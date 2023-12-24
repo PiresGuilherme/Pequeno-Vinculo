@@ -1,13 +1,12 @@
 import "reflect-metadata"
-
-import { AppDataSource } from "./data-source"
-import { User } from "./entity/User"
+import { AppDataSource } from "./data-source" 
 import server  from "./server"
+import { router } from "./routes/userRoutes"
 
+server.use('/api', router)
 
 server.listen(3000,()=> {
-        console.log('ouvindo');
-        
+        console.log('ouvindo');   
 })
 
 AppDataSource.initialize().then(async () => {
