@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, OneToMany } from "typeorm"
+import { Class } from "./Class"
+import { Student } from "./Student"
 
 export type type_user = "RESPONSIBLE"|"TEACHER"|"COORDINATOR"
 
@@ -51,13 +53,19 @@ export class User {
     @Column()
     password: string
 
-    @Column()
-    birth_date: number
+    @Column({type:'date'})
+    birth_date: Date
 
     @Column({
         type:"enum",
         enum:["RESPONSIBLE","TEACHER","COORDINATOR"],
-        default:null
     })
     type_user : type_user
+
+    @OneToMany(() => Class, (classe) => classe.user)
+    class : Class
+
+    @ManyToMany(() => Student, student => student.user)
+    @JoinTable()
+    student : Student[];
 }

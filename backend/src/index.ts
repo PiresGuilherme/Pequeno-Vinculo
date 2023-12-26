@@ -5,8 +5,10 @@ import { router } from "./routes/userRoutes"
 
 server.use('/api', router)
 
+console.log(router);
+
 server.listen(3000,()=> {
-        console.log('ouvindo');   
+        console.log('ouvindo');           
 })
 
 AppDataSource.initialize().then(async () => {
