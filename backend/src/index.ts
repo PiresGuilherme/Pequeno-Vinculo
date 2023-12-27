@@ -1,11 +1,19 @@
 import "reflect-metadata"
 import { AppDataSource } from "./data-source" 
 import server  from "./server"
-import { router } from "./routes/userRoutes"
+import { router as userRouter } from "./routes/userRoutes";
+import { router as studentRouter } from "./routes/studentRoutes";
+import { router as classRouter } from "./routes/classRoutes";
 
-server.use('/api', router)
 
-console.log(router);
+// verificar se é possível utilizar somente 1 roteador para encaminhar para os 3
+///////importante //////
+server.use('/api', userRouter);
+server.use('/api', studentRouter)
+server.use('/api', classRouter)
+
+
+// console.log(router);
 
 server.listen(3000,()=> {
         console.log('ouvindo');           

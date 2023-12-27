@@ -31,10 +31,10 @@ export class UserController {
             newUser.phone_number = req.body.phone_number;
             newUser.postal_code = req.body.postal_code;
             newUser.type_user = req.body.type_user;
-            userRepository.save(newUser);
+            await userRepository.save(newUser);
             return res.status(200).json(newUser)
         } catch (error){
-            return error
+            return res.status(500).json({ error: "Internal Server Error", details: error.message });
         }
     }
 }

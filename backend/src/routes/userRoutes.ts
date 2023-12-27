@@ -6,10 +6,10 @@ let userControler = new UserController()
 
 router.get("/user", (req: Request, res: Response) => {
     userControler.getAllUsers(req, res);
-})
+});
 
 router.post("/user", (req: Request, res: Response) => {
     userControler.postNewUser(req, res);
-})
+});
 
 export {router};
