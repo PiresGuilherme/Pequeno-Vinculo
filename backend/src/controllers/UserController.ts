@@ -41,4 +41,15 @@ export class UserController {
             return res.status(500).json({ error: "Internal Server Error", details: error.message });
         }
     }
+
+    async findChildren(req:Request, res:Response){
+        try {
+            let childrens = await userServices.findChildren(req.body.userId)
+            console.log(childrens);
+            
+            return res.status(202).json(childrens);
+        } catch (error) {
+            return res.status(404).json({ error: "Not Found", details: error.message });
+        }
+    }
 }

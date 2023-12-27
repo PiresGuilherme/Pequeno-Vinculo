@@ -12,4 +12,8 @@ router.post("/user", (req: Request, res: Response) => {
     userControler.postNewUser(req, res);
 });
 
+router.get('/user/children', (req:Request,res:Response)=>{
+    userControler.findChildren(req,res);
+})
+
 export {router};
