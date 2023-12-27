@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header-logo{
+    filter: #FF708D;
+    width: 400px ;
+    height: 200px;
+}
+
+.header-logo:hover{
+    filter: #FF708D
+}
