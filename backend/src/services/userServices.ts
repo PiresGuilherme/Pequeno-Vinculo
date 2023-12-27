@@ -1,6 +1,11 @@
 import { User } from "../entity/User";
 import { AppDataSource } from "../data-source"
-
 const userRepository = AppDataSource.getRepository(User);
 
-export default userRepository;
+export class UserServices {
+    getAllUsers() { return userRepository.find(); }
+
+    newUser(newUser){
+        userRepository.save(newUser)
+    }
+}

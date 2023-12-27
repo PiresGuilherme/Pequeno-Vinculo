@@ -1,6 +1,14 @@
 import { AppDataSource } from "../data-source";
 import { Student } from "../entity/Student";
 
-let studentRepository = AppDataSource.getRepository(Student);
+const studentRepository = AppDataSource.getRepository(Student);
 
-export default studentRepository
+export class StudentServices {
+    getAllStudents() { return studentRepository.find(); }
+
+    newStudent(newStudent){
+        studentRepository.save(newStudent)
+    }
+}
+
+// export default studentRepository
