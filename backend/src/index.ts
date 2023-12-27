@@ -4,13 +4,16 @@ import server  from "./server"
 import { router as userRouter } from "./routes/userRoutes";
 import { router as studentRouter } from "./routes/studentRoutes";
 import { router as classRouter } from "./routes/classRoutes";
+import { router as evaluationRouter } from "./routes/evaluationRoutes";
 
 
-// verificar se é possível utilizar somente 1 roteador para encaminhar para os 3
+
+// verificar se é possível utilizar somente 1 roteador para encaminhar para os 4
 ///////importante //////
 server.use('/api', userRouter);
 server.use('/api', studentRouter)
 server.use('/api', classRouter)
+server.use('/api', evaluationRouter)
 
 
 // console.log(router);
