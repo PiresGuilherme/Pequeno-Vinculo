@@ -8,6 +8,7 @@ export class ClassServices {
     newClass(newClass) {
         classRepository.save(newClass)
     }
+    
     //encontra uma única classe
     findOneClass(classId) {
         return classRepository.findOne({
