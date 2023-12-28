@@ -12,4 +12,8 @@ router.post('/evaluation', (req:Request, res:Response) => {
     evaluationController.postNewEvaluation(req,res);
 })
 
+router.get('/evaluation/student',(req:Request, res:Response) => {
+    evaluationController.stundentEvaluations(req,res);
+})
+
 export {router};

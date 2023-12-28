@@ -11,13 +11,8 @@ export class UserServices {
         userRepository.save(newUser)
     }
 
+    //select de filhos funcionando porém aparentemente não está sendo registrado na tabela de relação quando é criado um filho;
     findChildren(userId){
-        console.log(userRepository
-            .createQueryBuilder("user")
-            .innerJoin("user.student","student")
-            .where("user.id = :userId ", { userId })
-            .getMany());
-        
         return userRepository
         .createQueryBuilder("user")
         .innerJoinAndSelect("user.student","student")

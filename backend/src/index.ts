@@ -16,7 +16,6 @@ server.use('/api', classRouter)
 server.use('/api', evaluationRouter)
 
 
-// console.log(router);
 
 server.listen(3000,()=> {
         console.log('ouvindo');           
