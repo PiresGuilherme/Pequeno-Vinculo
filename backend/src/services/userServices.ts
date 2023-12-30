@@ -19,4 +19,13 @@ export class UserServices {
         .where("user.id = :userId ", { userId })
         .getMany();
     }
+
+    login(email, password){
+        return userRepository.find({
+            where:{
+                email: email,
+                password: password
+            }
+        })
+    }
 }

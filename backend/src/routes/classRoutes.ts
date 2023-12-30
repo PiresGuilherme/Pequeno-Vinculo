@@ -14,11 +14,9 @@ router.post('/class', (req: Request, res: Response) => {
 
 router.get('/class/teacher', (req: Request, res: Response) => {
     classController.findClassroomTeacher(req, res)
-    console.log(2);
 });
 
 router.get('/class/id', (req: Request, res: Response) => {
     classController.findOneClass(req, res)
-    console.log(2);
 })
 export { router };
