@@ -12,4 +12,8 @@ router.get('/student', (req: Request, res: Response) => {
 router.post('/student', (req: Request, res: Response) => {
     studentController.postNewStudent(req,res) 
 });
+
+router.post('/student/:id', (req: Request, res: Response) => {
+    studentController.getStudent(req,res);
+});
 export { router };

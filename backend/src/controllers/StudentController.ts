@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 // import studentRepository from "../services/studentServices";
 import { Student } from "../entity/Student";
-import {StudentServices} from "../services/studentServices";
+import { StudentServices } from "../services/studentServices";
 
 const studentServices = new StudentServices
 
@@ -32,6 +32,15 @@ export class StudentController {
         } catch (error) {
             return res.status(500).json({ error: "Internal Server Error", details: error.message });
         }
-
+    }
+    async getStudent(req: Request, res: Response) {
+        try {
+            console.log('aqui');
+            
+            let student = await studentServices.getStudent(req.params.id)
+            return res.status(200).json(student);
+        } catch (error) {
+            
+        }
     }
 }
