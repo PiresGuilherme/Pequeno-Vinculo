@@ -5,7 +5,9 @@ import { router as userRouter } from "./routes/userRoutes";
 import { router as studentRouter } from "./routes/studentRoutes";
 import { router as classRouter } from "./routes/classRoutes";
 import { router as evaluationRouter } from "./routes/evaluationRoutes";
+import cors from 'cors';
 
+server.use(cors());
 
 
 // verificar se é possível utilizar somente 1 roteador para encaminhar para os 4
