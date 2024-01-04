@@ -8,6 +8,19 @@ export class EvaluationServices {
     newEvaluation(newEvaluation){
         evaluationRepository.save(newEvaluation)
     }
+
+    findStudentEvaluations(studentId) {
+        return evaluationRepository.find({
+            relations: {
+                student: true
+            },
+            where: {
+                student: {
+                    id: studentId
+                }
+            }
+        })
+    }
 }
 
 // export default evaluationRepository;

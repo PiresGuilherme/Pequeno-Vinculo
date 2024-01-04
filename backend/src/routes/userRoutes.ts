@@ -12,4 +12,12 @@ router.post("/user", (req: Request, res: Response) => {
     userControler.postNewUser(req, res);
 });
 
+router.post('/user/children', (req:Request,res:Response) => {
+    userControler.findChildren(req,res);
+})
+
+router.post("/user/login",(req:Request,res:Response) => {
+    userControler.login(req, res);
+})
+
 export {router};

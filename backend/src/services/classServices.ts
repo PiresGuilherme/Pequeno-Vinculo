@@ -8,24 +8,25 @@ export class ClassServices {
     newClass(newClass) {
         classRepository.save(newClass)
     }
+    
     //encontra uma única classe
-    findOneClass(classId){
-        return classRepository.find({
-            where:{
-                id:classId
+    findOneClass(classId) {
+        return classRepository.findOne({
+            where: {
+                id: classId
             }
-        })
+        });
     }
 
     //Encontra todas as classes que o professor atua
     findTeacher(userId) {
         return classRepository.find({
             relations: {
-                user:true
+                user: true
             },
-            where:{
-                user:{
-                    id:userId
+            where: {
+                user: {
+                    id: userId
                 }
             }
         })
