@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 100vh;
+    gap: 2%;
+}
+
+.basic-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 13vh;
+    margin-bottom: 1%;
+}
+
+.basic-info-classes,
+.basic-info-students,
+.basic-info-guardians {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 25%;
+    height: 100%;
+    background-color: #e7e7e7;
+    border-radius: 10px;
+    position: relative;
+}
+
+.basic-info-classes:before,
+.basic-info-students:before,
+.basic-info-guardians:before {
+    content: '';
+    position: absolute;
+    height: 60%;
+    width: 2px;
+    background-color: #bdbdbd;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.basic-info-classes{
+    border-left: 12px solid #FEC868;
+}
+
+.basic-info-students{
+    border-left: 12px solid #A3E487;
+}
+
+.basic-info-guardians{
+    border-left: 12px solid #FF708D;
+}
+
+.classes-icon{
+    font-size: 3rem;
+    color: #FEC868;
+}
+
+.students-icon{
+    font-size: 3rem;
+    color: #A3E487;
+}
+
+.guardians-icon{
+    font-size: 3rem;
+    color: #FF708D;
+}
+
+.summary, 
+.summary-last-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 32vh;
+    margin-bottom: 1%;
+}
+
+.summary-calendar, 
+.summary-best-classes, 
+.last-info-birthdays, 
+.last-info-best-students{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* align-items: center; */
+    text-align: center;
+    width: 41%;
+    height: 100%;
+    background-color: #e7e7e7;
+    border-radius: 20px;
+    position: relative;
+}
+
+.best-student-one,
+.best-student-two,
+.best-student-three{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-around;
+    width: 25%;
+    height: 85%;
+    border-radius: 25px;
+}
+
+.best-student-one{
+    background-color: #A3E487;
+}
+
+.best-student-two{
+    background-color: #DCC1FC;
+}
+
+.best-student-three{
+    background-color: #FF708D;
+}
+
+
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #A3E487;
+    height: 6vh;
+    width: 100%;
+}
