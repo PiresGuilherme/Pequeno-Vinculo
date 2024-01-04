@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     width: auto;
     height: 100vh;
-    gap: 5%;
+    gap: 2%;
 }
 
 .basic-info {
@@ -17,7 +17,8 @@ body {
     flex-direction: row;
     justify-content: space-evenly;
     width: 100%;
-    height: 75vh;
+    height: 13vh;
+    margin-bottom: 1%;
 }
 
 .basic-info-classes,
@@ -29,7 +30,7 @@ body {
     align-items: center;
     text-align: center;
     width: 25%;
-    height: 20%;
+    height: 100%;
     background-color: #e7e7e7;
     border-radius: 10px;
     position: relative;
@@ -73,4 +74,65 @@ body {
 .guardians-icon{
     font-size: 3rem;
     color: #FF708D;
+}
+
+.summary, 
+.summary-last-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 32vh;
+    margin-bottom: 1%;
+}
+
+.summary-calendar, 
+.summary-best-classes, 
+.last-info-birthdays, 
+.last-info-best-students{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* align-items: center; */
+    text-align: center;
+    width: 41%;
+    height: 100%;
+    background-color: #e7e7e7;
+    border-radius: 20px;
+    position: relative;
+}
+
+.best-student-one,
+.best-student-two,
+.best-student-three{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-around;
+    width: 25%;
+    height: 85%;
+    border-radius: 25px;
+}
+
+.best-student-one{
+    background-color: #A3E487;
+}
+
+.best-student-two{
+    background-color: #DCC1FC;
+}
+
+.best-student-three{
+    background-color: #FF708D;
+}
+
+
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #A3E487;
+    height: 6vh;
+    width: 100%;
 }
