@@ -12,7 +12,7 @@ router.post('/class', (req: Request, res: Response) => {
     classController.postNewClass(req, res);
 });
 
-router.get('/class/teacher', (req: Request, res: Response) => {
+router.post('/class/teacher', (req: Request, res: Response) => {
     classController.findClassroomTeacher(req, res)
 });
 
