@@ -17,6 +17,19 @@ export class StudentServices {
             where: { id : id }
         })
     }
+    getSameClassStudents(classId){
+        console.log(studentRepository.findAndCount({
+            where:{
+                class:classId
+            }
+        }));
+        
+        return studentRepository.findAndCount({
+            where:{
+                class:classId
+            }
+        })
+    }
 }
 
 // export default studentRepository
