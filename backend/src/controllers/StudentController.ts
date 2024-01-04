@@ -43,4 +43,21 @@ export class StudentController {
             
         }
     }
+
+    async getSameClassStudents(req: Request, res: Response){
+        try {
+            let students = await studentServices.getSameClassStudents(req.body.classId)
+            //students
+            // console.log(students[0]);
+            //count
+            // console.log(students[1]);
+            console.log(students);
+            
+            return res.status(200).json(students);
+        } catch (error) {
+            console.log(error.message);
+            
+        }
+    }
+
 }
