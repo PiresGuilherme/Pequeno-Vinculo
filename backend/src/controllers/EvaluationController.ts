@@ -26,6 +26,15 @@ export class EvaluationController {
             return res.status(201).json(newEvaluation);     
         } catch (error) {
             return res.status(400).json({error:"Bad Request", details: error.message})
+        }        
+    } 
+    
+    async stundentEvaluations(req:Request,res:Response){
+        try {
+            const stundentEvaluations = await evaluationServices.findStudentEvaluations(req.body.studentId);
+            return res.status(200).json(stundentEvaluations);
+        } catch (error) {
+            return res.status(404).json({error: "Not Found", details: error.message})
         }
     }
 }
