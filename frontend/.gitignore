@@ -4,5 +4,4 @@ node_modules/
 build/
 tmp/
 temp/
-login.ts
 agenda.js

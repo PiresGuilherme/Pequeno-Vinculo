@@ -8,8 +8,7 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="/frontend/src/styles/schedule-teacher.css">
-    <script src="agenda.js" defer></script>
+    <link rel="stylesheet" href="/frontend/src/styles/schedule-guardian.css">
     <title>Agenda</title>
 </head>
 
@@ -23,18 +22,15 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto"> <!-- Adicionado a classe "ms-auto" para alinhar à direita em telas menores -->
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="dashboard-teacher.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Turmas</a>
+                        <a class="nav-link active" aria-current="page" href="dashboard-guardian.html">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Desempenho</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="schedule-teacher.html">Agenda</a>
+                        <a class="nav-link" href="schedule-guardian.html">Agenda</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Galeria</a>
@@ -45,14 +41,14 @@
                 </ul>
             </div>
         </div>
-    </nav>
+    </nav>    
     <main>
         <div class="page-title">
             <h4>Agenda</h4>
         </div>
-        <div class="classes-schedule">
-            <div class="class-one-schedule">
-                <h5>Agenda Turma 1</h5>
+        <div class="children-schedule">
+            <div class="children-one-schedule">
+                <h5>Agenda Filho 1</h5>
                 <span class="material-symbols-outlined" id="add">
                     add
                 </span>

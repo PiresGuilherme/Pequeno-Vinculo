@@ -57,7 +57,7 @@ main {
     gap: 10px;
 }
 
-.btn-primary{
+.teacher-btn{
     color: #000;
     width: 45%;
     height: 40px;
@@ -66,12 +66,12 @@ main {
     border-radius: 20px;
 }
 
-.btn-primary:hover{
+.teacher-btn:hover{
     background-color: var(--hover-pink);
     color: #000;
 }
 
-.btn-secondary{
+.guardian-btn{
     color: #000;
     width: 45%;
     height: 40px;
@@ -80,7 +80,7 @@ main {
     border-radius: 23px;
 }
 
-.btn-secondary:hover{
+.guardian-btn:hover{
     background-color: var(--hover-purple);
     color: #000;
 }
@@ -99,10 +99,59 @@ aside {
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--green);
     height: 6vh;
-    width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+    body {
+      flex-direction: column;
+    }
+  
+    header {
+      height: 8vh;
+      margin-bottom: 2%;
+    }
+  
+    .header-logo {
+      width: 80px;
+      height: 80px;
+    }
+  
+    main {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .section-buttons {
+      width: 80%;
+    }
+  
+    .teacher-btn,
+    .guardian-btn {
+      width: 100%;
+    }
+  
+    aside {
+      justify-content: center;
+    }
+  
+    .aside-backgound-img {
+      height: auto;
+      max-width: 100%;
+    }
+  
+    footer {
+      position: static;
+      text-align: center;
+      font-size: 14px;
+      padding: 1%;
+    }
+  }
