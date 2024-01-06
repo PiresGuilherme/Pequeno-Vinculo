@@ -1,3 +1,15 @@
+:root {
+    --body: #f3f8fe;
+    --orange: #FEC868;
+    --pink: #FF708D;
+    --purple: #DCC1FC;
+    --green: #A3E487;
+    --background: #e7e7e7;
+
+    --hover-pink: #e94e6d;
+    --hover-purple: #ae7deb;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -31,7 +43,7 @@ body {
     text-align: center;
     width: 25%;
     height: 100%;
-    background-color: #e7e7e7;
+    background-color: var(--background);
     border-radius: 10px;
     position: relative;
 }
@@ -49,35 +61,35 @@ body {
 }
 
 
-.basic-info-classes{
-    border-left: 12px solid #FEC868;
+.basic-info-classes {
+    border-left: 12px solid var(--orange);
 }
 
-.basic-info-students{
-    border-left: 12px solid #A3E487;
+.basic-info-students {
+    border-left: 12px solid var(--green);
 }
 
-.basic-info-guardians{
-    border-left: 12px solid #FF708D;
+.basic-info-guardians {
+    border-left: 12px solid var(--pink);
 }
 
-.classes-icon{
+.classes-icon {
     font-size: 3rem;
-    color: #FEC868;
+    color: var(--orange);
 }
 
-.students-icon{
+.students-icon {
     font-size: 3rem;
-    color: #A3E487;
+    color: var(--green);
 }
 
-.guardians-icon{
+.guardians-icon {
     font-size: 3rem;
-    color: #FF708D;
+    color: var(--pink);
 }
 
-.summary, 
-.summary-last-info{
+.summary,
+.summary-last-info {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -86,53 +98,107 @@ body {
     margin-bottom: 1%;
 }
 
-.summary-calendar, 
-.summary-best-classes, 
-.last-info-birthdays, 
-.last-info-best-students{
+.summary-calendar,
+.summary-best-classes,
+.last-info-birthdays,
+.last-info-best-students {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    /* align-items: center; */
     text-align: center;
     width: 41%;
     height: 100%;
-    background-color: #e7e7e7;
+    background-color: var(--background);
     border-radius: 20px;
     position: relative;
+    padding-top: 1%;
 }
 
 .best-student-one,
 .best-student-two,
-.best-student-three{
+.best-student-three {
     display: flex;
     flex-direction: row;
     align-self: center;
     justify-content: space-around;
     width: 25%;
-    height: 85%;
+    height: 90%;
     border-radius: 25px;
 }
 
-.best-student-one{
-    background-color: #A3E487;
+.best-student-one {
+    background-color: var(--green);
 }
 
-.best-student-two{
-    background-color: #DCC1FC;
+.best-student-two {
+    background-color: var(--purple);
 }
 
-.best-student-three{
-    background-color: #FF708D;
+.best-student-three {
+    background-color: var(--pink);
 }
-
-
 
 footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #A3E487;
+    background-color: var(--green);
     height: 6vh;
     width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    h5 {
+        font-size: 1rem;
+        ;
+    }
+
+    .basic-info {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .basic-info-classes,
+    .basic-info-students,
+    .basic-info-guardians {
+        width: 88%;
+        margin-bottom: 3%;
+        align-self: center;
+    }
+
+    .basic-info-classes:before,
+    .basic-info-students:before,
+    .basic-info-guardians:before {
+        height: 0px;
+        width: 0px;
+        left: 0;
+    }
+
+    .last-info-best-students {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .best-student-one,
+    .best-student-two,
+    .best-student-three {
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+        width: 85%;
+        height: 30%;
+        border-radius: 12px;
+    }
+
+    footer {
+        position: static;
+        text-align: center;
+        font-size: 14px;
+        padding: 1%;
+    }
 }

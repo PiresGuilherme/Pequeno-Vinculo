@@ -1,3 +1,15 @@
+:root{
+    --body: #f3f8fe;
+    --orange: #FEC868;
+    --pink: #FF708D;
+    --purple: #DCC1FC;
+    --green: #A3E487;
+
+    --hover-pink: #e94e6d;
+    --hover-purple: #ae7deb;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -8,11 +20,12 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    background-color: var(--body);
 }
 
 header {
     display: flex;
-    background-color: #FEC868;
+    background-color: var(--orange);
     height: 6vh;
     align-items: center;
     justify-content: center;
@@ -44,31 +57,31 @@ main {
     gap: 10px;
 }
 
-.btn-primary{
+.teacher-btn{
     color: #000;
     width: 45%;
     height: 40px;
-    background-color: #FF708D;
+    background-color: var(--pink);
     border: none;
     border-radius: 20px;
 }
 
-.btn-primary:hover{
-    background-color: #e94e6d;
+.teacher-btn:hover{
+    background-color: var(--hover-pink);
     color: #000;
 }
 
-.btn-secondary{
+.guardian-btn{
     color: #000;
     width: 45%;
     height: 40px;
-    background-color: #DCC1FC;
+    background-color: var(--purple);
     border: none;
     border-radius: 23px;
 }
 
-.btn-secondary:hover{
-    background-color: #ae7deb;
+.guardian-btn:hover{
+    background-color: var(--hover-purple);
     color: #000;
 }
 
@@ -86,10 +99,59 @@ aside {
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #A3E487;
+    background-color: var(--green);
     height: 6vh;
-    width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+    body {
+      flex-direction: column;
+    }
+  
+    header {
+      height: 8vh;
+      margin-bottom: 2%;
+    }
+  
+    .header-logo {
+      width: 80px;
+      height: 80px;
+    }
+  
+    main {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .section-buttons {
+      width: 80%;
+    }
+  
+    .teacher-btn,
+    .guardian-btn {
+      width: 100%;
+    }
+  
+    aside {
+      justify-content: center;
+    }
+  
+    .aside-backgound-img {
+      height: auto;
+      max-width: 100%;
+    }
+  
+    footer {
+      position: static;
+      text-align: center;
+      font-size: 14px;
+      padding: 1%;
+    }
+  }
