@@ -23,8 +23,8 @@ export class Student {
     @Column()
     coin:number
 
-    @ManyToOne(() => Class, (classe) => classe.student)
-    class: Class
+    @ManyToOne(() => Class, classe => classe.student)
+    classe: Class
 
     @ManyToMany(() => User, user => user.student)
     user: User[];

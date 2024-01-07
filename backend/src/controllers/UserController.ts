@@ -38,9 +38,13 @@ export class UserController {
     async login(req:Request, res:Response){
         try{
             let login = await userServices.login(req.body.email,req.body.password);
+            console.log(login);
+            if (login == null) {
+                return res.status(404).json({ message: "Usuário ou senha incorretos" })
+            }
             return res.status(200).json(login);
         }catch(error){
-            return res.status(404).json({ error: "Not Found", details: error.message });
+            return res.status(500).json({ error: "Internal Server Error", details: error.message });
         }
     }
 }

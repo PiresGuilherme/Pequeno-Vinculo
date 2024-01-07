@@ -116,25 +116,24 @@ async function teacherClasses(userId){
        const response = await axios.post('http://localhost:3000/api/class/teacher',{
         userId:userId
        }) 
-    //    console.log(response.data[0].id);
        const countClasses = response.data.length
-    //    console.log(countClasses);
        let countStudents = 0
        for (let i = 0; i < countClasses; i++) {
         let count = await teachersStudents(response.data[i].id);
-        countStudents +=count;
-        console.log(count);
+        countStudents += count.data[1];
        }
     } catch (error) {
         console.log(error.message);
     }
 }
+// teachersStudents(1)
 async function teachersStudents(classId){
     try {
+        console.log(classId);
         const response = await axios.post('http://localhost:3000/api/student/class',{
             classId:classId
         })
-        console.log(response);
+        console.log(response.data[1]);
         return response;
     } catch (error) {
         console.log(error.message);

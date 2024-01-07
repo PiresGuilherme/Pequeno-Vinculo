@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="/frontend/src/styles/login-page-style-teacher.css">
 
     <script src="https://cdn.jsdelivr.net/npm/axios@1.3.5/dist/axios.min.js"></script>
-    <script  type="module" src="../../../build/pages/teacher/login.js" defer></script>
+
+    <script type="module" src="../../../build/pages/teacher/login.js" defer></script>
     <!-- <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Agora você pode chamar a função login após o carregamento completo da página
-            login();
+            const loginBtn = document.getElementById('loginBtn');
+            loginBtn.addEventListener('click', () => login());
         });
-        </script> -->
-    <!-- <script type="module"> import { login } from '../../../build/pages/teacher/login.js' </script> -->
+    </script> -->
     <title>Login</title>
 </head>
 
@@ -45,11 +45,11 @@
                 <input class="input-password" id="password" type="password" placeholder="Senha">
             </div>
         </div>
-        <button type="button" class="login-btn" onclick="logar()">Entrar</button>
+        <button type="button" class="login-btn" id="loginBtn">Entrar</button>
     </main>
 
     <footer>Desenvolvido por Esther Lucena, Gabriel Morez, Guilherme Pires e Larissa Wandervegen.</footer>
-    
+
 </body>
 
 </html>
