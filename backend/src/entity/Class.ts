@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./User";
 import { Student } from "./Student";
+import { Schedule } from "./Schedule";
 
 export type shift = "AFTERNOON" | "NIGHT" | "MORNING";
 
@@ -26,5 +27,7 @@ export class Class {
 
     @OneToMany(() => Student, student => student.classe)
     student : Student[];
-
+    
+    @OneToMany(()=> Schedule, schedule => schedule.classe, {eager:true})
+    schedule: Schedule[]
 }

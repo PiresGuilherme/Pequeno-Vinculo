@@ -21,7 +21,7 @@ export class StudentServices {
           
         return studentRepository.findAndCount({
             where:{
-                classe :classId
+                classe : {id: classId}
             }
         })
     }
