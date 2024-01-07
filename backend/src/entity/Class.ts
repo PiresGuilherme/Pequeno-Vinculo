@@ -24,7 +24,7 @@ export class Class {
     @ManyToOne(() => User, user => user.class)
     user : User[];
 
-    @OneToMany(() => Student, student => student.class)
+    @OneToMany(() => Student, student => student.classe)
     student : Student[];
 
 }

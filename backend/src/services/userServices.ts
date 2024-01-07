@@ -21,11 +21,15 @@ export class UserServices {
     }
 
     login(email, password){
-        return userRepository.find({
-            where:{
-                email: email,
-                password: password
-            }
-        })
+        return  userRepository.findOne({
+            where:{email: email, password:password}
+        });
+        // console.log(user);
+        // return user;
+        // if (user) {
+        //     if (user.password === password) {
+        //         // Senha está correta, retorne o usuário autenticado
+        //         return user;
+        // }
     }
 }

@@ -13,11 +13,13 @@ router.post('/student', (req: Request, res: Response) => {
     studentController.postNewStudent(req, res)
 });
 
-router.post('/student/:id', (req: Request, res: Response) => {
+router.post('/student/:id(\\d+)', (req: Request, res: Response) => {
     studentController.getStudent(req, res);
 });
-
 router.post('/student/class', (req: Request, res: Response) => {
     studentController.getSameClassStudents(req, res);
-})
+});
+
+
+
 export { router };

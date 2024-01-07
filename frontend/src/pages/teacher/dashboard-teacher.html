@@ -9,7 +9,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="/frontend/src/styles/dashboard-teacher.css">
-    <script src="dash-board-teacher.js" defer></script>
+    <script type="module" src="../../../build/pages/teacher/dash.js" defer></script>
     <title>Dashboard</title>
 </head>
 
@@ -54,7 +54,7 @@
                 </span>
                 <div class="basic-info-classes-text">
                     <h5>Turmas</h5>
-                    <p>0</p>
+                    <p id="countClasses">0</p>
                 </div>
             </div>
             <div class="basic-info-students">
@@ -63,7 +63,7 @@
                 </span>
                 <div class="basic-info-students-text">
                     <h5>Alunos</h5>
-                    <p>0</p>
+                    <p id="countStudents">0</p>
                 </div>
             </div>
             <div class="basic-info-guardians">

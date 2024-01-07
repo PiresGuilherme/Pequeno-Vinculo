@@ -10,23 +10,18 @@ export class StudentServices {
         studentRepository.save(newStudent)
     }
 
-    getStudent(id) {
-        console.log(2);
-        
+    getStudent(id) {        
         return studentRepository.findOne({
             where: { id : id }
         })
     }
-    getSameClassStudents(classId){
-        console.log(studentRepository.findAndCount({
-            where:{
-                class:classId
-            }
-        }));
-        
+    
+    getSameClassStudents(classId){      
+        console.log(classId);
+          
         return studentRepository.findAndCount({
             where:{
-                class:classId
+                classe :classId
             }
         })
     }
