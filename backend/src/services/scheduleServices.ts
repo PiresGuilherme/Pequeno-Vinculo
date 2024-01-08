@@ -5,8 +5,6 @@ const scheduleRepository = AppDataSource.getRepository(Schedule);
 
 export class ScheduleServices {
     newSchedule(newSchedule){
-        console.log(newSchedule);
-        
         return scheduleRepository.save(newSchedule);
     }
 

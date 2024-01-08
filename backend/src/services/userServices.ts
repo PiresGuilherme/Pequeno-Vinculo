@@ -13,6 +13,8 @@ export class UserServices {
 
     //select de filhos funcionando porém aparentemente não está sendo registrado na tabela de relação quando é criado um filho;
     findChildren(userId){
+        console.log(userId);
+        
         return userRepository
         .createQueryBuilder("user")
         .innerJoinAndSelect("user.student","student")

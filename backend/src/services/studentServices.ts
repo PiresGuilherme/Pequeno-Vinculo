@@ -17,8 +17,6 @@ export class StudentServices {
     }
     
     getSameClassStudents(classId){      
-        console.log(classId);
-          
         return studentRepository.findAndCount({
             where:{
                 classe : {id: classId}

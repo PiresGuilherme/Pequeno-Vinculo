@@ -5,42 +5,42 @@ import axios from "axios"
 
 
 let userId = 1
-// let divChildren = document.getElementById('children')
-// findChildren(userId);
-// async function findChildren(userId) {
-//     try {
-//         const response = await axios.post('http://localhost:3000/api/user/children', {
-//             userId: userId
-//         })
+let divChildren = document.getElementById('children')
+findChildren(userId);
+async function findChildren(userId) {
+    try {
+        const response = await axios.post('http://localhost:3000/api/user/children', {
+            userId: userId
+        })
 
-//         divChildren.innerHTML = '';
+        divChildren.innerHTML = '';
 
-//         console.log(response.data[0].student)
-//         if (response.data[0]) {
-//             // Iterando sobre cada objeto dentro do array 'student'
-//             response.data[0].student.forEach((studentObject, index) => {
-//                 let link = document.createElement('a');
-//                 let studentInfo = document.createElement('p');
+        console.log(response.data[0].student)
+        if (response.data[0]) {
+            // Iterando sobre cada objeto dentro do array 'student'
+            response.data[0].student.forEach((studentObject, index) => {
+                let link = document.createElement('a');
+                let studentInfo = document.createElement('p');
 
-//                 // Adicionando atributos e conteúdo aos elementos
-//                 console.log(studentObject.id);
-//                 // link.href = `http://localhost:3000/api/student/${studentObject.id}`;
-//                 link.href = `http://127.0.0.1:5500/frontend/src/responsible/studentDash.html/${studentObject.id}`
-//                 link.textContent = `Filho ${index + 1}`;
-//                 studentInfo.textContent = `Nome: ${studentObject.name}, Idade: ${studentObject.birth_date}`;
-//                 // link.addEventListener('click', () => getLinkStudent(studentObject.id));
+                // Adicionando atributos e conteúdo aos elementos
+                console.log(studentObject.id);
+                // link.href = `http://localhost:3000/api/student/${studentObject.id}`;
+                link.href = `http://127.0.0.1:5500/frontend/src/responsible/studentDash.html/${studentObject.id}`
+                link.textContent = `Filho ${index + 1}`;
+                studentInfo.textContent = `Nome: ${studentObject.name}, Idade: ${studentObject.birth_date}`;
+                // link.addEventListener('click', () => getLinkStudent(studentObject.id));
 
-//                 // Adicionando elementos ao divChildren
-//                 divChildren.appendChild(link);
-//                 divChildren.appendChild(studentInfo);
-//             });
-//         } else {
-//             console.log('Nenhum estudante encontrado.');
-//         }
-//     } catch (error) {
-//         console.error('sa:', error.message);
-//     }
-// }
+                // Adicionando elementos ao divChildren
+                divChildren.appendChild(link);
+                divChildren.appendChild(studentInfo);
+            });
+        } else {
+            console.log('Nenhum estudante encontrado.');
+        }
+    } catch (error) {
+        console.error('sa:', error.message);
+    }
+}
 
 // async function getLinkStudent(id) {
 //     try {

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=5; IE=8; IE=7; IE=9; IE=10; IE=11" >
+		<meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1">
+		<title>Bins</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+	</head>
+	<body>
+		<h1>Grafico Linhas</h1>
+		<canvas id="grafico-linhas"></canvas>
+		<h1>Grafico Colunas</h1>
+		<canvas id="grafico-colunas"></canvas>
+		<h1>Grafico Pizza</h1>
+		<canvas id="grafico-pizza"></canvas>
+		<script type="text/javascript">
+				var ctx = document.getElementById("grafico-linhas");
+
+				var chartGraph = new Chart(ctx, {
+					type: 'line',
+					data: {
+						labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+					datasets: [{
+						label:"Vendas de 2019",
+						data: [10, 15, 8, 5, 6, 9, 10, 7, 8, 11, 4, 10],
+						borderWidth: 6,
+						borderColor: 'rgba(77,166,253,0.8)'
+					}]
+
+					}
+				})    
+				
+				var ctx = document.getElementById("grafico-colunas");
+				var chartGraph = new Chart(ctx, {
+					type: 'bar',
+					data: {
+						labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+					datasets: [{
+						label:"Vendas de 2019",
+						data: [10, 15, 8, 5, 6, 9, 10, 7, 8, 11, 4, 5],
+						borderWidth: 6,
+						borderColor: 'rgba(77,166,253,0.8)'
+					}]
+
+					}
+				})    
+				
+				var ctx = document.getElementById("grafico-pizza");
+				var chartColors = {
+					red: 'rgb(255, 99, 132)',
+					orange: 'rgb(255, 159, 64)',
+					yellow: 'rgb(255, 205, 86)',
+					green: 'rgb(75, 192, 192)',
+					blue: 'rgb(54, 162, 235)',
+					purple: 'rgb(153, 102, 255)',
+					grey: 'rgb(201, 203, 207)'
+				};
+
+				var chartGraph = new Chart(ctx, {
+					type: 'pie',
+					data: {
+						labels: ["Jan","Fev","Mar","Abr","Mai"],
+					datasets: [{
+						label:"Vendas de 2019",
+						data: [10, 15, 8, 5, 6],
+						borderWidth: 6,
+						borderColor: 'rgba(77,166,253,0.8)',
+						backgroundColor: [
+							chartColors.red,
+							chartColors.orange,
+							chartColors.yellow,
+							chartColors.green,
+							chartColors.blue,
+						],
+					}]
+
+					}
+				})    
+
+				//line, bar
+		</script>
+	</body>
+</html>	

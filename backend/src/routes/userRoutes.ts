@@ -12,7 +12,7 @@ router.post("/user", (req: Request, res: Response) => {
     userControler.postNewUser(req, res);
 });
 
-router.post('/user/children', (req:Request,res:Response) => {
+router.get('/user/children/:id(\\d+)', (req:Request,res:Response) => {
     userControler.findChildren(req,res);
 })
 
