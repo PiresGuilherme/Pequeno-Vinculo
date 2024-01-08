@@ -22,13 +22,11 @@ export async function login() {
             message.textContent = 'É necessário preencher ambos os campos, E-mail e Senha';
             return;
         }
-console.log(1);
 
         const response = await axios.post('http://localhost:3000/api/user/login', {
             email: emailValue,
             password: passwordValue,
         });
-console.log(2);
 
         if (response == null) {
             message.textContent = 'Usuário ou senha incorreto';
@@ -37,16 +35,14 @@ console.log(2);
 
         const token = response.data;
         console.log('Token de autenticação:', token);
-        if (token.type_user !== "TEACHER") {
+        if (token.type_user !== "RESPONSIBLE") {
             window.location.href = `http://127.0.0.1:5500/frontend/src/pages/initial-login.html`;
-            alert( 'Você não é um professor');
+            alert( 'Você não é um Responsável');
         }
 
         localStorage.setItem("login", JSON.stringify(token));
-        window.location.href = `http://127.0.0.1:5500/frontend/src/pages/teacher/dashboard-teacher.html?id=${token.id}`;
+        window.location.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/dashboard-guardian.html?id=${token.id}`;
     } catch (error: any) {
-        let message = document.createElement('p');
-
         if (error.response.status == 404) {
             message.textContent = error.response.data.message;
         } else if (error.response.status == 500) {

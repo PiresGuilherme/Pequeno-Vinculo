@@ -26,7 +26,9 @@ export class UserController {
 
     async findChildren(req:Request, res:Response){
         try {
-            let childrens = await userServices.findChildren(req.body.userId)
+            console.log(req.params.id);
+            
+            let childrens = await userServices.findChildren(req.params.id)
             console.log(childrens);
         
             return res.status(202).json(childrens);

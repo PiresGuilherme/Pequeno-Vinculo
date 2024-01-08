@@ -10,6 +10,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="/frontend/src/styles/login-page-style-guardian.css">
+    <script type="module" src="../../../build/pages/guardian/login.js" defer></script>
     <title>Login</title>
 </head>
 <header>
@@ -21,21 +22,21 @@
         <div class="initial-text">
             <h1 class="login-text">Login Responsável</h1>
         </div>
-        <div class="login-inputs">
+        <div class="login-inputs" id="login-imputs">
             <div class="login-email">
                 <span class="material-symbols-outlined">
                     mail
                 </span>
-                <input class="input-email" type="email" placeholder="E-mail">
+                <input class="input-email" id="email" type="email" placeholder="E-mail">
             </div>
             <div class="login-password">
                 <span class="material-symbols-outlined">
                     lock
                 </span>
-                <input class="input-password" type="password" placeholder="Senha">
+                <input class="input-password" id="password" type="password" placeholder="Senha">
             </div>
         </div>
-        <button type="button" class="login-btn">Entrar</button>
+        <button type="button" class="login-btn" id="loginBtn">Entrar</button>
     </main>
 
     <footer>Desenvolvido por Esther Lucena, Gabriel Morez, Guilherme Pires e Larissa Wandervegen.</footer>

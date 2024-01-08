@@ -81,3 +81,6 @@ footer {
         padding: 1%;
     }
 }
+.gray-background {
+    background-color: #ccc; /* ou a cor de fundo desejada */
+}
