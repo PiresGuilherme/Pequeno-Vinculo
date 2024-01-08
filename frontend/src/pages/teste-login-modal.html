@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/frontend/assets/logo-icon.svg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <title>Login</title>
+</head>
+
+<body>
+    <header>
+        <img class="header-logo" src="/frontend/assets/logo-icon-horizontal-pink.svg" alt="Logo Pequeno Vínculo">
+    </header>
+    <main>
+        <section class="initial-components">
+            <div class="initial-text">
+                <h1 class="welcome-text">Bem vindo(a)!</h1>
+                <p class="acess-text">Para começar, nos diga quem está acessando?</p>
+            </div>
+            <div class="section-buttons">
+                <button onclick="document.getElementById('modal-teacher').style.display='block'" style="width:auto;"
+                    type="button" class="teacher-btn">Professor</button>
+                <button onclick="document.getElementById('modal-guardian').style.display='block'" style="width:auto;"
+                    type="button" class="guardian-btn">Responsável</button>
+            </div>
+
+            <div id="modal-teacher" class="modal">
+                <span onclick="document.getElementById('modal-teacher').style.display='none'" class="close"
+                    title="Close Modal">×</span>
+                <div class="initial-components-teacher">
+                    <div class="initial-text-teacher">
+                        <h1 class="login-text-teacher">Login Professor</h1>
+                    </div>
+                    <div class="login-inputs-teacher" id="login-imputs">
+                        <div class="login-email-teacher">
+                            <span class="material-symbols-outlined">
+                                mail
+                            </span>
+                            <input class="input-email-teacher" id="email" type="email" placeholder="E-mail">
+                        </div>
+                        <div class="login-password-teacher">
+                            <span class="material-symbols-outlined">
+                                lock
+                            </span>
+                            <input class="input-password-teacher" id="password" type="password" placeholder="Senha">
+                        </div>
+                    </div>
+                    <button type="button" class="login-btn-teacher" id="loginBtn">Entrar</button>
+                </div>
+            </div>
+            <div id="modal-guardian" class="modal">
+                <span onclick="document.getElementById('modal-guardian').style.display='none'" class="close"
+                    title="Close Modal">×</span>
+                <div class="initial-components-guardian">
+                    <div class="initial-text-guardian">
+                        <h1 class="login-text-guardian">Login Responsável</h1>
+                    </div>
+                    <div class="login-inputs-guardian" id="login-imputs">
+                        <div class="login-email-guardian">
+                            <span class="material-symbols-outlined">
+                                mail
+                            </span>
+                            <input class="input-email-guardian" id="email" type="email" placeholder="E-mail">
+                        </div>
+                        <div class="login-password-guardian">
+                            <span class="material-symbols-outlined">
+                                lock
+                            </span>
+                            <input class="input-password-guardian" id="password" type="password" placeholder="Senha">
+                        </div>
+                    </div>
+                    <button type="button" class="login-btn-guardian" id="loginBtn">Entrar</button>
+                </div>
+            </div>
+        </section>
+
+        <aside>
+            <img src="/frontend/assets/mataura.png" alt="Formas geométricas" class="aside-backgound-img">
+        </aside>
+
+    </main>
+    <footer>Desenvolvido por Esther Lucena, Gabriel Morez, Guilherme Pires e Larissa Wandervegen.</footer>
+
+    <script>
+        var modalTeacher = document.getElementById('modal-teacher');
+        var modalGuardian = document.getElementById('modal-guardian');
+
+        window.onclick = function (event) {
+            if (event.target == modalTeacher) {
+                modalTeacher.style.display = "none";
+            } else if (event.target == modalGuardian) {
+                modalGuardian.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+<style>
+    :root {
+        --body: #f3f8fe;
+        --orange: #FEC868;
+        --pink: #FF708D;
+        --purple: #DCC1FC;
+        --green: #A3E487;
+
+        --hover-pink: #e94e6d;
+        --hover-purple: #ae7deb;
+    }
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: var(--body);
+    }
+
+    header {
+        display: flex;
+        background-color: var(--orange);
+        height: 6vh;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    main {
+        display: flex;
+        flex: 1;
+    }
+
+    .section-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .section-buttons .teacher-btn {
+        color: #000;
+        width: 55% !important;
+        /* Ajuste o valor conforme necessário */
+        height: 40px;
+        background-color: var(--pink);
+        border: none;
+        border-radius: 20px;
+    }
+
+    .section-buttons .guardian-btn {
+        color: #000;
+        width: 55% !important;
+        /* Ajuste o valor conforme necessário */
+        height: 40px;
+        background-color: var(--purple);
+        border: none;
+        border-radius: 23px;
+    }
+
+    .teacher-btn:hover {
+        background-color: var(--hover-pink);
+        color: #000;
+    }
+
+
+    .guardian-btn:hover {
+        background-color: var(--hover-purple);
+        color: #000;
+    }
+
+    .initial-components,
+    .initial-components-teacher,
+    .initial-components-guardian {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--body);
+        width: 40%;
+        height: 60vh;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 20px;
+        margin: auto;
+        gap: 10px
+    }
+
+    .login-inputs,
+    .login-inputs-teacher,
+    .login-inputs-guardian {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .login-email,
+    .login-password,
+    .login-email-teacher,
+    .login-password-teacher,
+    .login-email-guardian,
+    .login-password-guardian {
+        display: flex;
+        align-items: center;
+        background-color: var(--background);
+        height: 6vh;
+        width: 70%;
+        gap: 10px;
+        padding-left: 10px;
+    }
+
+    .material-symbols-outlined {
+        color: #ae7deb;
+        vertical-align: middle;
+    }
+
+    .input-email,
+    .input-password,
+    .input-email-teacher,
+    .input-password-teacher,
+    .input-email-guardian,
+    .input-password-guardian {
+        background-color: var(--background);
+        border: initial;
+        outline: initial;
+        vertical-align: middle;
+    }
+
+    .login-btn-teacher,
+    .login-btn-guardian {
+        color: #000;
+        width: 70%;
+        height: 7vh;
+        background-color: var(--pink);
+        border: none;
+        border-radius: 20px;
+        font-size: 1.5rem;
+    }
+
+    .login-btn-teacher:hover,
+    .login-btn-guardian:hover {
+        background-color: var(--hover-pink);
+        color: #000;
+    }
+
+    aside {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 88vh;
+    }
+
+    .aside-backgound-img {
+        height: 95vh;
+        width: 100%;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgb(0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--green);
+        height: 6vh;
+    }
+
+    @media screen and (max-width: 768px) {
+        body {
+            flex-direction: column;
+        }
+
+        header {
+            height: 8vh;
+            margin-bottom: 2%;
+        }
+
+        .header-logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        main {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .section-buttons {
+            width: 80%;
+        }
+
+        .teacher-btn,
+        .guardian-btn {
+            width: 100%;
+        }
+
+        aside {
+            justify-content: center;
+        }
+
+        .aside-backgound-img {
+            height: auto;
+            max-width: 100%;
+        }
+
+        footer {
+            position: static;
+            text-align: center;
+            font-size: 14px;
+            padding: 1%;
+        }
+    }
+</style>
+
+</html>

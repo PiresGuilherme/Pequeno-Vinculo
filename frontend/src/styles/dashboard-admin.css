@@ -1,0 +1,179 @@
+:root {
+    --body: #f3f8fe;
+    --orange: #FEC868;
+    --pink: #FF708D;
+    --purple: #DCC1FC;
+    --green: #A3E487;
+    --background: #e7e7e7;
+
+    --hover-pink: #e94e6d;
+    --hover-purple: #ae7deb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: 100vh;
+    gap: 2%;
+}
+
+.basic-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 13vh;
+    margin-bottom: 1%;
+}
+
+.basic-info-classes,
+.basic-info-students,
+.basic-info-teachers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 25%;
+    height: 100%;
+    background-color: var(--background);
+    border-radius: 10px;
+    position: relative;
+}
+
+.basic-info-classes:before,
+.basic-info-students:before,
+.basic-info-teachers:before {
+    content: '';
+    position: absolute;
+    height: 60%;
+    width: 2px;
+    background-color: #bdbdbd;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.basic-info-classes {
+    border-left: 12px solid var(--orange);
+}
+
+.basic-info-students {
+    border-left: 12px solid var(--green);
+}
+
+.basic-info-teachers {
+    border-left: 12px solid var(--pink);
+}
+
+.classes-icon {
+    font-size: 3rem;
+    color: var(--orange);
+}
+
+.students-icon {
+    font-size: 3rem;
+    color: var(--green);
+}
+
+.guardians-icon {
+    font-size: 3rem;
+    color: var(--pink);
+}
+
+.infos{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 67vh;
+}
+
+.summary {
+    display: flex;
+    flex-direction: column;
+    width: 41%;
+    height: 67vh;
+    gap: 2%;
+}
+
+.summary-calendar,
+.summary-birthdays {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+    border-radius: 20px;
+    padding-top: 1%;
+}
+
+.summary-last-info {
+    width: 41%;
+    height: 67vh;
+    margin-bottom: 1%;
+}
+
+.last-info-notifications{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background);
+    border-radius: 20px;
+    padding-top: 1%;
+}
+
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--green);
+    height: 6vh;
+    width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    h5 {
+        font-size: 1rem;
+        ;
+    }
+
+    .basic-info {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .basic-info-classes,
+    .basic-info-students,
+    .basic-info-teachers {
+        width: 88%;
+        margin-bottom: 3%;
+        align-self: center;
+    }
+
+    .basic-info-classes:before,
+    .basic-info-students:before,
+    .basic-info-teachers:before {
+        height: 0px;
+        width: 0px;
+        left: 0;
+    }
+
+
+    footer {
+        position: static;
+        text-align: center;
+        font-size: 14px;
+        padding: 1%;
+    }
+}
