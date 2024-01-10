@@ -2,7 +2,10 @@ import { Request, Response } from "express";
 // import evaluationRepository from "../services/evaluationServices";
 import { Evaluation } from "../entity/Evaluation";
 import { EvaluationServices } from "../services/evaluationServices";
+import { StudentServices } from "../services/studentServices";
+
 const evaluationServices = new EvaluationServices;
+const studentServices = new StudentServices;
 
 export class EvaluationController {
     async getAllEvaluations(req:Request, res:Response){
@@ -17,10 +20,18 @@ export class EvaluationController {
 
     async postNewEvaluation(req:Request,res:Response){
         try {
-            let newEvaluation : Evaluation = req.body;
             // let newEvaluation = new Evaluation;
             // newEvaluation.student = req.body.student;
+            let student = await studentServices.getStudent(req.body.studentId)
             // newEvaluation.evaluation_date = req.body.evaluation_date;
+            if (!student){
+                return res.status(404).json({ error: 'Not Found', details: 'Estudante não encontrado.' });
+            };
+            console.log(student);
+            let newEvaluation : Evaluation = req.body;
+            newEvaluation.student = student;
+            console.log(newEvaluation);
+            
             // newEvaluation.note = req.body.note;
             await evaluationServices.newEvaluation(newEvaluation);
             return res.status(201).json(newEvaluation);     

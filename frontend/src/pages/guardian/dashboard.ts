@@ -27,7 +27,7 @@ async function findChildren(userId : number) {
                 let studentInfo = document.createElement('p');
                 console.log(studentObject);
                 // link.href = `http://localhost:3000/api/student/${studentObject.id}`;
-                link.href = `http://127.0.0.1:5500/frontend/src/responsible/studentDash.html/${studentObject.id}`
+                link.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/student/${studentObject.id}`
                 link.textContent = `Filho ${index + 1}`;
                 studentInfo.textContent = `Nome: ${studentObject.name}, Idade: ${studentObject.birth_date}`;
                 // link.addEventListener('click', () => getLinkStudent(studentObject.id));

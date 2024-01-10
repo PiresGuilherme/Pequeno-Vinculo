@@ -1,46 +1,46 @@
-// import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
-import axios from "axios"
+import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
+// import axios from "axios"
 
 // let email = "Pires2"s
 
 
-let userId = 1
-let divChildren = document.getElementById('children')
-findChildren(userId);
-async function findChildren(userId) {
-    try {
-        const response = await axios.post('http://localhost:3000/api/user/children', {
-            userId: userId
-        })
+// let userId = 1
+// let divChildren = document.getElementById('children')
+// findChildren(userId);
+// async function findChildren(userId) {
+//     try {
+//         const response = await axios.post('http://localhost:3000/api/user/children', {
+//             userId: userId
+//         })
 
-        divChildren.innerHTML = '';
+//         divChildren.innerHTML = '';
 
-        console.log(response.data[0].student)
-        if (response.data[0]) {
-            // Iterando sobre cada objeto dentro do array 'student'
-            response.data[0].student.forEach((studentObject, index) => {
-                let link = document.createElement('a');
-                let studentInfo = document.createElement('p');
+//         console.log(response.data[0].student)
+//         if (response.data[0]) {
+//             // Iterando sobre cada objeto dentro do array 'student'
+//             response.data[0].student.forEach((studentObject, index) => {
+//                 let link = document.createElement('a');
+//                 let studentInfo = document.createElement('p');
 
-                // Adicionando atributos e conteúdo aos elementos
-                console.log(studentObject.id);
-                // link.href = `http://localhost:3000/api/student/${studentObject.id}`;
-                link.href = `http://127.0.0.1:5500/frontend/src/responsible/studentDash.html/${studentObject.id}`
-                link.textContent = `Filho ${index + 1}`;
-                studentInfo.textContent = `Nome: ${studentObject.name}, Idade: ${studentObject.birth_date}`;
-                // link.addEventListener('click', () => getLinkStudent(studentObject.id));
+//                 // Adicionando atributos e conteúdo aos elementos
+//                 console.log(studentObject.id);
+//                 // link.href = `http://localhost:3000/api/student/${studentObject.id}`;
+//                 link.href = `http://127.0.0.1:5500/frontend/src/responsible/studentDash.html/${studentObject.id}`
+//                 link.textContent = `Filho ${index + 1}`;
+//                 studentInfo.textContent = `Nome: ${studentObject.name}, Idade: ${studentObject.birth_date}`;
+//                 // link.addEventListener('click', () => getLinkStudent(studentObject.id));
 
-                // Adicionando elementos ao divChildren
-                divChildren.appendChild(link);
-                divChildren.appendChild(studentInfo);
-            });
-        } else {
-            console.log('Nenhum estudante encontrado.');
-        }
-    } catch (error) {
-        console.error('sa:', error.message);
-    }
-}
+//                 // Adicionando elementos ao divChildren
+//                 divChildren.appendChild(link);
+//                 divChildren.appendChild(studentInfo);
+//             });
+//         } else {
+//             console.log('Nenhum estudante encontrado.');
+//         }
+//     } catch (error) {
+//         console.error('sa:', error.message);
+//     }
+// }
 
 // async function getLinkStudent(id) {
 //     try {
@@ -110,32 +110,64 @@ async function findChildren(userId) {
 // });
 // console.log(teste);
 
-teacherClasses(userId);
-async function teacherClasses(userId){
+// teacherClasses(userId);
+// async function teacherClasses(userId){
+//     try {
+//        const response = await axios.post('http://localhost:3000/api/class/teacher',{
+//         userId:userId
+//        }) 
+//        const countClasses = response.data.length
+//        let countStudents = 0
+//        for (let i = 0; i < countClasses; i++) {
+//         let count = await teachersStudents(response.data[i].id);
+//         countStudents += count.data[1];
+//        }
+//     } catch (error) {
+//         console.log(error.message);   
+//     }
+// }
+// // teachersStudents(1)
+// async function teachersStudents(classId){
+//     try {
+//         console.log(classId);
+//         const response = await axios.post('http://localhost:3000/api/student/class',{
+//             classId:classId
+//         })
+//         console.log(response.data[1]);
+//         return response;
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
+
+
+const studentId = 3;
+let note = 9; 
+let evaluation_date = new Date();
+
+// evaluationStudent(studentid,note,evaluation_date);
+
+async function evaluationStudent(studentId, note, evaluation_date){
     try {
-       const response = await axios.post('http://localhost:3000/api/class/teacher',{
-        userId:userId
-       }) 
-       const countClasses = response.data.length
-       let countStudents = 0
-       for (let i = 0; i < countClasses; i++) {
-        let count = await teachersStudents(response.data[i].id);
-        countStudents += count.data[1];
-       }
-    } catch (error) {
-        console.log(error.message);
-    }
-}
-// teachersStudents(1)
-async function teachersStudents(classId){
-    try {
-        console.log(classId);
-        const response = await axios.post('http://localhost:3000/api/student/class',{
-            classId:classId
+        const response = await axios.post('http://localhost:3000/api/evaluation', {
+            student: studentId,
+            note: note,
+            evaluation_date: evaluation_date
         })
-        console.log(response.data[1]);
-        return response;
+        console.log(response);
     } catch (error) {
         console.log(error.message);
     }
 }
+
+document.getElementById('submitBtn').addEventListener('click', function () {
+    const selectedRating = document.querySelector('input[name="rating"]:checked');
+
+    if (selectedRating) {
+        alert('You rated ' + selectedRating.value);
+        evaluationStudent(studentId, selectedRating.value, evaluation_date)
+        // Aqui você pode enviar o valor da avaliação para o servidor ou realizar outras ações.
+    } else {
+        alert('Please select a rating.');
+    }
+});

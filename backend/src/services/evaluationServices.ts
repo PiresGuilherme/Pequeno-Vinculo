@@ -15,9 +15,7 @@ export class EvaluationServices {
                 student: true
             },
             where: {
-                student: {
-                    id: studentId
-                }
+                student: {id: studentId}
             }
         })
     }
