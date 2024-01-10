@@ -1,14 +1,65 @@
 <!doctype html>
 <html lang="pt-BR">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=5; IE=8; IE=7; IE=9; IE=10; IE=11" >
-		<meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1">
-		<title>Bins</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-	</head>
-	<body>
-		<h1>Grafico Linhas</h1>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=5; IE=8; IE=7; IE=9; IE=10; IE=11">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1">
+	<title>Bins</title>
+	<link rel="stylesheet" href="../styles/schedule-teacher.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="teste.js" defer></script>
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			margin: 0;
+		}
+
+		.rating {
+			display: flex;
+		}
+
+		.rating input {
+			display: none;
+		}
+
+		.rating label {
+			cursor: pointer;
+			font-size: 24px;
+			color: #ddd;
+		}
+
+		.rating label:hover,
+		.rating label:hover~label {
+			color: #f39c12;
+		}
+
+		.rating input:checked~label,
+		.rating input:checked~label:hover,
+		.rating input:checked~label:hover~label {
+			color: #f39c12;
+		}
+
+		#submitBtn {
+			margin-top: 20px;
+			padding: 10px 20px;
+			font-size: 18px;
+			background-color: #3498db;
+			color: #fff;
+			border: none;
+			cursor: pointer;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+</head>
+
+<body>
+	<!-- <h1>Grafico Linhas</h1>
 		<canvas id="grafico-linhas"></canvas>
 		<h1>Grafico Colunas</h1>
 		<canvas id="grafico-colunas"></canvas>
@@ -79,6 +130,40 @@
 				})    
 
 				//line, bar
-		</script>
-	</body>
-</html>	
+		</script> -->
+
+	<div class="classes-schedule">
+		<div class="class-one-schedule">
+			<h5>Agenda Turma 1</h5>
+			<span class="material-symbols-outlined" id="add">
+				add
+			</span>
+			<div class="rating">
+				<input type="radio" id="star10" name="rating" value="10">
+				<label for="star10"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star9" name="rating" value="9">
+				<label for="star9"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star8" name="rating" value="8">
+				<label for="star8"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star7" name="rating" value="7">
+				<label for="star7"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star6" name="rating" value="6">
+				<label for="star6"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star5" name="rating" value="5">
+				<label for="star5"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star4" name="rating" value="4">
+				<label for="star4"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star3" name="rating" value="3">
+				<label for="star3"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star2" name="rating" value="2">
+				<label for="star2"><i class="fas fa-star"></i></label>
+				<input type="radio" id="star1" name="rating" value="1">
+				<label for="star1"><i class="fas fa-star"></i></label>
+			</div>
+
+			<button id="submitBtn">Submit</button>
+		</div>
+	</div>
+</body>
+
+</html>

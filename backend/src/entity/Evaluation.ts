@@ -13,5 +13,5 @@ export class Evaluation {
     evaluation_date: Date
 
     @ManyToOne(()=> Student, (student) => student.evaluation)
-    student : Student[]
+    student : Student
 }
