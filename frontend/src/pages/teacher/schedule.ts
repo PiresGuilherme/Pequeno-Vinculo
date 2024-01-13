@@ -45,24 +45,24 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
         data.forEach((schedule: any) => {
             console.log(schedule);
 
-            const newChild = document.createElement('div');
-            newChild.classList.add('class-one-schedul', 'gray-background'); // 
-            newChild.innerHTML = `
+            const newSchedule = document.createElement('div');
+            newSchedule.classList.add('class-one-schedul', 'gray-background'); // 
+            newSchedule.innerHTML = `
             <h5>${schedule.schedule_date}</h5>
             <p>${schedule.message}</p>
         `;
-            oneClass.appendChild(newChild);
+            oneClass.appendChild(newSchedule);
         });
 
 
     } catch (error:any) {      
         if (error.response.status = 404) {
-            const newChild = document.createElement('div');
-            newChild.classList.add('class-one-schedul', 'gray-background'); // 
-            newChild.innerHTML = `
+            const newSchedule = document.createElement('div');
+            newSchedule.classList.add('class-one-schedul', 'gray-background'); // 
+            newSchedule.innerHTML = `
             <h5>Não há nenhum bilhete aqui</h5>
         `;
-            oneClass.appendChild(newChild);
+            oneClass.appendChild(newSchedule);
         }
     }
 }

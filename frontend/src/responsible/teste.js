@@ -161,13 +161,20 @@ async function evaluationStudent(studentId, note, evaluation_date){
 }
 
 document.getElementById('submitBtn').addEventListener('click', function () {
-    const selectedRating = document.querySelector('input[name="rating"]:checked');
-
-    if (selectedRating) {
+    var selectedRating = document.querySelector('input[name="rating"]:checked');
+console.log(selectedRating);
+    if (selectedRating == null) {
+        // alert('You rated ' + selectedRating.value);
+        // evaluationStudent(studentId, selectedRating.value, evaluation_date)
+        // Aqui você pode enviar o valor da avaliação para o servidor ou realizar outras ações.
+        selectedRating=0;
+        alert('You rated ' + selectedRating);
+        evaluationStudent(studentId, selectedRating, evaluation_date)
+    } else {
+        // alert('Please select a rating.');
+        // selectedRating.value=0;
         alert('You rated ' + selectedRating.value);
         evaluationStudent(studentId, selectedRating.value, evaluation_date)
-        // Aqui você pode enviar o valor da avaliação para o servidor ou realizar outras ações.
-    } else {
-        alert('Please select a rating.');
     }
+    
 });
