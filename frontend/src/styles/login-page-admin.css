@@ -1,0 +1,175 @@
+:root {
+  --body: #f3f8fe;
+  --orange: #FEC868;
+  --pink: #FF708D;
+  --purple: #DCC1FC;
+  --green: #A3E487;
+  --background: #e7e7e7;
+
+  --hover-pink: #e94e6d;
+  --hover-purple: #ae7deb;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--body);
+}
+
+header {
+  display: flex;
+  background-color: var(--orange);
+  height: 6vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo {
+  width: 100px;
+  height: 100px;
+}
+
+main {
+  display: flex;
+  flex: 1;
+}
+
+.initial-components {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-inputs {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 53%;
+  gap: 20px;
+  margin-bottom: 2%;
+}
+
+.login-email,
+.login-password {
+  display: flex;
+  align-items: center;
+  background-color: var(--background);
+  height: 6vh;
+  width: 100%;
+  gap: 10px;
+  padding-left: 10px;
+}
+
+.material-symbols-outlined {
+  color: #ae7deb;
+  vertical-align: middle;
+}
+
+.input-email,
+.input-password {
+  background-color: var(--background);
+  border: initial;
+  outline: initial;
+  vertical-align: middle;
+}
+
+.login-btn {
+  color: #000;
+  width: 50%;
+  height: 7vh;
+  background-color: var(--pink);
+  border: none;
+  border-radius: 20px;
+  font-size: 1.5rem;
+}
+
+.login-btn:hover {
+  background-color: var(--hover-pink);
+  color: #000;
+}
+
+aside {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 88vh;
+}
+
+.aside-backgound-img {
+  height: 95vh;
+  width: 100%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green);
+  height: 6vh;
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  header {
+    height: 8vh;
+    margin-bottom: 2%;
+  }
+
+  .header-logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  main {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .login-inputs {
+    width: 60%;
+    gap: 20px;
+    margin-bottom: 2%;
+  }
+
+  .input-email,
+  .input-password {
+    height: 6vh;
+    width: 100%;
+    gap: 10px;
+    padding-left: 10px;
+  }
+
+  aside {
+    justify-content: center;
+  }
+
+  .aside-backgound-img {
+    height: auto;
+    max-width: 100%;
+  }
+
+  footer {
+    position: static;
+    text-align: center;
+    font-size: 14px;
+    padding: 1%;
+  }
+}
