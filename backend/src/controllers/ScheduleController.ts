@@ -13,7 +13,7 @@ export class ScheduleController {
             var schedules = await scheduleServices.getClassSchedules(req.params.id);
             console.log(schedules);
             if (schedules.length == 0) {
-                return res.status(404).json();
+                return res.status(404).json({message: 'Nenhum bilhete encontrado!'});
             }
             return res.status(200).json(schedules);
         } catch (error) {

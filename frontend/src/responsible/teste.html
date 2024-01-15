@@ -7,132 +7,126 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1">
 	<title>Bins</title>
 	<link rel="stylesheet" href="../styles/schedule-teacher.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script type="module" src="teste.js" defer></script>
-	<style>
-		body {
-			font-family: 'Arial', sans-serif;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			height: 100vh;
-			margin: 0;
-		}
-
-		.rating {
-			display: flex;
-		}
-
-		.rating input {
-			display: none;
-		}
-
-		.rating label {
-			cursor: pointer;
-			font-size: 24px;
-			color: #ddd;
-		}
-
-		.rating label:hover,
-		.rating label:hover~label {
-			color: #f39c12;
-		}
-
-		.rating input:checked~label,
-		.rating input:checked~label:hover,
-		.rating input:checked~label:hover~label {
-			color: #f39c12;
-		}
-
-		#submitBtn {
-			margin-top: 20px;
-			padding: 10px 20px;
-			font-size: 18px;
-			background-color: #3498db;
-			color: #fff;
-			border: none;
-			cursor: pointer;
-		}
-	</style>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script type="module" src="teste.js" defer></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .rating {
+            display: flex;
+        }
+
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            cursor: pointer;
+            font-size: 24px;
+            color: #ddd;
+        }
+
+        .rating label:hover,
+        .rating label:hover~label {
+            color: #f39c12;
+        }
+
+        .rating input:checked~label,
+        .rating input:checked~label:hover,
+        .rating input:checked~label:hover~label {
+            color: #f39c12;
+        }
+
+        #submitBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-	<!-- <h1>Grafico Linhas</h1>
-		<canvas id="grafico-linhas"></canvas>
-		<h1>Grafico Colunas</h1>
-		<canvas id="grafico-colunas"></canvas>
-		<h1>Grafico Pizza</h1>
-		<canvas id="grafico-pizza"></canvas>
-		<script type="text/javascript">
-				var ctx = document.getElementById("grafico-linhas");
+    <h1>Grafico Linhas</h1>
+    <canvas id="grafico-linhas" width="800" height="400" style="display: block; width: 946px; height: 473px;"></canvas>
+    <!-- <h1>Grafico Colunas</h1>
+    <canvas id="grafico-colunas" width="962" height="481" style="display: block; width: 962px; height: 481px;"></canvas>
+    <h1>Grafico Pizza</h1>
+    <canvas id="grafico-pizza" width="400" height="200"></canvas> -->
 
-				var chartGraph = new Chart(ctx, {
-					type: 'line',
-					data: {
-						labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
-					datasets: [{
-						label:"Vendas de 2019",
-						data: [10, 15, 8, 5, 6, 9, 10, 7, 8, 11, 4, 10],
-						borderWidth: 6,
-						borderColor: 'rgba(77,166,253,0.8)'
-					}]
+    <script type="text/javascript">
+        var ctxLinhas = document.getElementById("grafico-linhas").getContext("2d");
+        var chartLinhas = new Chart(ctxLinhas, {
+            type: 'line',
+            data: {
+                labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+                datasets: [{
+                    label: "Vendas de 2019",
+                    data: [10, 15, 8, 5, 6, 9, 10, 7, 8, 11, 4, 10],
+                    borderWidth: 6,
+                    borderColor: 'rgba(77,166,253,0.8)'
+                }]
+            }
+        });
 
-					}
-				})    
-				
-				var ctx = document.getElementById("grafico-colunas");
-				var chartGraph = new Chart(ctx, {
-					type: 'bar',
-					data: {
-						labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
-					datasets: [{
-						label:"Vendas de 2019",
-						data: [10, 15, 8, 5, 6, 9, 10, 7, 8, 11, 4, 5],
-						borderWidth: 6,
-						borderColor: 'rgba(77,166,253,0.8)'
-					}]
+        // var ctxColunas = document.getElementById("grafico-colunas").getContext("2d");
+        // var chartColunas = new Chart(ctxColunas, {
+        //     type: 'bar',
+        //     data: {
+        //         labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+        //         datasets: [{
+        //             label: "Vendas de 2019",
+        //             data: [10, 15, 8, 5, 6, 9, 10, 7, 8, 11, 4, 5],
+        //             borderWidth: 6,
+        //             borderColor: 'rgba(77,166,253,0.8)'
+        //         }]
+        //     }
+        // });
 
-					}
-				})    
-				
-				var ctx = document.getElementById("grafico-pizza");
-				var chartColors = {
-					red: 'rgb(255, 99, 132)',
-					orange: 'rgb(255, 159, 64)',
-					yellow: 'rgb(255, 205, 86)',
-					green: 'rgb(75, 192, 192)',
-					blue: 'rgb(54, 162, 235)',
-					purple: 'rgb(153, 102, 255)',
-					grey: 'rgb(201, 203, 207)'
-				};
+        // var ctxPizza = document.getElementById("grafico-pizza").getContext("2d");
+        // var chartColors = {
+        //     red: 'rgb(255, 99, 132)',
+        //     orange: 'rgb(255, 159, 64)',
+        //     yellow: 'rgb(255, 205, 86)',
+        //     green: 'rgb(75, 192, 192)',
+        //     blue: 'rgb(54, 162, 235)',
+        //     purple: 'rgb(153, 102, 255)',
+        //     grey: 'rgb(201, 203, 207)'
+        // };
 
-				var chartGraph = new Chart(ctx, {
-					type: 'pie',
-					data: {
-						labels: ["Jan","Fev","Mar","Abr","Mai"],
-					datasets: [{
-						label:"Vendas de 2019",
-						data: [10, 15, 8, 5, 6],
-						borderWidth: 6,
-						borderColor: 'rgba(77,166,253,0.8)',
-						backgroundColor: [
-							chartColors.red,
-							chartColors.orange,
-							chartColors.yellow,
-							chartColors.green,
-							chartColors.blue,
-						],
-					}]
+        // var chartPizza = new Chart(ctxPizza, {
+        //     type: 'pie',
+        //     data: {
+        //         labels: ["Jan", "Fev", "Mar", "Abr", "Mai"],
+        //         datasets: [{
+        //             label: "Vendas de 2019",
+        //             data: [10, 15, 8, 5, 6],
+        //             borderWidth: 6,
+        //             borderColor: 'rgba(77,166,253,0.8)',
+        //             backgroundColor: [
+        //                 chartColors.red,
+        //                 chartColors.orange,
+        //                 chartColors.yellow,
+        //                 chartColors.green,
+        //                 chartColors.blue,
+        //             ],
+        //         }]
+        //     }
+        // });
+    </script>
 
-					}
-				})    
-
-				//line, bar
-		</script> -->
-
-	<div class="classes-schedule">
+	<!-- <div class="classes-schedule">
 		<div class="class-one-schedule">
 			<h5>Agenda Turma 1</h5>
 			<span class="material-symbols-outlined" id="add">
@@ -162,7 +156,7 @@
 			</div>
 			<button id="submitBtn">Submit</button>
 		</div>
-	</div>
+	</div> -->
 </body>
 
 </html>

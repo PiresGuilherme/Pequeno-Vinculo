@@ -14,29 +14,30 @@ async function findChildren(userId : number) {
     try {
         const response = await axios.get(`http://localhost:3000/api/user/children/${userId}`);
 
-
+        console.log(response);
+        
 
         if (response.data[0]) {
-
-            // Iterando sobre cada objeto dentro do array 'student'
-            response.data[0].student.forEach((studentObject : any, index:number) => {
+            response.data[0].student.forEach((student : any, index:number) => {
                 let divChildren = document.createElement('div');
                 divChildren.classList.add('best-children-one');
                 // divChildren.innerHTML = '';
                 let link = document.createElement('a');
                 let studentInfo = document.createElement('p');
-                console.log(studentObject);
-                // link.href = `http://localhost:3000/api/student/${studentObject.id}`;
-                link.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/student/${studentObject.id}`
+                console.log(student);
+                // link.href = `http://localhost:3000/api/student/${student.id}`;
+                link.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/student/${student.id}`
                 link.textContent = `Filho ${index + 1}`;
-                studentInfo.textContent = `Nome: ${studentObject.name}, Idade: ${studentObject.birth_date}`;
-                // link.addEventListener('click', () => getLinkStudent(studentObject.id));
+                studentInfo.textContent = `Nome: ${student.name}, Idade: ${student.birth_date}`;
+                // link.addEventListener('click', () => getLinkStudent(student.id));
 
                 // Adicionando elementos ao divChildren
                 divChildren.appendChild(link);
                 divChildren.appendChild(studentInfo);
 
                 children.appendChild(divChildren);
+
+                // findLastestNotifications(student.id);
             });
         } else {
             console.log('Nenhum estudante encontrado.');
@@ -90,3 +91,17 @@ async function findChildren(userId : number) {
 // }
 
 
+
+
+// findLastestNotifications(1)
+//notifications
+async function findLastestNotifications(childrenId: number){
+    try {
+        const response = await axios.get(`http://localhost:3000/api/schedule/${childrenId}`)
+        console.log(response);
+        
+        return response;
+    } catch (error) {
+        
+    }
+}
