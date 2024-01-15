@@ -110,6 +110,8 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 // });
 // console.log(teste);
 
+
+// contagem de alunos e classes do professor
 // teacherClasses(userId);
 // async function teacherClasses(userId){
 //     try {
@@ -141,40 +143,167 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 // }
 
 
+
+///// avaliar alunos
+// const studentId = 3;
+// let note = 9; 
+// let evaluation_date = new Date();
+
+// // evaluationStudent(studentid,note,evaluation_date);
+
+// async function evaluationStudent(studentId, note, evaluation_date){
+//     try {
+//         const response = await axios.post('http://localhost:3000/api/evaluation', {
+//             student: studentId,
+//             note: note,
+//             evaluation_date: evaluation_date
+//         })
+//         console.log(response);
+//     } catch (error) {
+//         console.log(error.message);
+//     }
+// }
+
+// document.getElementById('submitBtn').addEventListener('click', function () {
+//     var selectedRating = document.querySelector('input[name="rating"]:checked');
+// console.log(selectedRating);
+//     if (selectedRating == null) {
+//         // alert('You rated ' + selectedRating.value);
+//         // evaluationStudent(studentId, selectedRating.value, evaluation_date)
+//         // Aqui você pode enviar o valor da avaliação para o servidor ou realizar outras ações.
+//         selectedRating=0;
+//         alert('You rated ' + selectedRating);
+//         evaluationStudent(studentId, selectedRating, evaluation_date)
+//     } else {
+//         // alert('Please select a rating.');
+//         // selectedRating.value=0;
+//         alert('You rated ' + selectedRating.value);
+//         evaluationStudent(studentId, selectedRating.value, evaluation_date)
+//     }
+
+// });
+
+
+
+
+
+
+//criar grafico com as notas do aluno
 const studentId = 3;
-let note = 9; 
-let evaluation_date = new Date();
-
-// evaluationStudent(studentid,note,evaluation_date);
-
-async function evaluationStudent(studentId, note, evaluation_date){
+performanceMeasurement(studentId);
+async function performanceMeasurement(studentId) {
     try {
-        const response = await axios.post('http://localhost:3000/api/evaluation', {
-            student: studentId,
-            note: note,
-            evaluation_date: evaluation_date
+        const response = await axios.get(`http://localhost:3000/api/evaluation/student/${studentId}`)
+        var today = new Date();
+        // today.setDate(today.getDate()-2)
+        // console.log(today.getDate())
+
+        // console.log(today);
+        // console.log(response.data[0]);
+        let datas = response.data.filter(data => {
+            // console.log(data.evaluation_date);
+            return data.evaluation_date;
+        }).map(data => ({ ...data, evaluation_date: new Date(data.evaluation_date) }));
+
+        console.log(datas);
+        datas.sort((a, b) => b.evaluation_date.getTime() - a.evaluation_date.getTime());
+        console.log( datas[8].note,
+            datas[7].note,
+            datas[6].note,
+            datas[5].note,
+            datas[4].note,
+            datas[3].note,
+            datas[2].note,
+            datas[1].note,
+            datas[0].note);
+        //media fazer
+
+        var ctx = document.getElementById("grafico-linhas");
+
+        var chartGraph = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [today.getDate() - 8, today.getDate() - 7, today.getDate() - 6, today.getDate() - 5, today.getDate() - 4, today.getDate() - 3, today.getDate() - 2, today.getDate() - 1, today.getDate()],
+                datasets: [{
+                    label: "Notas por dia",
+                    data: [
+                    datas[8].note,
+                    datas[7].note,
+                    datas[6].note,
+                    datas[5].note,
+                    datas[4].note,
+                    datas[3].note,
+                    datas[2].note,
+                    datas[1].note,
+                    datas[0].note],
+                    borderWidth: 6,
+                    borderColor: 'rgba(77,166,253,0.8)'
+                }]
+            }
         })
-        console.log(response);
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
     }
 }
+// var ctx = document.getElementById("grafico-linhas");
 
-document.getElementById('submitBtn').addEventListener('click', function () {
-    var selectedRating = document.querySelector('input[name="rating"]:checked');
-console.log(selectedRating);
-    if (selectedRating == null) {
-        // alert('You rated ' + selectedRating.value);
-        // evaluationStudent(studentId, selectedRating.value, evaluation_date)
-        // Aqui você pode enviar o valor da avaliação para o servidor ou realizar outras ações.
-        selectedRating=0;
-        alert('You rated ' + selectedRating);
-        evaluationStudent(studentId, selectedRating, evaluation_date)
-    } else {
-        // alert('Please select a rating.');
-        // selectedRating.value=0;
-        alert('You rated ' + selectedRating.value);
-        evaluationStudent(studentId, selectedRating.value, evaluation_date)
-    }
-    
-});
+// var chartGraph = new Chart(ctx, {
+//     type: 'line',
+//     data: {
+//         labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+//         datasets: [{
+//             label: "Vendas de 2019",
+//             data: [10, 10, 8, 5, 6, 9, 10, 7, 8, 10, 4, 10],
+//             borderWidth: 6,
+//             borderColor: 'rgba(77,166,253,0.8)'
+//         }]
+
+//     }
+// })
+
+// var ctx = document.getElementById("grafico-colunas");
+// var chartGraph = new Chart(ctx, {
+//     type: 'bar',
+//     data: {
+//         labels: ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"],
+//     datasets: [{
+//         label:"Vendas de 2019",
+//         data: [10, 15, 8, 5, 6, 9, 10, 7, 8, 11, 4, 5],
+//         borderWidth: 6,
+//         borderColor: 'rgba(77,166,253,0.8)'
+//     }]
+
+//     }
+// })
+
+// var ctx = document.getElementById("grafico-pizza");
+// var chartColors = {
+//     red: 'rgb(255, 99, 132)',
+//     orange: 'rgb(255, 159, 64)',
+//     yellow: 'rgb(255, 205, 86)',
+//     green: 'rgb(75, 192, 192)',
+//     blue: 'rgb(54, 162, 235)',
+//     purple: 'rgb(153, 102, 255)',
+//     grey: 'rgb(201, 203, 207)'
+// };
+
+// var chartGraph = new Chart(ctx, {
+//     type: 'pie',
+//     data: {
+//         labels: ["Jan","Fev","Mar","Abr","Mai"],
+//     datasets: [{
+//         label:"Vendas de 2019",
+//         data: [10, 15, 8, 5, 6],
+//         borderWidth: 6,
+//         borderColor: 'rgba(77,166,253,0.8)',
+//         backgroundColor: [
+//             chartColors.red,
+//             chartColors.orange,
+//             chartColors.yellow,
+//             chartColors.green,
+//             chartColors.blue,
+//         ],
+//     }]
+
+//     }
+// })    
