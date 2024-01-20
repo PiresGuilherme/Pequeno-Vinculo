@@ -21,16 +21,17 @@ body {
     width: auto;
     height: 100vh;
     gap: 2%;
-    background-color: #ffff;
+    background-color: var(--body);
 }
 
-nav {
-    padding-right: 2%;
+#navbar{
+    padding: 0px;
 }
 
-#dropdown-logout {
+.container-fluid{
+    background-color:#DCC1FC;
+    border-color: 10px solid #DCC1FC;
 
-    border-radius: 50px;
 }
 
 main {
@@ -42,30 +43,40 @@ main {
     gap: 2%;
 }
 
-.children-schedule {
-    width: 90%;
-    height: 65vh;
+.classes{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.children-one-schedule {
-    display: flex;
-    flex-direction: row;
-    background-color: var(--pink);
+.class-one {
+    width: 90%;
     height: 7vh;
-    justify-content: space-between;
-    padding-right: 2%;
-    padding-left: 2%;
-    align-items: center;
-    border-radius: 10px;
+    display: flex;
+   justify-self: center;
+}
+
+.accordion{
+    width: 100%;
+   
+}
+
+.button{
+    background-color: var(--pink);
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--green);
     height: 6vh;
-    width: 100%;
 }
 
 @media screen and (max-width: 768px) {
@@ -73,11 +84,11 @@ footer {
         font-size: 1rem;
     }
 
-    .children-schedule {
+    .classes-schedule {
         width: 90%;
     }
 
-    .children-one-schedule {
+    .class-one-schedule {
         padding: 2%;
     }
 
@@ -87,4 +98,9 @@ footer {
         font-size: 14px;
         padding: 1%;
     }
+}
+
+.gray-background {
+    background-color: #ccc;
+    /* ou a cor de fundo desejada */
 }

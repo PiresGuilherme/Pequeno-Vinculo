@@ -2,7 +2,7 @@ import { Router , Request, Response } from 'express';
 import { UserController } from '../controllers/UserController';
 
 const router = Router()
-let userControler = new UserController()
+let userControler = new UserController() //colocar dentro das rotas
 
 router.get("/user", (req: Request, res: Response) => {
     userControler.getAllUsers(req, res);
