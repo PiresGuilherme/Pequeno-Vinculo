@@ -2,6 +2,7 @@ import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGen
 import { Class } from "./Class";
 import { User } from "./User";
 import { Evaluation } from "./Evaluation";
+import { Attendance } from "./Attendance";
 
 @Entity()
 export class Student {
@@ -31,4 +32,8 @@ export class Student {
 
     @OneToMany(()=> Evaluation, (evaluation) => evaluation.student)
     evaluation : Evaluation[]
+
+    @ManyToOne(()=> Attendance,attendance => attendance.student)
+    attendance:Attendance[];
+
 }

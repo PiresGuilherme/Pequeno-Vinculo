@@ -6,6 +6,7 @@ import { router as studentRouter } from "./routes/studentRoutes";
 import { router as classRouter } from "./routes/classRoutes";
 import { router as evaluationRouter } from "./routes/evaluationRoutes";
 import { router as scheduleRouter } from "./routes/scheduleRoutes";
+import { router as attendanceRouter } from "./routes/attendanceRoutes";
 
 import cors from 'cors';
 
@@ -22,10 +23,12 @@ AppDataSource.initialize().then(async () => {
     server.use('/api', classRouter);
     server.use('/api', evaluationRouter);
     server.use('/api',scheduleRouter);
-    
+    server.use('/api',attendanceRouter);
     
     server.listen(3000,()=> {
-            console.log('ouvindo');           
+            console.log('ouvindo')
+            console.log(Date());
+            ;           
     })
     
 
