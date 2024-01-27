@@ -28,6 +28,16 @@ nav {
     padding-right: 2%;
 }
 
+#navbar{
+    padding: 0px;
+}
+
+.container-fluid{
+    background-color:#DCC1FC;
+    border-color: 10px solid #DCC1FC;
+
+}
+
 #dropdown-logout {
 
     border-radius: 50px;

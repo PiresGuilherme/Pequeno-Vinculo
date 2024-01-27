@@ -21,7 +21,16 @@ body {
     flex-direction: column;
     width: auto;
     height: 100vh;
-    gap: 2%;
+    gap: 3%;
+}
+
+#navbar{
+    padding: 0px;
+}
+
+.container-fluid{
+    background-color:#DCC1FC;
+    border-color: 10px solid #DCC1FC;
 }
 
 .basic-info {
@@ -130,11 +139,12 @@ body {
 
 
 footer {
+    position: static;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--green);
-    height: 6vh;
+    height: 7vh;
     width: 100%;
 }
 
