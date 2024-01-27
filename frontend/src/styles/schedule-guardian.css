@@ -1,4 +1,4 @@
-:root{
+:root {
     --body: #f3f8fe;
     --orange: #FEC868;
     --pink: #FF708D;
@@ -24,9 +24,13 @@ body {
     background-color: #ffff;
 }
 
-body{
-    width: 100%;
-    height: 100vh;
+nav {
+    padding-right: 2%;
+}
+
+#dropdown-logout {
+
+    border-radius: 50px;
 }
 
 main {
@@ -38,7 +42,7 @@ main {
     gap: 2%;
 }
 
-.children-schedule{
+.children-schedule {
     width: 90%;
     height: 65vh;
 }
@@ -65,9 +69,10 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-    h5{
+    h5 {
         font-size: 1rem;
     }
+
     .children-schedule {
         width: 90%;
     }

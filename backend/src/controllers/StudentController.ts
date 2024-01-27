@@ -21,11 +21,7 @@ export class StudentController {
     async postNewStudent(req: Request, res: Response) {
         try {
             let newStudent: Student = req.body;
-            // let newStudent = new Student;
-            // newStudent.name = req.body.name;
-            // newStudent.last_name = req.body.last_name;
-            // newStudent.birth_date = req.body.birth_date;
-            // newStudent.document = req.body.document;
+           // verificar existencia do guardian
             const classeId = req.body.class;
             const classInstance = await classServices.findOneClass(classeId);
             console.log(classInstance);
