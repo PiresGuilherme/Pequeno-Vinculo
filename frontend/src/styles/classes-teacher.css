@@ -1,4 +1,4 @@
-:root{
+:root {
     --body: #f3f8fe;
     --orange: #FEC868;
     --pink: #FF708D;
@@ -33,25 +33,46 @@ main {
     gap: 2%;
 }
 
-.classes-schedule{
-    width: 90%;
-    height: 70vh;
+.classes {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
 }
 
-.class-one-schedule {
-    display: flex;
-    flex-direction: row;
+
+.class-one {
     background-color: var(--pink);
+    width: 80%;
     height: 7vh;
-    justify-content: space-between;
     padding-right: 2%;
     padding-left: 2%;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    border-radius: 10px;
+    flex-direction: column;
+}
+
+.class-one-name {
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    width: 100%; 
+}
+
+.class-one-students{
+    background-color: var(--purple);
+    width: 105.2%;
+    padding-right: 2%;
+    padding-left: 2%;
     border-radius: 10px;
 }
 
+
 footer {
-    position: fixed;
+    position: static;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -59,13 +80,14 @@ footer {
     align-items: center;
     justify-content: center;
     background-color: var(--green);
-    height: 6vh;
+    height: 10vh;
 }
 
 @media screen and (max-width: 768px) {
-    h5{
+    h5 {
         font-size: 1rem;
     }
+
     .classes-schedule {
         width: 90%;
     }
