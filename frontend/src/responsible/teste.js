@@ -189,53 +189,31 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 
 
 //criar grafico com as notas do aluno
-const studentId = 3;
+const studentId = 2;
 performanceMeasurement(studentId);
 async function performanceMeasurement(studentId) {
     try {
         const response = await axios.get(`http://localhost:3000/api/evaluation/student/${studentId}`)
         var today = new Date();
-        // today.setDate(today.getDate()-2)
-        // console.log(today.getDate())
-
-        // console.log(today);
-        // console.log(response.data[0]);
+        console.log(response.data[0]);
         let datas = response.data.filter(data => {
-            // console.log(data.evaluation_date);
             return data.evaluation_date;
         }).map(data => ({ ...data, evaluation_date: new Date(data.evaluation_date) }));
-
-        console.log(datas);
         datas.sort((a, b) => b.evaluation_date.getTime() - a.evaluation_date.getTime());
-        console.log( datas[8].note,
-            datas[7].note,
-            datas[6].note,
-            datas[5].note,
-            datas[4].note,
-            datas[3].note,
-            datas[2].note,
-            datas[1].note,
-            datas[0].note);
-        //media fazer
-
-        var ctx = document.getElementById("grafico-linhas");
-
+        console.log(datas[0].evaluation_date.getMonth());
+        var ctx = document.getElementById("grafico-linhas").getContext("2d");;
         var chartGraph = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: [today.getDate() - 8, today.getDate() - 7, today.getDate() - 6, today.getDate() - 5, today.getDate() - 4, today.getDate() - 3, today.getDate() - 2, today.getDate() - 1, today.getDate()],
+                labels: datas.slice(0, 5).reverse().map(data => {
+
+                    var dado = (`${data.evaluation_date.getDate()} / ${data.evaluation_date.getMonth() + 1}`)
+                    return dado
+                })
+                ,
                 datasets: [{
                     label: "Notas por dia",
-                    data: [
-                    datas[8].note,
-                    datas[7].note,
-                    datas[6].note,
-                    datas[5].note,
-                    datas[4].note,
-                    datas[3].note,
-                    datas[2].note,
-                    datas[1].note,
-                    datas[0].note],
+                    data: datas.map(data => data.note),
                     borderWidth: 6,
                     borderColor: 'rgba(77,166,253,0.8)'
                 }]
