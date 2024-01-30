@@ -3,6 +3,7 @@ import { Class } from "./Class";
 import { User } from "./User";
 import { Evaluation } from "./Evaluation";
 import { Attendance } from "./Attendance";
+import { File } from "./File";
 
 @Entity()
 export class Student {

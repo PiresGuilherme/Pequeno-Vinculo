@@ -2,6 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "ty
 import { User } from "./User";
 import { Student } from "./Student";
 import { Schedule } from "./Schedule";
+import { File } from "./File";
 
 export type shift = "AFTERNOON" | "NIGHT" | "MORNING";
 
@@ -30,4 +31,7 @@ export class Class {
     
     @OneToMany(()=> Schedule, schedule => schedule.classe, {eager:true})
     schedule: Schedule[]
+
+    @OneToMany(()=> File, file => file.classe)
+    file: File[]
 }
