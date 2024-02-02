@@ -10,8 +10,29 @@ export class File {
     description: string;
 
     @Column()
-    url: string;
+    fieldname: string;
+
+    @Column()
+    originalname: string;
+
+    @Column()
+    encoding: string;
+
+    @Column()
+    mimetype: string;
+
+    @Column()
+    destination: string;
+
+    @Column()
+    filename: string;
+
+    @Column()
+    path: string;
+    
+    @Column()
+    size: number
 
     @ManyToMany(() => Class, classe => classe.file)
-    classe:Class;
+    classe: Class;
 }

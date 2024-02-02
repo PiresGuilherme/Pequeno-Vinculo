@@ -4,4 +4,4 @@ import { FileController } from "../controllers/FileController";
 
 const router = Router();
 
-router.get("")
+router.get("/")

@@ -7,7 +7,9 @@ export class fileServices {
         return fileRepository.findAndCountBy({ classe: classId });
     }
 
-    newPicture(classId, file){
-
+    newPicture(file){
+        const fileRepository = AppDataSource.getRepository(File);
+        fileRepository.save(file);
     }
+    
 }

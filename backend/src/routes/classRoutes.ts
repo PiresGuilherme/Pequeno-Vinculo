@@ -1,9 +1,18 @@
 import { Request, Response, Router } from "express";
 import { ClassController } from "../controllers/ClassController";
-import { FileController } from "../controllers/FileController";
+import { FileController, reqFile } from "../controllers/FileController";
 
 const multer  = require('multer')
-const upload = multer({dest:'/uploads/'})
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'uploads')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix +"-" + file.originalname);
+    }
+  })
+const upload = multer({storage})
 const router = Router()
 // let classController = new ClassController()
 
@@ -27,15 +36,15 @@ router.get('/class/id', (req: Request, res: Response) => {
     classController.findOneClass(req, res)
 })
 
-router.get("class/:id(\\d+)/files", upload.single('picture'), (req:Request,res:Response)=>{
+router.get("/class/:id(\\d+)/picture", upload.single('picture'), (req:Request,res:Response)=>{
     // const fileController = new FileController();
     // console.log("1");
     // fileController.getClassFiles(req,res);
 })
-router.post("class/:id(\\d+)/files",upload.single('picture'), (req:Request,res:Response)=>{
+router.post("/class/:id(\\d+)/picture",upload.single('picture'), async (req:reqFile,res:Response)=>{
     const fileController = new FileController();
     console.log("1");
-    fileController.getClassFiles(req,res);
+    fileController.newPicture(req,res);
 })
 
 export { router };
