@@ -1,7 +1,6 @@
 import { User } from "../entity/User";
 import { AppDataSource } from "../data-source"
 import bcrypt from "bcrypt"
-import { log } from "console";
 
 
 export class UserServices {
@@ -11,7 +10,7 @@ export class UserServices {
 
     async newUser(newUser: User){
         const userRepository = AppDataSource.getRepository(User);
-      //  newUser.password = await bcrypt.hash(newUser.password, 10) Comentado por enquanto até solucionarmos a validação do front
+        newUser.password = await bcrypt.hash(newUser.password, 10)
         const savedUser = userRepository.save(newUser)
         ;(await savedUser).password = undefined
         return savedUser
@@ -28,19 +27,12 @@ export class UserServices {
         return children;
     }
 
-    async login(email: string, password: string){
+    async findUserByEmail(email: string){
         const userRepository = AppDataSource.getRepository(User);
         const user = await userRepository.findOne({
-            where:{email: email, password:password}
+            where:{email: email}
         })
         
         return user;
-        // console.log(user);
-        // return user;
-        // if (user) {
-        //     if (user.password === password) {
-        //         // Senha está correta, retorne o usuário autenticado
-        //         return user;
-        // }
     }
 }

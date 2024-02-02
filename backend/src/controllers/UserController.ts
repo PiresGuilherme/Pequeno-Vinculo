@@ -37,11 +37,11 @@ export class UserController {
         }
     }
 
-    async login(req:Request, res:Response){
+    async findUserByEmail(req:Request, res:Response){
         try{
-            let login = await userServices.login(req.body.email,req.body.password);
+            let login = await userServices.findUserByEmail(req.body.email);
             if (login == null) {
-                return res.status(404).json({ message: "Usuário ou senha incorretos" })
+                return res.status(404).json({ message: "Usuário inexistente." })
             }
             return res.status(200).json(login);
         }catch(error){

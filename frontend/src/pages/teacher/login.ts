@@ -22,20 +22,18 @@ export async function login() {
             message.textContent = 'É necessário preencher ambos os campos, E-mail e Senha';
             return;
         }
-console.log(1);
 
         const response = await axios.post('http://localhost:3000/api/user/login', {
             email: emailValue,
             password: passwordValue,
         });
-console.log(2);
 
         if (response == null) {
             message.textContent = 'Usuário ou senha incorreto';
             return;
         }
 
-        const token = response.data;
+        const token = response.data.user;
         console.log('Token de autenticação:', token);
         if (token.type_user !== "TEACHER") {
             window.location.href = `http://127.0.0.1:5500/frontend/src/pages/initial-login.html`;
