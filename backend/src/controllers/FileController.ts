@@ -22,8 +22,8 @@ export class FileController {
             console.log(2);
 
             const fileService = new fileServices;
-            const files = fileService.getClassFiles(req.params.classId);
-            console.log(3);
+            const files = await fileService.getClassFiles(req.params.classId);
+            console.log(files);
             if (!files) {
                 return res.status(200).json("Não foi encontrado nenhuma imagem desta turma")
             }

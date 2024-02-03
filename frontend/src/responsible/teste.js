@@ -189,40 +189,40 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 
 
 //criar grafico com as notas do aluno
-const studentId = 2;
-performanceMeasurement(studentId);
-async function performanceMeasurement(studentId) {
-    try {
-        const response = await axios.get(`http://localhost:3000/api/evaluation/student/${studentId}`)
-        var today = new Date();
-        console.log(response.data[0]);
-        let datas = response.data.filter(data => {
-            return data.evaluation_date;
-        }).map(data => ({ ...data, evaluation_date: new Date(data.evaluation_date) }));
-        datas.sort((a, b) => b.evaluation_date.getTime() - a.evaluation_date.getTime());
-        console.log(datas[0].evaluation_date.getMonth());
-        var ctx = document.getElementById("grafico-linhas").getContext("2d");;
-        var chartGraph = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: datas.slice(0, 5).reverse().map(data => {
+// const studentId = 2;
+// performanceMeasurement(studentId);
+// async function performanceMeasurement(studentId) {
+//     try {
+//         const response = await axios.get(`http://localhost:3000/api/evaluation/student/${studentId}`)
+//         var today = new Date();
+//         console.log(response.data[0]);
+//         let datas = response.data.filter(data => {
+//             return data.evaluation_date;
+//         }).map(data => ({ ...data, evaluation_date: new Date(data.evaluation_date) }));
+//         datas.sort((a, b) => b.evaluation_date.getTime() - a.evaluation_date.getTime());
+//         console.log(datas[0].evaluation_date.getMonth());
+//         var ctx = document.getElementById("grafico-linhas").getContext("2d");;
+//         var chartGraph = new Chart(ctx, {
+//             type: 'line',
+//             data: {
+//                 labels: datas.slice(0, 5).reverse().map(data => {
 
-                    var dado = (`${data.evaluation_date.getDate()} / ${data.evaluation_date.getMonth() + 1}`)
-                    return dado
-                })
-                ,
-                datasets: [{
-                    label: "Notas por dia",
-                    data: datas.map(data => data.note),
-                    borderWidth: 6,
-                    borderColor: 'rgba(77,166,253,0.8)'
-                }]
-            }
-        })
-    } catch (error) {
-        console.log(error);
-    }
-}
+//                     var dado = (`${data.evaluation_date.getDate()} / ${data.evaluation_date.getMonth() + 1}`)
+//                     return dado
+//                 })
+//                 ,
+//                 datasets: [{
+//                     label: "Notas por dia",
+//                     data: datas.map(data => data.note),
+//                     borderWidth: 6,
+//                     borderColor: 'rgba(77,166,253,0.8)'
+//                 }]
+//             }
+//         })
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 // var ctx = document.getElementById("grafico-linhas");
 
 // var chartGraph = new Chart(ctx, {
@@ -285,3 +285,45 @@ async function performanceMeasurement(studentId) {
 
 //     }
 // })    
+
+
+
+
+
+
+///gallery
+
+import {express} from 'express';
+
+const server = express();
+server.use(express.static('uploads'))
+let classId = 1
+
+classesPicture(classId);
+async function classesPicture(classId){
+    const div1 = document.getElementById('box')
+    console.log(div1);
+    try {
+        const response = await axios.get(`http://localhost:3000/api/class/${classId}/picture`);
+        console.log(response.data[0][1].path+ response.data[0][1].originalname);
+        console.log(response.data[0]);
+        const pictures = response.data[0]
+        pictures.forEach(picture => { 
+            // console.log(1);
+            // console.log(picture.path);
+            const image = document.createElement('img');
+            // console.log(`../../../backend/src/${picture.path}`);
+            //"C:\Users\guilherme.viana\Desktop\Pequeno-Vinculo\backend\uploads\picture-1706910817225-498935461-gomes.jpg" backend\uploads\picture-1706910515294-119552097-gomes.jpg
+
+            //../../../backend\uploads\picture-1706910817225-498935461-gomes.jpg
+            image.setAttribute('src',`/uploads/${picture.path}`)
+            image.setAttribute('width','auto');
+            image.setAttribute('height','auto')
+            console.log(image);
+            div1.appendChild(image)
+        });
+    } catch (error) {
+        console.log(error.message);
+    }
+    console.log(div1);
+}
