@@ -29,9 +29,10 @@ export class ScheduleController {
             const classInstance = await classServices.findOneClass(classeId.id);
             console.log(classInstance);
 
-            if (classInstance) {
-                newSchedule.classe = classInstance;
+            if (!classInstance) {
+                throw new Error;
             }
+            newSchedule.classe = classInstance;
             await scheduleServices.newSchedule(newSchedule)
             return res.status(200).json(newSchedule);
         } catch (error) {
