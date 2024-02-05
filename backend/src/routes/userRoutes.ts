@@ -1,23 +1,27 @@
 import { Router , Request, Response } from 'express';
 import { UserController } from '../controllers/UserController';
+import { SessionController } from '../controllers/SessionController';
 
 const router = Router()
-let userControler = new UserController() //colocar dentro das rotas
 
-router.get("/user", (req: Request, res: Response) => {
-    userControler.getAllUsers(req, res);
+router.get("/user", async (req: Request, res: Response) => {
+    let userControler = new UserController()
+    await userControler.getAllUsers(req, res);
 });
 
-router.post("/user", (req: Request, res: Response) => {
-    userControler.postNewUser(req, res);
+router.post("/user", async (req: Request, res: Response) => {
+    let userControler = new UserController()
+    await userControler.postNewUser(req, res);
 });
 
-router.get('/user/children/:id(\\d+)', (req:Request,res:Response) => {
-    userControler.findChildren(req,res);
+router.get('/user/children/:id(\\d+)', async (req:Request,res:Response) => {
+    let userControler = new UserController()
+    await userControler.findChildren(req,res);
 })
 
-router.post("/user/login",(req:Request,res:Response) => {
-    userControler.login(req, res);
+router.post("/user/login", async (req:Request,res:Response) => {
+    let sessionController = new SessionController()
+    await sessionController.userLogin(req, res);
 })
 
 export {router};
