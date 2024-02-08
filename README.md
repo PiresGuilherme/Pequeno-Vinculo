@@ -1,4 +1,4 @@
-![Logo](frontend/assets/logo-icon-horizontal-pink.sgv)
+<img src="https://ibb.co/gPW0VnJ">
 
 
 # Pequeno Vínculo
