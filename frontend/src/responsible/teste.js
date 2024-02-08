@@ -293,10 +293,10 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 
 ///gallery
 
-import {express} from 'express';
+// import {express} from 'express';
 
-const server = express();
-server.use(express.static('uploads'))
+// const server = express();
+// server.use(express.static('uploads'))
 let classId = 1
 
 classesPicture(classId);
