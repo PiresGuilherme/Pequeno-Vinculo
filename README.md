@@ -1,4 +1,4 @@
-<div align="center" ><a href="https://imgbb.com/"><img src="https://i.ibb.co/z723JkZ/Microsoft-Teams-image-removebg-preview.png" alt="Microsoft-Teams-image-removebg-preview" border="0"></a></div>
+<div align="center" ><a href="https://ibb.co/thttxqc"><img src="https://i.ibb.co/59yynrv/header-readme.png" alt="header-readme" border="0"></a></a></div>
 
 
 # Pequeno Vínculo
