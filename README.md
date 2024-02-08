@@ -1,4 +1,4 @@
-<div align="center" ><a href="https://ibb.co/thttxqc"><img src="https://i.ibb.co/59yynrv/header-readme.png" alt="header-readme" width="500px"></a></a></div>
+<div align="center" ><a href="https://ibb.co/thttxqc"><img src="https://i.ibb.co/59yynrv/header-readme.png" alt="header-readme" width="800px"></a></a></div>
 
 
 # Pequeno Vínculo
