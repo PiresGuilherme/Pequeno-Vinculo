@@ -1,4 +1,4 @@
-![Logo](./frontend/assets/logo-icon-horizontal-pink.sgv)
+![Logo](frontend/assets/logo-icon-horizontal-pink.sgv)
 
 
 # Pequeno Vínculo
