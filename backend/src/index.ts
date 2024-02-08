@@ -17,19 +17,15 @@ import cors from 'cors';
 
 AppDataSource.initialize().then(async () => {
     server.use(cors());
-
     server.use('/api', userRouter);
     server.use('/api', studentRouter);
     server.use('/api', classRouter);
     server.use('/api', evaluationRouter);
     server.use('/api',scheduleRouter);
     server.use('/api',attendanceRouter);
-    
     server.listen(3000,()=> {
             console.log('ouvindo')
             console.log(Date());
             ;           
     })
-    
-
 }).catch(error => console.log(error))

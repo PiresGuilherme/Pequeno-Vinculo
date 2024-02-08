@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import  {UserServices} from "../services/userServices";
+import { UserServices } from "../services/userServices";
 import { User } from "../entity/User";
 
 const userServices = new UserServices
@@ -28,7 +28,7 @@ export class UserController {
         try {
             console.log(req.params.id);
             
-            let childrens = await userServices.findChildren(req.params.id)
+            let childrens = await userServices.findChildren(Number(req.params.id))
             console.log(childrens);
         
             return res.status(202).json(childrens);
@@ -37,12 +37,11 @@ export class UserController {
         }
     }
 
-    async login(req:Request, res:Response){
+    async findUserByEmail(req:Request, res:Response){
         try{
-            let login = await userServices.login(req.body.email,req.body.password);
-            console.log(login);
+            let login = await userServices.findUserByEmail(req.body.email);
             if (login == null) {
-                return res.status(404).json({ message: "Usuário ou senha incorretos" })
+                return res.status(404).json({ message: "Usuário inexistente." })
             }
             return res.status(200).json(login);
         }catch(error){
