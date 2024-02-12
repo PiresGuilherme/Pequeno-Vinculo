@@ -2,7 +2,7 @@
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 var classe = 1
 teachersStudents(classe);
-const classesSchedule = document.querySelector('.classes-schedule');
+const classesSchedule = document.querySelector('.classes-performances');
 console.log(classesSchedule);
 
 async function teachersStudents(classId: number) {
@@ -14,7 +14,7 @@ async function teachersStudents(classId: number) {
       console.log(students);
 
       var classDiv = document.createElement('div');
-      classDiv.classList.add('class-one-schedule')
+      classDiv.classList.add('class-performance')
       var className = document.createElement('h5');
       className.textContent += `Turma ${classId}`
       var btnSubmit = document.createElement('button');
@@ -30,14 +30,14 @@ async function teachersStudents(classId: number) {
       students.forEach((student: any) => {
          // console.log(student);
          var studentDiv = document.createElement('div');
-         studentDiv.classList.add('class-one-schedule')
+         studentDiv.classList.add('class-performance')
          var studentName = document.createElement('h5');
          studentName.textContent += (`${student.name} ${student.last_name}`);
          var ratingDiv = document.createElement('div');
          ratingDiv.classList.add('rating');
          // console.log(student.name, student.last_name);
 
-         for (let i = 10; i > 0; i--) {
+         for (let i = 5; i > 0; i--) {
             const input = `<input type="radio" id="star${i}-${student.id}" name="${student.id}" value="${i}">`;
             const label = `<label for="star${i}-${student.id}"><i class="fas fa-star"></i></label>`;
             ratingDiv.innerHTML += (input + label);
