@@ -1,4 +1,4 @@
-:root{
+:root {
     --body: #f3f8fe;
     --orange: #FEC868;
     --pink: #FF708D;
@@ -24,12 +24,12 @@ body {
     background-color: var(--body);
 }
 
-#navbar{
+#navbar {
     padding: 0px;
 }
 
-.container-fluid{
-    background-color:#DCC1FC;
+.container-fluid {
+    background-color: #DCC1FC;
     border-color: 10px solid #DCC1FC;
 
 }
@@ -43,12 +43,13 @@ main {
     gap: 2%;
 }
 
-.classes-schedule{
+.classes-schedule {
     width: 90%;
     height: 70vh;
+    gap: 2%;
 }
 
-.class-one-schedule {
+.class-schedule {
     display: flex;
     flex-direction: row;
     background-color: var(--pink);
@@ -58,6 +59,111 @@ main {
     padding-left: 2%;
     align-items: center;
     border-radius: 10px;
+}
+
+.material-symbols-outlined {
+    cursor: pointer
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 10%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-title{
+    font-size: 1.3em;
+}
+
+.modal-content {
+    background-color: var(--pink);
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    height: 60vh;
+    gap: 3%;
+}
+
+.modal-info{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+
+.close {
+    color: var(--body);
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: static;
+    width: 24px;
+    height: 24px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.input-class,
+.input-title{
+    background-color: var(--body);
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    height: 6vh;
+    border-radius: 10px;
+    padding-left: 1%;
+}
+
+.reminder-content{
+    display: flex;
+    flex-direction: row;
+}
+
+.input-message{
+    background-color: var(--body);
+    border: none;
+    box-shadow: none;
+    width: 100%;
+    height: 20vh;
+    border-radius: 10px;
+    padding-left: 1%;
+    padding-top: 1%;
+}
+
+#clip{
+    position: absolute;
+    right: 3%;
+    padding-top: 1%;
+    color: var(--pink);
+}
+
+.hidden {
+    display: none;
+}
+
+.add-reminder-button{
+    width: 50%;
+    height: 6vh;
+    background-color: var(--purple);
+    align-self: center;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+}
+
+.add-reminder-button:hover{
+    background-color: var(--hover-purple);
 }
 
 footer {
@@ -73,9 +179,10 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
-    h5{
+    h5 {
         font-size: 1rem;
     }
+
     .classes-schedule {
         width: 90%;
     }

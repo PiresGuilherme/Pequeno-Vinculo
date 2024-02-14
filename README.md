@@ -1,10 +1,28 @@
-# Projeto integrador Entra21
-# Pequeno Vinculo
+<div align="center" ><a href="https://ibb.co/thttxqc"><img src="https://i.ibb.co/59yynrv/header-readme.png" alt="header-readme" width="800px"></a></a></div>
 
-Este é o projeto final do nosso curso de NodeJS pelo Entra21, o mesmo está sendo desenvolvido pelos alunos
-Esther Lucena
-Gabriel Morez
-Guilherme Pires
-Larissa Wandervegen
-A ideia do protótipo é desenvolver um software que seria dedicado a Creche e/ou ensino infantil no qual o professor colocaria um feedback em forma de estrelas ou emogis para representar o desempenho do aluno na aula, não só em relação aos estudos, mas também em questão de comportamento, nesta plataforma com o passar das aulas seria gerado um gráfico no qual o pai poderia analisar como seu filho tem se comportado em sala. O protótipo também tem como ideia servir de agenda e também de um lugar no qual o professor pode disponibilizar momentos dos quais a criança ou turma tenha passado, disponibilizando na plataforma pra download dos pais.
-Também tem como objetivo desenvolver além do método de avaliação, uma forma de bonificar o aluno, gerando moedas virtuais no sistema para o mesmo, no final do mês ou semestre o aluno poderia escolher como gastar sua moeda e teria que decidir entre “alugar” um brinquedo diferente ou fazer alguma dinâmica diferente, instigando não só que o mesmo se comporte melhor, como também que ele aprenda uma educação financeira de forma divertida.
+
+# Pequeno Vínculo
+
+Projeto de conclusão do curso Node.js do Entra21
+
+Este software tem como objetivo aprimorar o contato entre responsáveis e professores, também auxiliar no acompanhamento do aluno de forma interativa. 
+
+## Funcionalidades
+
+📖 Servir como agenda para facilitar o contato com o responsável através de lembretes.
+<br>
+⭐ Avaliação diária do aluno que gera moedas como forma de bonificação.
+<br>
+💰 Ensinar educação financeira de forma divertida por meio do uso consciente das moedas para atividades extras.
+<br>
+📷 Galeria de fotos para o responsável acompanhar o aluno na escola. 
+<br>
+💭Chat para que professor e responsável possam interagir. 
+
+
+## Autores
+
+- [Larissa Wandervegen](https://github.com/larissawandervegen)
+- [Guilherme Pires](https://github.com/PiresGuilherme)
+- [Esther Lucena](https://github.com/EstherLucena)
+- [Gabriel Morez](https://github.com/gabrielmorez)
