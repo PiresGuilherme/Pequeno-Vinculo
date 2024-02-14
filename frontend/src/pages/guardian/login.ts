@@ -38,6 +38,7 @@ export async function login() {
         if (token.type_user !== "RESPONSIBLE") {
             window.location.href = `http://127.0.0.1:5500/frontend/src/pages/initial-login.html`;
             alert( 'Você não é um Responsável');
+            return
         }
 
         localStorage.setItem("login", JSON.stringify(token));
