@@ -1,42 +1,13 @@
+
 //@ts-ignore
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
-
-const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
+ 
+ 
+// var classe = new URLSearchParams(window.location.search)
+// teachersStudents(classe);
+const classesSchedule = document.querySelector('.classes-performances');
 console.log(classesSchedule);
-
-const userJson = localStorage.getItem('login');
-
-if (userJson) {
-    const user = JSON.parse(userJson);
-    teacherClasses(user.id)
-}
-
-async function teacherClasses(userId: number) {
-   try {
-       const response = await axios.post('http://localhost:3000/api/class/teacher', {
-           userId: userId
-       })
-       const classes = response.data.length
-       for (let i = 0; i < classes; i++) {
-         var classDiv = document.createElement('div');
-         classDiv.classList.add('class-performance')
-         var className = document.createElement('h5');
-         className.textContent += `Turma`
-         var btnSubmit = document.createElement('a');
-         btnSubmit.type = 'button';
-         btnSubmit.id = 'btnSubmit';
-         btnSubmit.innerHTML = `<button>Avaliar</button>`
-         btnSubmit.href = `http://127.0.0.1:5500/frontend/src/teacher/performanceClass.html/${response.data[i].id}`
-   
-         classDiv.appendChild(className);
-         classDiv.appendChild(btnSubmit);
-         classesSchedule?.appendChild(classDiv)
-       }
-   } catch (error: any) {
-       console.log(error.message);
-   }
-}
-
+ 
 async function teachersStudents(classId: number) {
    try {
       const response = await axios.post('http://localhost:3000/api/student/class', {
@@ -44,10 +15,21 @@ async function teachersStudents(classId: number) {
       });
       const students = response.data[0];
       console.log(students);
-
-      
+ 
+      var classDiv = document.createElement('div');
+      classDiv.classList.add('class-performance')
+      var className = document.createElement('h5');
+      className.textContent += `Turma ${classId}`
+      var btnSubmit = document.createElement('button');
+      btnSubmit.type = 'button';
+      btnSubmit.id = 'btnSubmit';
+      btnSubmit.textContent = 'Avaliar'
+ 
+      classDiv.appendChild(className);
+      classDiv.appendChild(btnSubmit);
+      classesSchedule?.appendChild(classDiv)
       // console.log(classDiv);
-
+ 
       students.forEach((student: any) => {
          // console.log(student);
          var studentDiv = document.createElement('div');
@@ -57,7 +39,7 @@ async function teachersStudents(classId: number) {
          var ratingDiv = document.createElement('div');
          ratingDiv.classList.add('rating');
          // console.log(student.name, student.last_name);
-
+ 
          for (let i = 5; i > 0; i--) {
             const input = `<input type="radio" id="star${i}-${student.id}" name="${student.id}" value="${i}">`;
             const label = `<label for="star${i}-${student.id}"><i class="fas fa-star"></i></label>`;
@@ -67,15 +49,15 @@ async function teachersStudents(classId: number) {
          studentDiv.appendChild(ratingDiv);
          classesSchedule?.appendChild(studentDiv)
       })
-
+ 
       document.getElementById('btnSubmit')?.addEventListener('click', async function () {
          students.forEach(async (student: any) => {
-
+ 
             var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
             // console.log(selectedRating.value);
             // var note = Number(selectedRating.value);
             // console.log(student.id);
-
+ 
             var nowDate = new Date();
             if (selectedRating == null) {
                // selectedRating = 0;
@@ -94,8 +76,8 @@ async function teachersStudents(classId: number) {
       alert(error.message)
    }
 }
-
-
+ 
+ 
 async function evaluateClass(studentId: number, note: number, evaluation_date: Date) {
    try {
       const response = await axios.post('http://localhost:3000/api/evaluation', {
@@ -104,9 +86,10 @@ async function evaluateClass(studentId: number, note: number, evaluation_date: D
          evaluation_date: evaluation_date
       })
       console.log(response);
-
+ 
       return
    } catch (error: any) {
       throw new Error(error.message)
    }
 }
+ 
