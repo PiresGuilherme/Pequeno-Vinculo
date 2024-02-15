@@ -47,13 +47,12 @@ export class EvaluationController {
         }
     }
 
-    //Precisa ser corrigido, precisamos filtrar por datas e armazenar avaliações da mesma data.
     async averageEvaluations(req:Request,res:Response) {
-        try {
+        try {          
             const average = await evaluationServices.averageEvaluations(req.params.id)
-            // console.log(average);
-            console.log(average[0]);
+            console.log(average);
             
+            return res.status(200).json(average)
         } catch (error) {
             return res.status(500).json()            
         }

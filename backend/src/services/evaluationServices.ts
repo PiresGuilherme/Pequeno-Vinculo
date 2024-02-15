@@ -10,26 +10,26 @@ export class EvaluationServices {
 
     async newEvaluation(newEvaluation) {
         const evaluationRepository = AppDataSource.getRepository(Evaluation);
-        // var valid = false
-        // const exist = await evaluationRepository.find({
-        //     relations: {
-        //         student: true
-        //     },
-        //     where: {
-        //         student: { id: newEvaluation.student.id }
-        //     }
-        // })
-        // exist.forEach(evaluate => {
-        //     if (evaluate.evaluation_date == newEvaluation.student.id) {
-        //         valid = true;
-        //     }
-        // })
-        // if (valid) {
+        var valid = false
+        const exist = await evaluationRepository.find({
+            relations: {
+                student: true
+            },
+            where: {
+                student: { id: newEvaluation.student.id }
+            }
+        })
+        exist.forEach(evaluate => {
+            if (evaluate.evaluation_date == newEvaluation.student.id) {
+                valid = true;
+            }
+        })
+        if (valid) {
             evaluationRepository.save(newEvaluation)
-        // }
-        // else{
-        //     throw new Error("Avaliação já foi feita na data de hoje.")
-        // }
+        }
+        else {
+            throw new Error("Avaliação já foi feita na data de hoje.")
+        }
     }
 
     findStudentEvaluations(studentId) {
@@ -44,19 +44,22 @@ export class EvaluationServices {
             }
         })
     }
-    averageEvaluations(evaluation_date) {
+    async averageEvaluations(studentId) {
         const evaluationRepository = AppDataSource.getRepository(Evaluation);
-
-        let evaluations = evaluationRepository.findAndCount({
+        
+        const evaluations = await evaluationRepository.find({
+            relations: {
+                student: true
+            },
             where: {
-                evaluation_date: evaluation_date
+                student: { id: studentId }
             }
         })
-        // evaluations.then(evaluate => {
-        //     // console.log(evaluate);
-        // }
-        // )
-        return evaluations;
+        var totalNotes: number = evaluations.reduce((acc, evaluation) => acc + evaluation.note, 0)
+        const average = totalNotes / evaluations.length;
+        // console.log(average);
+        
+        return average;
     }
 }
 

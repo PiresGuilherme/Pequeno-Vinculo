@@ -9,19 +9,19 @@ let colorIndex = 0;
 const userJson = localStorage.getItem('login');
 
 if (userJson) {
-    const user = JSON.parse(userJson);
-    console.log(user.user.id);
-    
-    teacherClasses(user.user.id)
+   const user = JSON.parse(userJson);
+   console.log(user.user.id);
+
+   teacherClasses(user.user.id)
 }
 
 async function teacherClasses(userId: number) {
    try {
-       const response = await axios.post('http://localhost:3000/api/class/teacher', {
-           userId: userId
-       })
-       const classes = response.data.length
-       for (let i = 0; i < classes; i++) {
+      const response = await axios.post('http://localhost:3000/api/class/teacher', {
+         userId: userId
+      })
+      const classes = response.data.length
+      for (let i = 0; i < classes; i++) {
          var classDiv = document.createElement('div');
          classDiv.classList.add('class-performance')
          var className = document.createElement('h5');
@@ -36,23 +36,23 @@ async function teacherClasses(userId: number) {
           expand_more
          </span>`
          // btnSubmit.href = `http://127.0.0.1:5500/frontend/src/teacher/performanceClass.html/${response.data[i].id}`
-         
+
          classDiv.style.backgroundColor = colorPalette[colorIndex];
          colorIndex = (colorIndex + 1) % colorPalette.length;
-        
+
          classDiv.appendChild(className);
          classDiv.appendChild(btnSubmit);
          classDiv.appendChild(btnExpand);
          classesSchedule?.appendChild(classDiv)
 
-         
+
          document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function () {
             const classId = response.data[i].id;
             await teachersStudents(classId);
-        });
+         });
       }
    } catch (error: any) {
-       console.log(error.message);
+      console.log(error.message);
    }
 }
 
@@ -64,7 +64,7 @@ async function teachersStudents(classId: number) {
       const students = response.data[0];
       console.log(students);
 
-      
+
       // console.log(classDiv);
 
       students.forEach((student: any) => {
@@ -88,7 +88,7 @@ async function teachersStudents(classId: number) {
       })
 
       document.getElementById('btnSubmit')?.addEventListener('click', async function () {
-         students.forEach(async (student: any) => {
+         const evaluations = students.map(async (student: any) => {
 
             var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
             // console.log(selectedRating.value);
@@ -105,10 +105,9 @@ async function teachersStudents(classId: number) {
                // await teachersStudents(classe);
             }
          })
-      });
-      if (!Error) {
+         await Promise.all(evaluations);
          alert("Avaliações criadas com sucesso!");
-      }
+      });
    } catch (error: any) {
       alert(error.message)
    }
@@ -122,7 +121,7 @@ async function evaluateClass(studentId: number, note: number, evaluation_date: D
          note: note,
          evaluation_date: evaluation_date
       })
-      console.log(response);
+      // console.log(response);
 
       return
    } catch (error: any) {
