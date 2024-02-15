@@ -53,13 +53,14 @@ main {
 .class-performance {
     display: flex;
     flex-direction: row;
-    background-color: var(--pink);
+    /* background-color: var(--pink); */
     height: 7vh;
     justify-content: space-between;
     padding-right: 2%;
     padding-left: 2%;
     align-items: center;
     border-radius: 10px;
+    margin-top: 0.5%;
 }
 
 

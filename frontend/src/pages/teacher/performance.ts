@@ -3,6 +3,8 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
 console.log(classesSchedule);
+const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
+let colorIndex = 0;
 
 const userJson = localStorage.getItem('login');
 
@@ -21,17 +23,32 @@ async function teacherClasses(userId: number) {
          var classDiv = document.createElement('div');
          classDiv.classList.add('class-performance')
          var className = document.createElement('h5');
-         className.textContent += `Turma`
+         className.textContent += `Turma ${response.data[i].name}`
          var btnSubmit = document.createElement('a');
          btnSubmit.type = 'button';
          btnSubmit.id = 'btnSubmit';
          btnSubmit.innerHTML = `<button>Avaliar</button>`
-         btnSubmit.href = `http://127.0.0.1:5500/frontend/src/teacher/performanceClass.html/${response.data[i].id}`
-   
+         var btnExpand = document.createElement('div');
+         btnExpand.innerHTML = `
+         <span class="material-symbols-outlined" id="expand${i + 1}">
+          expand_more
+         </span>`
+         // btnSubmit.href = `http://127.0.0.1:5500/frontend/src/teacher/performanceClass.html/${response.data[i].id}`
+         
+         classDiv.style.backgroundColor = colorPalette[colorIndex];
+         colorIndex = (colorIndex + 1) % colorPalette.length;
+        
          classDiv.appendChild(className);
          classDiv.appendChild(btnSubmit);
+         classDiv.appendChild(btnExpand);
          classesSchedule?.appendChild(classDiv)
-       }
+
+         
+         document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function () {
+            const classId = response.data[i].id;
+            await teachersStudents(classId);
+        });
+      }
    } catch (error: any) {
        console.log(error.message);
    }
