@@ -68,7 +68,7 @@ async function teachersStudents(classId: number) {
       // console.log(classDiv);
 
       students.forEach((student: any) => {
-         // console.log(student);
+         console.log(student);
          var studentDiv = document.createElement('div');
          studentDiv.classList.add('class-performance')
          var studentName = document.createElement('h5');

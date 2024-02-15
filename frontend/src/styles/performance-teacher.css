@@ -63,6 +63,14 @@ main {
     margin-top: 0.5%;
 }
 
+.accordion.active .students-list {
+    display: block;
+}
+
+.students-list {
+    display: none;
+}
+
 
 .rating {
     display: flex;
