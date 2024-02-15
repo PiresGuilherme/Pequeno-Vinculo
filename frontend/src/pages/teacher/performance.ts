@@ -1,8 +1,8 @@
 //@ts-ignore
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
-const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
-console.log(classesSchedule);
+const classesPerformance = document.querySelector('.classes-performances') as HTMLElement;
+console.log(classesPerformance);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
@@ -43,7 +43,7 @@ async function teacherClasses(userId: number) {
          classDiv.appendChild(className);
          classDiv.appendChild(btnSubmit);
          classDiv.appendChild(btnExpand);
-         classesSchedule?.appendChild(classDiv)
+         classesPerformance?.appendChild(classDiv)
 
          
          document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function () {
@@ -64,7 +64,7 @@ async function teachersStudents(classId: number) {
       const students = response.data[0];
       console.log(students);
 
-      
+      var studentList = document.createElement('div');
       // console.log(classDiv);
 
       students.forEach((student: any) => {
@@ -84,7 +84,7 @@ async function teachersStudents(classId: number) {
          }
          studentDiv.appendChild(studentName);
          studentDiv.appendChild(ratingDiv);
-         classesSchedule?.appendChild(studentDiv)
+         classesPerformance?.appendChild(studentDiv)
       })
 
       document.getElementById('btnSubmit')?.addEventListener('click', async function () {
