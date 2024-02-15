@@ -10,7 +10,9 @@ const userJson = localStorage.getItem('login');
 
 if (userJson) {
     const user = JSON.parse(userJson);
-    teacherClasses(user.id)
+    console.log(user.user.id);
+    
+    teacherClasses(user.user.id)
 }
 
 async function teacherClasses(userId: number) {

@@ -32,10 +32,11 @@ export async function login() {
             message.textContent = 'Usuário ou senha incorreto';
             return;
         }
+        // console.log(response.data);
 
-        const token = response.data.user;
+        const token = response.data;
         console.log('Token de autenticação:', token);
-        if (token.type_user !== "RESPONSIBLE") {
+        if (token.user.type_user !== "RESPONSIBLE") {
             window.location.href = `http://127.0.0.1:5500/frontend/src/pages/initial-login.html`;
             alert( 'Você não é um Responsável');
             return
