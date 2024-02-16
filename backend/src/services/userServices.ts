@@ -16,6 +16,11 @@ export class UserServices {
         return savedUser
     }
 
+    async getUserById(userId){
+        const userRepository = AppDataSource.getRepository(User);
+        return userRepository.findOneBy({id:userId})
+    }
+
     //select de filhos funcionando porém aparentemente não está sendo registrado na tabela de relação quando é criado um filho;
     async findChildren(userId: Number){
         const userRepository = AppDataSource.getRepository(User);

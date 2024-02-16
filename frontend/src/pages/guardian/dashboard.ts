@@ -4,35 +4,42 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const userJson = localStorage.getItem('login');
 const children = document.getElementById('children') as HTMLDivElement;
+const bestChildrens = document.getElementById('bests') as HTMLDivElement;
         
 if (userJson) {
     const user = JSON.parse(userJson);
-    findChildren(user.id)
+    findChildren(user.user.id)
+    childrensPerformance(user.user.id)
 }
  
 async function findChildren(userId : number) {
     try {
         const response = await axios.get(`http://localhost:3000/api/user/children/${userId}`);
 
-        console.log(response);
+        // console.log(response);
         
 
         if (response.data[0]) {
-            response.data[0].student.forEach((student : any, index:number) => {
+            response.data[0].student.forEach(async (student : any, index:number) => {
+
                 let divChildren = document.createElement('div');
                 divChildren.classList.add('best-children-one');
-                // divChildren.innerHTML = '';
-                let link = document.createElement('a');
+                // let link = document.createElement('a');
                 let studentInfo = document.createElement('p');
-                console.log(student);
+
+                // console.log(student);
                 // link.href = `http://localhost:3000/api/student/${student.id}`;
-                link.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/student/${student.id}`
-                link.textContent = `Filho ${index + 1}`;
-                studentInfo.textContent = `Nome: ${student.name}, Idade: ${student.birth_date}`;
+                // link.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/student/${student.id}`
+                // link.textContent = `Filho ${index + 1}`;
+                var turma = await axios.get(`http://localhost:3000/api/class/${student.classeId}`);
+                console.log(turma.data);
+                turma = turma.data;
+                studentInfo.innerHTML = `<strong>Nome:</strong>
+                <p> ${student.name}</p> <strong>Turma:</strong> <p>${turma.name}</p>`;
                 // link.addEventListener('click', () => getLinkStudent(student.id));
 
                 // Adicionando elementos ao divChildren
-                divChildren.appendChild(link);
+                // divChildren.appendChild(link);
                 divChildren.appendChild(studentInfo);
 
                 children.appendChild(divChildren);
@@ -48,6 +55,51 @@ async function findChildren(userId : number) {
 }
 
 
+
+async function childrensPerformance(userId : number) {
+    try {
+        const response = await axios.get(`http://localhost:3000/api/user/children/${userId}`);
+
+        // console.log(response);
+        
+
+        if (response.data[0]) {
+            response.data[0].student.forEach(async (student : any, index:number) => {
+                let divBests = document.createElement('div');
+                divBests.classList.add('best-children-one');
+                // divChildren.innerHTML = '';
+               
+                let studentInfo = document.createElement('p');
+                var average = await axios.get(`http://localhost:3000/api/evaluate/average/${student.id}`);
+                average = average.data
+                // console.log(average);
+                
+                var media = ``
+                if (average == null || average == 0) {
+                    media = `Nenhuma nota cadastrada!`
+                } else {
+                    media = `${average.toFixed(2)} / 5`
+                }
+                console.log(average);
+                studentInfo.textContent = `Nome: ${student.name}, média: ${media}`;
+                
+
+                // link.addEventListener('click', () => getLinkStudent(student.id));
+
+                // Adicionando elementos ao divChildren
+                divBests.appendChild(studentInfo);
+
+                bestChildrens.appendChild(divBests);
+
+                // findLastestNotifications(student.id);
+            });
+        } else {
+            console.log('Nenhum estudante encontrado.');
+        }
+    } catch (error : any) {
+        console.error('sa:', error.message);
+    }
+}
 
 
 

@@ -31,15 +31,15 @@ router.post('/class/teacher', (req: Request, res: Response) => {
     classController.findClassroomTeacher(req, res)
 });
 
-router.get('/class/id', (req: Request, res: Response) => {
+router.get('/class/:id', (req: Request, res: Response) => {
     let classController = new ClassController()
     classController.findOneClass(req, res)
 })
 
 router.get("/class/:id(\\d+)/picture", upload.single('picture'), (req:Request,res:Response)=>{
-    const fileController = new FileController();
-    console.log("1");
-    fileController.getClassFiles(req,res);
+    // const fileController = new FileController();
+    // console.log("1");
+    // fileController.getClassFiles(req,res);
 })
 router.post("/class/:id(\\d+)/picture",upload.single('picture'), async (req:reqFile,res:Response)=>{
     const fileController = new FileController();

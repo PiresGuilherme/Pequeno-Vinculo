@@ -3,6 +3,8 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
 console.log(classesSchedule);
+const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
+console.log(classesSchedule);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
@@ -81,13 +83,15 @@ async function teachersStudents(classId: number, container: HTMLElement) {
 
         container.innerHTML = ''; 
 
-        students.forEach((student: any) => {
-            var studentDiv = document.createElement('div');
-            studentDiv.classList.add('class-performance');
-            var studentName = document.createElement('h5');
-            studentName.textContent += (`${student.name} ${student.last_name}`);
-            var ratingDiv = document.createElement('div');
-            ratingDiv.classList.add('rating');
+      students.forEach((student: any) => {
+         console.log(student);
+         var studentDiv = document.createElement('div');
+         studentDiv.classList.add('class-performance')
+         var studentName = document.createElement('h5');
+         studentName.textContent += (`${student.name} ${student.last_name}`);
+         var ratingDiv = document.createElement('div');
+         ratingDiv.classList.add('rating');
+         // console.log(student.name, student.last_name);
 
             for (let i = 5; i > 0; i--) {
                 const input = `<input type="radio" id="star${i}-${student.id}" name="${student.id}" value="${i}">`;
@@ -99,24 +103,30 @@ async function teachersStudents(classId: number, container: HTMLElement) {
             container?.appendChild(studentDiv);
         });
 
-        document.getElementById('btnSubmit')?.addEventListener('click', async function () {
-            students.forEach(async (student: any) => {
-                var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
+      document.getElementById('btnSubmit')?.addEventListener('click', async function () {
+         const evaluations = students.map(async (student: any) => {
 
-                var nowDate = new Date();
-                if (selectedRating == null) {
-                    await evaluateClass(student.id, 0, nowDate);
-                } else {
-                    await evaluateClass(student.id, Number(selectedRating.value), nowDate);
-                }
-            });
-            if (!Error) {
-                alert("Avaliações criadas com sucesso!");
+            var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
+            // console.log(selectedRating.value);
+            // var note = Number(selectedRating.value);
+            // console.log(student.id);
+
+            var nowDate = new Date();
+            if (selectedRating == null) {
+               // selectedRating = 0;
+               await evaluateClass(student.id, 0, nowDate);
+               // await teachersStudents(classe);
+            } else {
+               await evaluateClass(student.id, Number(selectedRating.value), nowDate)
+               // await teachersStudents(classe);
             }
-        });
-    } catch (error: any) {
-        alert(error.message);
-    }
+         })
+         await Promise.all(evaluations);
+         alert("Avaliações criadas com sucesso!");
+      });
+   } catch (error: any) {
+      alert(error.message)
+   }
 }
 
 async function evaluateClass(studentId: number, note: number, evaluation_date: Date) {
