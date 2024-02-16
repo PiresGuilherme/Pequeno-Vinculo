@@ -5,7 +5,7 @@ const classRepository = AppDataSource.getRepository(Class);
 export class ClassServices {
     getAllClasses() { return classRepository.find(); }
 
-    newClass(newClass) {
+    newClass(newClass: Class) {
         classRepository.save(newClass)
     }
     

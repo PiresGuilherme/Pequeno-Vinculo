@@ -1,7 +1,7 @@
 //@ts-ignore
 import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
-
+const buttonAddSchedule = document.querySelector('.add-reminder-button') as HTMLButtonElement;
 const classesJson = localStorage.getItem('classes');
 const divClassesSchedule = document.querySelector('.classes-schedule') as HTMLDivElement;
 
@@ -66,6 +66,40 @@ if (classesJson) {
     oneClass.innerHTML = 'NÃO HÁ NENHUMA TURMA CADASTRADA';
     divClassesSchedule.appendChild(oneClass)
 }
+
+buttonAddSchedule.addEventListener('click', async () => {
+    const classElement: HTMLInputElement | null = document.querySelector('.input-class');
+    const titleElement: HTMLInputElement | null = document.querySelector('.input-title');
+    const messageElement: HTMLTextAreaElement | null = document.querySelector('.input-message');    
+
+    if(!Number(classElement?.value)){
+        alert('Informe o ID da turma!')
+    }
+
+    if(titleElement?.value === ''){
+        alert('Informe o título do lembrete!')
+    }
+
+    if(messageElement?.value === ''){
+        alert('Informe a mensagem do lembrete!')
+    }
+
+    let classId = Number(classElement?.value)
+    let title = titleElement?.value
+    let message = messageElement?.value
+
+    let response = await postShedules(message, title, classId)
+
+    if(response.status === 200){
+        alert('Lembrete adicionado com sucesso!')
+        window.location.href = `http://127.0.0.1:5500/frontend/src/pages/teacher/schedule-teacher.html`
+        return
+    }
+    
+    alert(response.statusText)
+
+})
+
 async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
     try {
         const schedules = await axios.get(`http://localhost:3000/api/schedule/${classId}`)
@@ -98,5 +132,30 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
         `;
             oneClass.appendChild(newSchedule);
         }
+    }
+}
+async function postShedules(message: String | undefined, title: String | undefined, classId: Number | undefined){
+    try {
+        if(classId === undefined){
+            alert('Informe o ID da turma!')
+        }
+
+        if(title === undefined){
+            alert('Informe o título do lembrete!')
+        }
+
+        if(message === undefined){
+            alert('Informe a mensagem do lembrete!')
+        }
+
+        const response = await axios.post('http://localhost:3000/api/schedule', {
+            "message": message,
+            "title": title,
+            "class": classId
+        })
+
+        return response
+    } catch (error) {
+        return error
     }
 }
