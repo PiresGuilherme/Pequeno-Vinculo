@@ -41,6 +41,9 @@ export class StudentController {
     async getStudent(req: Request, res: Response) {
         try {
             let student = await studentServices.getStudent(req.params.id)
+            console.log('a');
+            
+            console.log(student);   
             return res.status(200).json(student);
         } catch (error) {
             console.log(error.message);

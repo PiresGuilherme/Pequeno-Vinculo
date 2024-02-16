@@ -20,16 +20,20 @@ async function findChildren(userId : number) {
         
 
         if (response.data[0]) {
-            response.data[0].student.forEach((student : any, index:number) => {
+            response.data[0].student.forEach(async (student : any, index:number) => {
+
                 let divChildren = document.createElement('div');
                 divChildren.classList.add('best-children-one');
-                // divChildren.innerHTML = '';
                 let link = document.createElement('a');
                 let studentInfo = document.createElement('p');
+
                 console.log(student);
                 // link.href = `http://localhost:3000/api/student/${student.id}`;
                 link.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/student/${student.id}`
                 link.textContent = `Filho ${index + 1}`;
+                const turma = await axios.get(`http://localhost:3000/api/class/${student.classeId}`);
+                console.log(turma);
+                
                 studentInfo.textContent = `Nome: ${student.name}, Idade: ${student.birth_date}`;
                 // link.addEventListener('click', () => getLinkStudent(student.id));
 
@@ -65,9 +69,16 @@ async function childrensPerformance(userId : number) {
                 // divChildren.innerHTML = '';
                
                 let studentInfo = document.createElement('p');
-                const average = await axios.get(`http://localhost:3000/api/evaluate/average/${student.id}`);
+                var average = await axios.get(`http://localhost:3000/api/evaluate/average/${student.id}`);
+                average = average.data
+                var media = ``
+                if (average == null) {
+                    media = `Nenhuma nota cadastrada!`
+                } else {
+                    media = `${average.toFixed(2)} / 5`
+                }
                 console.log(average);
-                studentInfo.textContent = `Nome: ${student.name}, média: ${average}`;
+                studentInfo.textContent = `Nome: ${student.name}, média: ${media}`;
                 
 
                 // link.addEventListener('click', () => getLinkStudent(student.id));

@@ -50,8 +50,6 @@ export class EvaluationController {
     async averageEvaluations(req:Request,res:Response) {
         try {          
             const average = await evaluationServices.averageEvaluations(req.params.id)
-            console.log(average);
-            
             return res.status(200).json(average)
         } catch (error) {
             return res.status(500).json()            

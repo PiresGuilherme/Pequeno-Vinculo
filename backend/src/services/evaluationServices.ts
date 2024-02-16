@@ -19,13 +19,15 @@ export class EvaluationServices {
                 student: { id: newEvaluation.student.id }
             }
         })
+        
         exist.forEach(evaluate => {
             if (evaluate.evaluation_date == newEvaluation.student.id) {
                 valid = true;
             }
         })
-        if (valid) {
-            evaluationRepository.save(newEvaluation)
+        
+        if (!valid) {
+            return evaluationRepository.save(newEvaluation)
         }
         else {
             throw new Error("Avaliação já foi feita na data de hoje.")

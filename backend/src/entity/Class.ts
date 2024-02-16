@@ -24,7 +24,7 @@ export class Class {
     shift : shift
 
     @ManyToOne(() => User, user => user.class)
-    user : User[];
+    user : User;
 
     @OneToMany(() => Student, student => student.classe)
     student : Student[];
