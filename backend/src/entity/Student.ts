@@ -19,7 +19,7 @@ export class Student {
     @Column()
     birth_date: Date
     
-    @Column()
+    @Column({ type: "numeric" })
     document: number
 
     @Column()
