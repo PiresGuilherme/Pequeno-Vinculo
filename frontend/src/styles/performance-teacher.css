@@ -63,11 +63,19 @@ main {
     margin-top: 0.5%;
 }
 
-.accordion.active .students-list {
+.accordion.active .students-container {
     display: block;
 }
 
-.students-list {
+.expand-button {
+    transition: transform 0.3s;
+}
+
+.accordion.active .expand-button {
+    transform: rotate(180deg);
+}
+
+.students-container {
     display: none;
 }
 
@@ -83,18 +91,20 @@ main {
 .rating label {
     cursor: pointer;
     font-size: 24px;
-    color: #ddd;
+    color: #f39c12;
+
 }
 
 .rating label:hover,
 .rating label:hover~label {
-    color: #f39c12;
+    color: #ddd;
+
 }
 
 .rating input:checked~label,
 .rating input:checked~label:hover,
 .rating input:checked~label:hover~label {
-    color: #f39c12;
+    color: #ddd;
 }
 
 #submitBtn {
