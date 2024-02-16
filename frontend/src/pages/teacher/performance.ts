@@ -3,8 +3,6 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
 console.log(classesSchedule);
-const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
-console.log(classesSchedule);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
