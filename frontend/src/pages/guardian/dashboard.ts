@@ -24,21 +24,22 @@ async function findChildren(userId : number) {
 
                 let divChildren = document.createElement('div');
                 divChildren.classList.add('best-children-one');
-                let link = document.createElement('a');
+                // let link = document.createElement('a');
                 let studentInfo = document.createElement('p');
 
-                console.log(student);
+                // console.log(student);
                 // link.href = `http://localhost:3000/api/student/${student.id}`;
-                link.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/student/${student.id}`
-                link.textContent = `Filho ${index + 1}`;
-                const turma = await axios.get(`http://localhost:3000/api/class/${student.classeId}`);
-                console.log(turma);
-                
-                studentInfo.textContent = `Nome: ${student.name}, Idade: ${student.birth_date}`;
+                // link.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/student/${student.id}`
+                // link.textContent = `Filho ${index + 1}`;
+                var turma = await axios.get(`http://localhost:3000/api/class/${student.classeId}`);
+                console.log(turma.data);
+                turma = turma.data;
+                studentInfo.innerHTML = `<strong>Nome:</strong>
+                <p> ${student.name}</p> <strong>Turma:</strong> <p>${turma.name}</p>`;
                 // link.addEventListener('click', () => getLinkStudent(student.id));
 
                 // Adicionando elementos ao divChildren
-                divChildren.appendChild(link);
+                // divChildren.appendChild(link);
                 divChildren.appendChild(studentInfo);
 
                 children.appendChild(divChildren);
@@ -71,8 +72,10 @@ async function childrensPerformance(userId : number) {
                 let studentInfo = document.createElement('p');
                 var average = await axios.get(`http://localhost:3000/api/evaluate/average/${student.id}`);
                 average = average.data
+                // console.log(average);
+                
                 var media = ``
-                if (average == null) {
+                if (average == null || average == 0) {
                     media = `Nenhuma nota cadastrada!`
                 } else {
                     media = `${average.toFixed(2)} / 5`
