@@ -22,8 +22,7 @@ export class ClassController {
             // newClass.capacity = req.body.capacity;
             // newClass.shift = req.body.shift;
             // newClass.user = req.body.user;
-            // newClass.student = req.body.student;
-            await classServices.newClass(newClass);
+            classServices.newClass(newClass);
             return res.status(200).json();
         } catch(error) {
             return res.status(500).json({error: "Internal Server Error", details: error.message})
