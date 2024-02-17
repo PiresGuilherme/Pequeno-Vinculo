@@ -44,7 +44,7 @@ export class User {
     @Column()
     postal_code: number
 
-    @Column()
+    @Column({ type: "numeric" })
     document: number
 
     @Column()
