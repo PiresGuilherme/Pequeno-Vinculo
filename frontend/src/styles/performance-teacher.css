@@ -82,6 +82,7 @@ main {
 
 .rating {
     display: flex;
+    flex-direction: row-reverse;
 }
 
 .rating input {
@@ -91,20 +92,20 @@ main {
 .rating label {
     cursor: pointer;
     font-size: 24px;
-    color: #f39c12;
+    color: #ddd;
 
 }
 
 .rating label:hover,
 .rating label:hover~label {
-    color: #ddd;
+    color: #f39c12;
 
 }
 
 .rating input:checked~label,
 .rating input:checked~label:hover,
 .rating input:checked~label:hover~label {
-    color: #ddd;
+    color: #f39c12;
 }
 
 #submitBtn {

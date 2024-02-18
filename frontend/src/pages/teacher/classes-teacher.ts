@@ -1,6 +1,9 @@
 //@ts-ignore
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
+const backend = "http://localhost:3000/api"
+
+
 const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
 console.log(classesSchedule);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
@@ -32,7 +35,7 @@ async function teacherClasses(userId: number) {
             var btnSubmit = document.createElement('a');
             btnSubmit.type = 'button';
             btnSubmit.id = 'btnSubmit';
-            btnSubmit.innerHTML = `<button>Avaliar</button>`;
+            btnSubmit.innerHTML = `<button>Enviar</button>`;
             var btnExpand = document.createElement('div');
             btnExpand.innerHTML = `
                 <span class="material-symbols-outlined expand-button" id="expand${i + 1}" data-id=${i + 1}>
@@ -61,7 +64,7 @@ async function teacherClasses(userId: number) {
 
                 } else {
                     accordionDiv?.classList.toggle('active');
-                    await teachersStudents(response.data[i].id, studentsContainer);
+                    await teachersStudentsAttendance(response.data[i].id, studentsContainer);
                 }
             });
 
@@ -71,7 +74,7 @@ async function teacherClasses(userId: number) {
     }
 }
 
-async function teachersStudents(classId: number, container: HTMLElement) {
+async function teachersStudentsAttendance(classId: number, container: HTMLElement) {
     try {
         const response = await axios.post('http://localhost:3000/api/student/class', {
             classId: classId
@@ -81,7 +84,7 @@ async function teachersStudents(classId: number, container: HTMLElement) {
 
         container.innerHTML = '';
         if (students == 0) {
-            console.log('ss');
+            // console.log('ss');
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-performance');
             studentDiv.classList.add('d-flex');
@@ -97,52 +100,24 @@ async function teachersStudents(classId: number, container: HTMLElement) {
             studentDiv.classList.add('class-performance')
             var studentName = document.createElement('h5');
             studentName.textContent += (`${student.name} ${student.last_name}`);
-            var ratingDiv = document.createElement('div');
-            ratingDiv.classList.add('rating');
-            // console.log(student.name, student.last_name);
-
-            for (let i = 5; i > 0; i--) {
-                const input = `<input type="radio" id="star${i}-${student.id}" name="${student.id}" value="${i}">`;
-                const label = `<label for="star${i}-${student.id}"><i class="fas fa-star"></i></label>`;
-                ratingDiv.innerHTML += (input + label);
-            }
-
-            var average = await axios.get(`http://localhost:3000/api/evaluate/average/${student.id}`);
-            average = average.data;
-
-            var media = ``;
-            if (average == null || average == 0) {
-                media = `Nenhuma nota cadastrada!`
-            } else {
-                media = `${average.toFixed(2)} / 5`
-            }
-            console.log(average);
-            var studentAverage = document.createElement('p');
-            studentAverage.innerHTML += `<strong>Média do aluno:  ${media}</strong>`;
-
+            const attendance = document.createElement('div');
+            attendance.className = 'form-check form-switch'
+            attendance.innerHTML = `
+            <input class="form-check-input" type="checkbox" role="switch" id="switch-${student.id}">
+            <label class="form-check-label" for="switch-${student.id}"></label>
+            `
             studentDiv.appendChild(studentName);
-            studentDiv.appendChild(studentAverage)
-            studentDiv.appendChild(ratingDiv);
+            studentDiv.appendChild(attendance);
             container?.appendChild(studentDiv);
         });
 
         document.getElementById('btnSubmit')?.addEventListener('click', async function () {
             const evaluations = students.map(async (student: any) => {
 
-                var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
-                // console.log(selectedRating.value);
-                // var note = Number(selectedRating.value);
-                // console.log(student.id);
-
+                const checkboxAttendance = document.getElementById(`switch-${student.id}`) as HTMLInputElement;
+                var presence = checkboxAttendance.checked
                 var nowDate = new Date();
-                if (selectedRating == null) {
-                    // selectedRating = 0;
-                    await evaluateClass(student.id, 0, nowDate);
-                    // await teachersStudents(classe);
-                } else {
-                    await evaluateClass(student.id, Number(selectedRating.value), nowDate)
-                    // await teachersStudents(classe);
-                }
+                await studentAttendance(student.id, presence, nowDate)
             })
             await Promise.all(evaluations);
             alert("Avaliações criadas com sucesso!");
@@ -152,16 +127,17 @@ async function teachersStudents(classId: number, container: HTMLElement) {
     }
 }
 
-async function evaluateClass(studentId: number, note: number, evaluation_date: Date) {
+async function studentAttendance(studentId: number, attendance: boolean, nowDate: Date) {
     try {
-        const response = await axios.post('http://localhost:3000/api/evaluation', {
+        const response = await axios.post(`${backend}/attendance`, {
             student: studentId,
-            note: note,
-            evaluation_date: evaluation_date
-        });
+            presence: attendance,
+            date_attendance: nowDate
+        })
         console.log(response);
-        return;
-    } catch (error: any) {
-        throw new Error(error.message);
+        
+    } catch (error) {   
+        console.log(error);
+        
     }
 }

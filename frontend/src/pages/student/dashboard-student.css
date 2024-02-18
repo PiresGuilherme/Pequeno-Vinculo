@@ -23,3 +23,32 @@
 .bg-green{
     background-color: var(--green);
 }
+
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ddd;
+
+}
+
+/* .rating label:hover,
+.rating label:hover~label {
+    color: #f39c12;
+
+} */
+
+.rating input:checked~label,
+.rating input:checked~label:hover,
+.rating input:checked~label:hover~label {
+    color: #f39c12;
+}

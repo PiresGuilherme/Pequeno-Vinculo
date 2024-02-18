@@ -19,6 +19,10 @@ export class StudentServices {
         const studentRepository = AppDataSource.getRepository(Student);
 
         return studentRepository.findOne({
+            relations:{
+                classe:true,
+                user:true
+            },
             where: { id: id }
         })
     }

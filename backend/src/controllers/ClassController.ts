@@ -25,6 +25,7 @@ export class ClassController {
             // newClass.shift = req.body.shift;
             // newClass.user = req.body.user;
             // newClass.student = req.body.student;
+             
             const userService = new UserServices()
             let user = await userService.getUserById(req.body.user)
             // console.log(user);

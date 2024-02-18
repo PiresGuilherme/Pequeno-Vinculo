@@ -4,12 +4,13 @@ import { SessionController } from '../controllers/SessionController';
 
 const router = Router()
 
+
 router.get("/user", async (req: Request, res: Response) => {
     let userControler = new UserController()
     await userControler.getAllUsers(req, res);
 });
 
-router.get("user/teachers", async (req: Request, res: Response) => {
+router.get("/user/teachers", async (req: Request, res: Response) => {
     console.log(1);
     
     let userControler = new UserController()
