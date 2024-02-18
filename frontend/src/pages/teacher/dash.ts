@@ -24,6 +24,8 @@ async function teacherClasses(userId: number) {
         console.log(countStudents);
         
         countClassesLine.textContent = countClasses.toString();
+        console.log(countClasses);
+        
         countStudentsLine.textContent = countStudents.toString();
         localStorage.setItem('classes', JSON.stringify(response))
     } catch (error: any) {
