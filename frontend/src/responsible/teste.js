@@ -300,28 +300,51 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 let classId = 1
 
 classesPicture(classId);
-async function classesPicture(classId){
+async function classesPicture(classId) {
     const div1 = document.getElementById('box')
-    console.log(div1);
+    // console.log(div1);
     try {
         const response = await axios.get(`http://localhost:3000/api/class/${classId}/picture`);
-        console.log(response.data[0][1].path+ response.data[0][1].originalname);
-        console.log(response.data[0]);
         const pictures = response.data[0]
-        pictures.forEach(picture => { 
-            // console.log(1);
-            // console.log(picture.path);
-            const image = document.createElement('img');
-            // console.log(`../../../backend/src/${picture.path}`);
-            //"C:\Users\guilherme.viana\Desktop\Pequeno-Vinculo\backend\uploads\picture-1706910817225-498935461-gomes.jpg" backend\uploads\picture-1706910515294-119552097-gomes.jpg
 
-            //../../../backend\uploads\picture-1706910817225-498935461-gomes.jpg
-            image.setAttribute('src',`/uploads/${picture.path}`)
-            image.setAttribute('width','auto');
-            image.setAttribute('height','auto')
-            console.log(image);
+        pictures.forEach(picture => {
+            const image = document.createElement('img');
+            const caminho = `${picture.path.replace(/\\/g, '/')}`
+
+            image.setAttribute('src', `../../../backend/${caminho}`)
+            image.setAttribute('width', '300');
+            image.setAttribute('height', '300');
+            image.setAttribute('alt', 'foto da turma');
+            image.setAttribute('class', 'foto shadow bg-body-tertiary rounded');
+
             div1.appendChild(image)
+
         });
+
+        var modal = document.getElementById("myModal");
+
+        // Get the image and insert it inside the modal
+        var modalImg = document.getElementById("modalImage");
+        var captionText = document.getElementById("caption");
+        // captionText.className('d-flex justify-content-center wrap')
+
+
+        div1.addEventListener('click', function (event) {
+            console.log(event.target.src.replace(/^.*[\\\/]/, ''));
+            const selectedPicture = pictures.find(picture =>  picture.filename == event.target.src.replace(/^.*[\\\/]/, '')) 
+
+            if (event.target.tagName === 'IMG') {
+                modal.style.display = "block";
+                modalImg.src = event.target.src;
+                captionText.innerHTML = `${selectedPicture.description}`
+            }
+        });
+
+        // Fechar o modal ao clicar no botão de fechar
+        var closeBtn = document.getElementsByClassName("close")[0];
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        };
     } catch (error) {
         console.log(error.message);
     }

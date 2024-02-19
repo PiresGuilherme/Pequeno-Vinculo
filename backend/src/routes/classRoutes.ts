@@ -5,7 +5,7 @@ import { FileController, reqFile } from "../controllers/FileController";
 const multer  = require('multer')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, '../uploads')
+      cb(null, 'uploads')
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
@@ -36,10 +36,9 @@ router.get('/class/id', (req: Request, res: Response) => {
     classController.findOneClass(req, res)
 })
 
-router.get("/class/:id(\\d+)/picture", upload.single('picture'), (req:Request,res:Response)=>{
+router.get("/class/:id(\\d+)/picture", (req:Request,res:Response)=>{
     const fileController = new FileController();
-    console.log("1");
-    fileController.getClassFiles(req,res);
+    return fileController.getClassFiles(req,res);
 })
 router.post("/class/:id(\\d+)/picture",upload.single('picture'), async (req:reqFile,res:Response)=>{
     const fileController = new FileController();
