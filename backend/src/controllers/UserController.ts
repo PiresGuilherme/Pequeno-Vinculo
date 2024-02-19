@@ -16,7 +16,10 @@ export class UserController {
 
     async postNewUser(req: Request, res: Response) {
         try {
-            const newUser: User = req.body.user;
+            const newUser: User = req.body;
+            console.log(req.body);
+            console.log(newUser);
+            
             await userServices.newUser(newUser);
             return res.status(200).json(newUser);
         } catch (error) {

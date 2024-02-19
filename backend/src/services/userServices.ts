@@ -11,13 +11,8 @@ export class UserServices {
 
     async newUser(newUser: User) {
         const userRepository = AppDataSource.getRepository(User);
-        // console.log(newUser);
-
         newUser.password = await bcrypt.hash(newUser.password, 10)
-        console.log(newUser);
-
         const savedUser = await userRepository.save(newUser);
-        console.log(savedUser);
 
         if (savedUser) {
             savedUser.password = undefined;

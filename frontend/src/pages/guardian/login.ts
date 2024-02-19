@@ -43,7 +43,7 @@ export async function login() {
         }
 
         localStorage.setItem("login", JSON.stringify(token));
-        window.location.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/dashboard-guardian.html?id=${token.user.id}`;
+        window.location.href = `http://127.0.0.1:5500/frontend/src/pages/guardian/dashboard-guardian.html`;
     } catch (error: any) {
         if (error.response.status == 404) {
             message.textContent = error.response.data.message;
