@@ -3,6 +3,15 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 
 // classesPicture(classId);
 
+let urlParams = new URLSearchParams(window.location.search);
+    let idParam = urlParams.get('id');
+    let classe = await axios.get(`http://localhost:3000/api/class/${idParam}`)
+    console.log(classe);
+    if (classe) {
+        classe = classe.data
+        classesPicture(classe.id)
+    }
+
 async function classesPicture(classId:number) {
     const div1 = document.getElementById('box') as HTMLElement
     try {
@@ -13,7 +22,7 @@ async function classesPicture(classId:number) {
             const image = document.createElement('img');
             const caminho = `${picture.path.replace(/\\/g, '/')}`
 
-            image.setAttribute('src', `../../../backend/${caminho}`)
+            image.setAttribute('src', `../../../../backend/${caminho}`)
             image.setAttribute('width', '300');
             image.setAttribute('height', '300');
             image.setAttribute('alt', 'foto da turma');

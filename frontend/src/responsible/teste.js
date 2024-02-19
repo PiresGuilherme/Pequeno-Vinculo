@@ -302,7 +302,6 @@ let classId = 1
 classesPicture(classId);
 async function classesPicture(classId) {
     const div1 = document.getElementById('box')
-    // console.log(div1);
     try {
         const response = await axios.get(`http://localhost:3000/api/class/${classId}/picture`);
         const pictures = response.data[0]
@@ -323,10 +322,8 @@ async function classesPicture(classId) {
 
         var modal = document.getElementById("myModal");
 
-        // Get the image and insert it inside the modal
         var modalImg = document.getElementById("modalImage");
         var captionText = document.getElementById("caption");
-        // captionText.className('d-flex justify-content-center wrap')
 
 
         div1.addEventListener('click', function (event) {
@@ -339,8 +336,6 @@ async function classesPicture(classId) {
                 captionText.innerHTML = `${selectedPicture.description}`
             }
         });
-
-        // Fechar o modal ao clicar no botão de fechar
         var closeBtn = document.getElementsByClassName("close")[0];
         closeBtn.onclick = function () {
             modal.style.display = "none";
@@ -348,5 +343,4 @@ async function classesPicture(classId) {
     } catch (error) {
         console.log(error.message);
     }
-    console.log(div1);
 }

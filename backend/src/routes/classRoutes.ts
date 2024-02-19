@@ -31,7 +31,7 @@ router.post('/class/teacher', (req: Request, res: Response) => {
     classController.findClassroomTeacher(req, res)
 });
 
-router.get('/class/id', (req: Request, res: Response) => {
+router.get('/class/:id', (req: Request, res: Response) => {
     let classController = new ClassController()
     classController.findOneClass(req, res)
 })
