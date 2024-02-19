@@ -1,6 +1,7 @@
 //@ts-ignore
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 const backend = "http://localhost:3000/api"
+const frontend = "http://127.0.0.1:5500/frontend/src/pages"
 
 const userJson = localStorage.getItem('login');
 const children = document.getElementById('children') as HTMLDivElement;
@@ -14,20 +15,72 @@ async function findChildren(userId : number) {
     try {
         const response = await axios.get(`${backend}/user/children/${userId}`);
 
-        console.log(response.data);
+        // console.log(response.data);
 
-        
+        response.data[0].student.forEach((student:any)=>{
+            getStudentClass(student.id)
+        })
 
     } catch (error : any) {
         console.error('sa:', error.message);
     }
 }
 
-async function getStudentClass(studentId){
+
+
+const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
+console.log(classesSchedule);
+const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
+let colorIndex = 0;
+
+async function getStudentClass(studentId:number){
     try {
         const response = await axios.get(`${backend}/student/${studentId}`);
 
-        console.log(response.data);
+            // console.log(response.data.classe.id);
+        const student = response.data;
+        const classe = response.data.classe.id;
+        const turma = document.querySelector(`#accordion${classe}`)
+        if (turma) {
+            // console.log(turma);
+            let className = document.querySelector(`#className${classe}`)!;
+            console.log(className);
+            
+            className.textContent += ` e ${student.name}`
+            return
+        } else{
+                    var accordionDiv = document.createElement('div');
+                    accordionDiv.classList.add('accordion');
+                    accordionDiv.id = 'accordion' + (classe);
+                    var classDiv = document.createElement('div');
+                    classDiv.classList.add('class-performance');
+                    let className = document.createElement('h5');
+                    className.setAttribute('id',`className${classe}`)
+                    className.textContent += `Turma ${response.data.classe.name} do ${student.name}`;
+                    var btnExpand = document.createElement('div');
+                    btnExpand.innerHTML = `
+                        <span class="btn btn-success" id="${classe}" data-id=${classe}>
+                            Ver fotos da turma
+                        </span>`;
+        
+                    accordionDiv.style.backgroundColor = colorPalette[colorIndex];
+                    colorIndex = (colorIndex + 1) % colorPalette.length;
+        
+                    classDiv.appendChild(className);
+                    classDiv.appendChild(btnExpand);
+                    accordionDiv.appendChild(classDiv);
+        
+                    const studentsContainer = document.createElement('div');
+                    studentsContainer.classList.add('students-container');
+                    accordionDiv.appendChild(studentsContainer);
+                    classesSchedule?.appendChild(accordionDiv);
+        
+                    document.getElementById(`${classe}`)?.addEventListener('click', async function (event: MouseEvent) {
+                       console.log(classe);
+                       window.location.href = `${frontend}/guardian/gallery-dashboard-guardian.html?id=${classe}`
+                    });
+                } 
+        // console.log(response.data);
         
     } catch (error) {
         

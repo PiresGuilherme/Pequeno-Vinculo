@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Class } from "./Class";
 
 @Entity()
@@ -33,6 +33,6 @@ export class File {
     @Column()
     size: number
 
-    @ManyToMany(() => Class, classe => classe.file)
+    @ManyToOne(() => Class, classe => classe.file)
     classe: Class;
 }

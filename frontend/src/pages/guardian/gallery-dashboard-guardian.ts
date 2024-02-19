@@ -5,19 +5,34 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 
 let urlParams = new URLSearchParams(window.location.search);
     let idParam = urlParams.get('id');
-    let classe = await axios.get(`http://localhost:3000/api/class/${idParam}`)
-    console.log(classe);
-    if (classe) {
+    console.log(idParam);
+    
+    let classe = await axios.get(`http://localhost:3000/api/class/${idParam}`);
+    
+    if (classe.data) {
         classe = classe.data
         classesPicture(classe.id)
+    }
+    else {
+        console.log("não há nenhuma foto cadastrada para esta turma ainda!");
+        const box = document.querySelector('#box');
+        const h2 = document.createElement('h1');
+        h2.textContent = 'Nenhuma foto cadastrada para esta turma ainda!';
+        box?.appendChild(h2); 
     }
 
 async function classesPicture(classId:number) {
     const div1 = document.getElementById('box') as HTMLElement
     try {
         const response = await axios.get(`http://localhost:3000/api/class/${classId}/picture`);
+        console.log(response.data[0]);
+        
+        // if (condition) {
+            
+        // }
         const pictures = response.data[0]
 
+        
         pictures.forEach((picture : any) => {
             const image = document.createElement('img');
             const caminho = `${picture.path.replace(/\\/g, '/')}`
