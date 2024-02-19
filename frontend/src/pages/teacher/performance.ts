@@ -29,6 +29,8 @@ async function teacherClasses(userId: number) {
             classDiv.classList.add('class-performance');
             var className = document.createElement('h5');
             className.textContent += `Turma ${response.data[i].name}`;
+            var buttons = document.createElement('div');
+            buttons.classList.add('buttons')
             var btnSubmit = document.createElement('a');
             btnSubmit.type = 'button';
             btnSubmit.id = 'btnSubmit';
@@ -42,9 +44,10 @@ async function teacherClasses(userId: number) {
             accordionDiv.style.backgroundColor = colorPalette[colorIndex];
             colorIndex = (colorIndex + 1) % colorPalette.length;
 
+            buttons.appendChild(btnSubmit);
+            buttons.appendChild(btnExpand);
             classDiv.appendChild(className);
-            classDiv.appendChild(btnSubmit);
-            classDiv.appendChild(btnExpand);
+            classDiv.appendChild(buttons);
             accordionDiv.appendChild(classDiv);
 
             const studentsContainer = document.createElement('div');

@@ -4,8 +4,8 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 const backend = "http://localhost:3000/api"
 
 
-const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
-console.log(classesSchedule);
+const classesAttendance = document.querySelector('.classes-attendance') as HTMLElement;
+console.log(classesAttendance);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
@@ -29,14 +29,17 @@ async function teacherClasses(userId: number) {
             accordionDiv.classList.add('accordion');
             accordionDiv.id = 'accordion' + (i + 1);
             var classDiv = document.createElement('div');
-            classDiv.classList.add('class-performance');
+            classDiv.classList.add('class-attendance');
             var className = document.createElement('h5');
             className.textContent += `Turma ${response.data[i].name}`;
+            var buttons = document.createElement('div');
+            buttons.classList.add('buttons');
             var btnSubmit = document.createElement('a');
             btnSubmit.type = 'button';
             btnSubmit.id = 'btnSubmit';
             btnSubmit.innerHTML = `<button>Enviar</button>`;
             var btnExpand = document.createElement('div');
+            btnExpand.id= 'btnExpand';
             btnExpand.innerHTML = `
                 <span class="material-symbols-outlined expand-button" id="expand${i + 1}" data-id=${i + 1}>
                     expand_more
@@ -45,15 +48,16 @@ async function teacherClasses(userId: number) {
             accordionDiv.style.backgroundColor = colorPalette[colorIndex];
             colorIndex = (colorIndex + 1) % colorPalette.length;
 
+            buttons.appendChild(btnSubmit);
+            buttons.appendChild(btnExpand);
             classDiv.appendChild(className);
-            classDiv.appendChild(btnSubmit);
-            classDiv.appendChild(btnExpand);
+            classDiv.appendChild(buttons);
             accordionDiv.appendChild(classDiv);
 
             const studentsContainer = document.createElement('div');
             studentsContainer.classList.add('students-container');
             accordionDiv.appendChild(studentsContainer);
-            classesSchedule?.appendChild(accordionDiv);
+            classesAttendance?.appendChild(accordionDiv);
 
             document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function (event: MouseEvent) {
                 //  
@@ -86,7 +90,7 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
         if (students == 0) {
             // console.log('ss');
             var studentDiv = document.createElement('div');
-            studentDiv.classList.add('class-performance');
+            studentDiv.classList.add('class-attendance');
             studentDiv.classList.add('d-flex');
             studentDiv.classList.add('justify-content-center');
             var studentName = document.createElement('h5');
@@ -97,7 +101,7 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
         students.forEach(async (student: any) => {
             console.log(student);
             var studentDiv = document.createElement('div');
-            studentDiv.classList.add('class-performance')
+            studentDiv.classList.add('class-attendance')
             var studentName = document.createElement('h5');
             studentName.textContent += (`${student.name} ${student.last_name}`);
             const attendance = document.createElement('div');
@@ -120,7 +124,7 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
                 await studentAttendance(student.id, presence, nowDate)
             })
             await Promise.all(evaluations);
-            alert("Avaliações criadas com sucesso!");
+            alert("Chamada registrada com sucesso!");
         });
     } catch (error: any) {
         alert(error.message)

@@ -53,7 +53,6 @@ main {
 .class-performance {
     display: flex;
     flex-direction: row;
-    /* background-color: var(--pink); */
     height: 7vh;
     justify-content: space-between;
     padding-right: 2%;
@@ -61,6 +60,10 @@ main {
     align-items: center;
     border-radius: 10px;
     margin-top: 0.5%;
+}
+
+.accordion{
+    border-radius: 10px;
 }
 
 .accordion.active .students-container {
@@ -108,16 +111,24 @@ main {
     color: #f39c12;
 }
 
-#submitBtn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 18px;
-    background-color: #3498db;
-    color: #fff;
-    border: none;
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 25%;
+}
+
+#btnExpand{
     cursor: pointer;
 }
 
+button {
+    background-color: var(--body);
+    border: none;
+    border-radius: 5px;
+    width: 130%;
+    cursor: pointer;
+}
 
 footer {
     position: fixed;

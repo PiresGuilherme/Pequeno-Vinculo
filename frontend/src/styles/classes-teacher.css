@@ -1,3 +1,4 @@
+
 :root {
     --body: #f3f8fe;
     --orange: #FEC868;
@@ -24,12 +25,12 @@ body {
     background-color: var(--body);
 }
 
-#navbar{
+#navbar {
     padding: 0px;
 }
 
-.container-fluid{
-    background-color:#DCC1FC;
+.container-fluid {
+    background-color: #DCC1FC;
     border-color: 10px solid #DCC1FC;
 
 }
@@ -43,28 +44,64 @@ main {
     gap: 2%;
 }
 
-.classes{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+.classes-attendance {
+    width: 90%;
+    height: 70vh;
+    gap: 2%;
 }
 
-.class-one {
-    width: 90%;
-    height: 7vh;
+.class-attendance {
     display: flex;
-   justify-self: center;
+    flex-direction: row;
+    height: 7vh;
+    justify-content: space-between;
+    padding-right: 2%;
+    padding-left: 2%;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 0.5%;
 }
 
 .accordion{
-    width: 100%;
-   
+    border-radius: 10px;
 }
 
-.button{
-    background-color: var(--pink);
+.form-check-input:checked{
+    background-color: var(--hover-purple);
+}
+
+.accordion.active .students-container {
+    display: block;
+}
+
+.expand-button {
+    transition: transform 0.3s;
+}
+
+.accordion.active .expand-button {
+    transform: rotate(180deg);
+}
+
+.students-container {
+    display: none;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    gap: 25%;
+}
+
+#btnExpand{
+    cursor: pointer;
+}
+
+button {
+    background-color: var(--body);
+    border: none;
+    border-radius: 5px;
+    width: 130%;
+    cursor: pointer;
 }
 
 footer {
@@ -78,6 +115,7 @@ footer {
     background-color: var(--green);
     height: 6vh;
 }
+
 
 @media screen and (max-width: 768px) {
     h5 {
