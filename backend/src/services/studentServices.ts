@@ -12,6 +12,9 @@ export class StudentServices {
 
     getStudent(id) {        
         return studentRepository.findOne({
+            relations:{
+                classe:true
+            },
             where: { id : id }
         })
     }

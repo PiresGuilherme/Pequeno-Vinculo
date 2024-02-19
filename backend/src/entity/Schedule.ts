@@ -6,11 +6,16 @@ export class Schedule {
     @PrimaryGeneratedColumn()
     id : number;
 
-    @Column()
+    @Column({
+        type: "date"
+    })
     schedule_date : Date;
 
     @Column()
     message : string;
+
+    @Column()
+    title : string;
 
     @ManyToOne(()=> Class, classe => classe.schedule)
     classe : Class

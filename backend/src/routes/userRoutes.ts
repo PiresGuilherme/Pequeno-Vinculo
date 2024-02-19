@@ -21,7 +21,7 @@ router.get('/user/children/:id(\\d+)', async (req:Request,res:Response) => {
 
 router.post("/user/login", async (req:Request,res:Response) => {
     let sessionController = new SessionController()
-    await sessionController.userLogin(req, res);
+    return await sessionController.userLogin(req, res);
 })
 
 export {router};

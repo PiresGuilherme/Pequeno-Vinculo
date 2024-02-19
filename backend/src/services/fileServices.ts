@@ -2,14 +2,20 @@ import { AppDataSource } from "../data-source";
 import { File } from "../entity/File";
 
 export class fileServices {
-    getClassFiles(classId) {
-        const fileRepository = AppDataSource.getRepository(File);
-        return fileRepository.findAndCountBy({ classe: classId });
+   async getClassFiles(classId:number) {
+        const fileRepository = AppDataSource.getRepository(File);        
+        const files = await fileRepository.find({
+            relations: {classe:true}, 
+            where: { classe: {id: classId }}
+        });
+        console.log(files);
+        
+        return files;
     }
 
-    newPicture(file){
+    newPicture(file) {
         const fileRepository = AppDataSource.getRepository(File);
         fileRepository.save(file);
     }
-    
+
 }
