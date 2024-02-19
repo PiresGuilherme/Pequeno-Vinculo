@@ -25,18 +25,19 @@ async function classesPicture(classId:number) {
     const div1 = document.getElementById('box') as HTMLElement
     try {
         const response = await axios.get(`http://localhost:3000/api/class/${classId}/picture`);
-        console.log(response.data[0]);
+        console.log(response.data);
         
         // if (condition) {
             
         // }
-        const pictures = response.data[0]
+        const pictures = response.data;
 
         
         pictures.forEach((picture : any) => {
             const image = document.createElement('img');
             const caminho = `${picture.path.replace(/\\/g, '/')}`
-
+            console.log(caminho);
+            
             image.setAttribute('src', `../../../../backend/${caminho}`)
             image.setAttribute('width', '300');
             image.setAttribute('height', '300');
@@ -50,7 +51,6 @@ async function classesPicture(classId:number) {
         var modal = document.getElementById("myModal")!;
         var modalImg = document.getElementById("modalImage") as HTMLImageElement;
         var captionText = document.getElementById("caption")!;
-
 
         div1.addEventListener('click', (selected:any) => {
             console.log(selected.target.src.replace(/^.*[\\\/]/, ''));

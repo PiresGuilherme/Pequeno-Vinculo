@@ -7,7 +7,7 @@ const children = document.getElementById('children') as HTMLDivElement;
         
 if (userJson) {
     const user = JSON.parse(userJson);
-    findChildren(user.id)
+    findChildren(user.user.id)
 }
  
 async function findChildren(userId : number) {
