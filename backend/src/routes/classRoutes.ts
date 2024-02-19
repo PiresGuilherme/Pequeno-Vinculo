@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
   })
 const upload = multer({storage})
 const router = Router()
-// let classController = new ClassController()
 
 router.get('/class', (req: Request, res: Response) => {
     let classController = new ClassController()
@@ -36,15 +35,16 @@ router.get('/class/:id', (req: Request, res: Response) => {
     classController.findOneClass(req, res)
 })
 
-router.get("/class/:id(\\d+)/picture", upload.single('picture'), (req:Request,res:Response)=>{
-    // const fileController = new FileController();
-    // console.log("1");
-    // fileController.getClassFiles(req,res);
+router.get("/class/:id(\\d+)/picture", (req:Request,res:Response)=>{
+    const fileController = new FileController();
+    return fileController.getClassFiles(req,res);
 })
-router.post("/class/:id(\\d+)/picture",upload.single('picture'), async (req:reqFile,res:Response)=>{
+router.post("/class/:id(\\d+)/picture", upload.single('picture'), async (req: reqFile, res: Response) => {
+    console.log(req.file);
+    
     const fileController = new FileController();
     console.log("1");
-    fileController.newPicture(req,res);
+    fileController.newPicture(req, res);
 })
 
 export { router };

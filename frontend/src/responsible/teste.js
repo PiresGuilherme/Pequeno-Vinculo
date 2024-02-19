@@ -298,30 +298,47 @@ server.use(express.static('uploads'))
 let classId = 1
 
 classesPicture(classId);
-async function classesPicture(classId){
+async function classesPicture(classId) {
     const div1 = document.getElementById('box')
-    console.log(div1);
     try {
         const response = await axios.get(`http://localhost:3000/api/class/${classId}/picture`);
-        console.log(response.data[0][1].path+ response.data[0][1].originalname);
-        console.log(response.data[0]);
         const pictures = response.data[0]
-        pictures.forEach(picture => { 
-            // console.log(1);
-            // console.log(picture.path);
-            const image = document.createElement('img');
-            // console.log(`../../../backend/src/${picture.path}`);
-            //"C:\Users\guilherme.viana\Desktop\Pequeno-Vinculo\backend\uploads\picture-1706910817225-498935461-gomes.jpg" backend\uploads\picture-1706910515294-119552097-gomes.jpg
 
-            //../../../backend\uploads\picture-1706910817225-498935461-gomes.jpg
-            image.setAttribute('src',`/uploads/${picture.path}`)
-            image.setAttribute('width','auto');
-            image.setAttribute('height','auto')
-            console.log(image);
+        pictures.forEach(picture => {
+            const image = document.createElement('img');
+            const caminho = `${picture.path.replace(/\\/g, '/')}`
+
+            image.setAttribute('src', `../../../backend/${caminho}`)
+            image.setAttribute('width', '300');
+            image.setAttribute('height', '300');
+            image.setAttribute('alt', 'foto da turma');
+            image.setAttribute('class', 'foto shadow bg-body-tertiary rounded');
+
             div1.appendChild(image)
+
         });
+
+        var modal = document.getElementById("myModal");
+
+        var modalImg = document.getElementById("modalImage");
+        var captionText = document.getElementById("caption");
+
+
+        div1.addEventListener('click', function (event) {
+            console.log(event.target.src.replace(/^.*[\\\/]/, ''));
+            const selectedPicture = pictures.find(picture =>  picture.filename == event.target.src.replace(/^.*[\\\/]/, '')) 
+
+            if (event.target.tagName === 'IMG') {
+                modal.style.display = "block";
+                modalImg.src = event.target.src;
+                captionText.innerHTML = `${selectedPicture.description}`
+            }
+        });
+        var closeBtn = document.getElementsByClassName("close")[0];
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        };
     } catch (error) {
         console.log(error.message);
     }
-    console.log(div1);
 }

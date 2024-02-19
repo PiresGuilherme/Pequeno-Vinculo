@@ -13,19 +13,19 @@ import cors from 'cors';
 
 // verificar se é possível utilizar somente 1 roteador para encaminhar para os 4
 ///////importante //////
-
+server.use(cors());
+server.use('/api', userRouter);
+server.use('/api', studentRouter);
+server.use('/api', classRouter);
+server.use('/api', evaluationRouter);
+server.use('/api',scheduleRouter);
+server.use('/api',attendanceRouter);
 
 AppDataSource.initialize().then(async () => {
-    server.use(cors());
-    server.use('/api', userRouter);
-    server.use('/api', studentRouter);
-    server.use('/api', classRouter);
-    server.use('/api', evaluationRouter);
-    server.use('/api',scheduleRouter);
-    server.use('/api',attendanceRouter);
+
     server.listen(3000,()=> {
             console.log('ouvindo')
-            console.log(Date());
+            // console.log(Date());
             ;           
     })
 }).catch(error => console.log(error))
