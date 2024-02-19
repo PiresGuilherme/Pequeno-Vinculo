@@ -189,40 +189,40 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 
 
 //criar grafico com as notas do aluno
-const studentId = 2;
-performanceMeasurement(studentId);
-async function performanceMeasurement(studentId) {
-    try {
-        const response = await axios.get(`http://localhost:3000/api/evaluation/student/${studentId}`)
-        var today = new Date();
-        console.log(response.data[0]);
-        let datas = response.data.filter(data => {
-            return data.evaluation_date;
-        }).map(data => ({ ...data, evaluation_date: new Date(data.evaluation_date) }));
-        datas.sort((a, b) => b.evaluation_date.getTime() - a.evaluation_date.getTime());
-        console.log(datas[0].evaluation_date.getMonth());
-        var ctx = document.getElementById("grafico-linhas").getContext("2d");;
-        var chartGraph = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: datas.slice(0, 5).reverse().map(data => {
+// const studentId = 2;
+// performanceMeasurement(studentId);
+// async function performanceMeasurement(studentId) {
+//     try {
+//         const response = await axios.get(`http://localhost:3000/api/evaluation/student/${studentId}`)
+//         var today = new Date();
+//         console.log(response.data[0]);
+//         let datas = response.data.filter(data => {
+//             return data.evaluation_date;
+//         }).map(data => ({ ...data, evaluation_date: new Date(data.evaluation_date) }));
+//         datas.sort((a, b) => b.evaluation_date.getTime() - a.evaluation_date.getTime());
+//         console.log(datas[0].evaluation_date.getMonth());
+//         var ctx = document.getElementById("grafico-linhas").getContext("2d");;
+//         var chartGraph = new Chart(ctx, {
+//             type: 'line',
+//             data: {
+//                 labels: datas.slice(0, 5).reverse().map(data => {
 
-                    var dado = (`${data.evaluation_date.getDate()} / ${data.evaluation_date.getMonth() + 1}`)
-                    return dado
-                })
-                ,
-                datasets: [{
-                    label: "Notas por dia",
-                    data: datas.map(data => data.note),
-                    borderWidth: 6,
-                    borderColor: 'rgba(77,166,253,0.8)'
-                }]
-            }
-        })
-    } catch (error) {
-        console.log(error);
-    }
-}
+//                     var dado = (`${data.evaluation_date.getDate()} / ${data.evaluation_date.getMonth() + 1}`)
+//                     return dado
+//                 })
+//                 ,
+//                 datasets: [{
+//                     label: "Notas por dia",
+//                     data: datas.map(data => data.note),
+//                     borderWidth: 6,
+//                     borderColor: 'rgba(77,166,253,0.8)'
+//                 }]
+//             }
+//         })
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
 // var ctx = document.getElementById("grafico-linhas");
 
 // var chartGraph = new Chart(ctx, {
@@ -285,3 +285,62 @@ async function performanceMeasurement(studentId) {
 
 //     }
 // })    
+
+
+
+
+
+
+///gallery
+
+// import {express} from 'express';
+
+// const server = express();
+// server.use(express.static('uploads'))
+let classId = 1
+
+classesPicture(classId);
+async function classesPicture(classId) {
+    const div1 = document.getElementById('box')
+    try {
+        const response = await axios.get(`http://localhost:3000/api/class/${classId}/picture`);
+        const pictures = response.data[0]
+
+        pictures.forEach(picture => {
+            const image = document.createElement('img');
+            const caminho = `${picture.path.replace(/\\/g, '/')}`
+
+            image.setAttribute('src', `../../../backend/${caminho}`)
+            image.setAttribute('width', '300');
+            image.setAttribute('height', '300');
+            image.setAttribute('alt', 'foto da turma');
+            image.setAttribute('class', 'foto shadow bg-body-tertiary rounded');
+
+            div1.appendChild(image)
+
+        });
+
+        var modal = document.getElementById("myModal");
+
+        var modalImg = document.getElementById("modalImage");
+        var captionText = document.getElementById("caption");
+
+
+        div1.addEventListener('click', function (event) {
+            console.log(event.target.src.replace(/^.*[\\\/]/, ''));
+            const selectedPicture = pictures.find(picture =>  picture.filename == event.target.src.replace(/^.*[\\\/]/, '')) 
+
+            if (event.target.tagName === 'IMG') {
+                modal.style.display = "block";
+                modalImg.src = event.target.src;
+                captionText.innerHTML = `${selectedPicture.description}`
+            }
+        });
+        var closeBtn = document.getElementsByClassName("close")[0];
+        closeBtn.onclick = function () {
+            modal.style.display = "none";
+        };
+    } catch (error) {
+        console.log(error.message);
+    }
+}

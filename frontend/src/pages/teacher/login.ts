@@ -46,6 +46,7 @@ export async function login() {
 
         localStorage.setItem("login", JSON.stringify(token));
         window.location.href = `http://127.0.0.1:5500/frontend/src/pages/teacher/dashboard-teacher.html?id=${token.id}`;
+        
     } catch (error: any) {
         let message = document.createElement('p');
 

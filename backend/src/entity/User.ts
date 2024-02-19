@@ -27,7 +27,7 @@ export class User {
     phone_number: number
 
     @Column()
-    address_coutry: string
+    address_country: string
 
     @Column()
     address_city: string
@@ -44,7 +44,7 @@ export class User {
     @Column()
     postal_code: number
 
-    @Column()
+    @Column({ type: "numeric" })
     document: number
 
     @Column()

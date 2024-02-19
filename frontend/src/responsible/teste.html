@@ -2,14 +2,16 @@
 <html lang="pt-BR">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=5; IE=8; IE=7; IE=9; IE=10; IE=11">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1">
-	<title>Bins</title>
-	<link rel="stylesheet" href="../styles/schedule-teacher.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=5; IE=8; IE=7; IE=9; IE=10; IE=11">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,  user-scalable=0, maximum-scale=1">
+    <title>Bins</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../styles/schedule-teacher.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script type="module" src="teste.js" defer></script>
-    <style>
+    <!-- <style>
         body {
             font-family: 'Arial', sans-serif;
             display: flex;
@@ -54,18 +56,90 @@
             border: none;
             cursor: pointer;
         }
+    </style> -->
+
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Grafico Linhas</h1>
-    <canvas id="grafico-linhas" width="800" height="400" style="display: block; width: 946px; height: 473px;"></canvas>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
+        <div class="container-fluid">
+            <img class="header-logo" src="/frontend/assets/logo-icon-horizontal-pink.svg" alt="Logo Pequeno Vínculo"
+                style="height: 6vh; width: 100px;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="dashboard-teacher.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="classes-teacher.html">Turmas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="performance-teacher.html">Desempenho</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="schedule-teacher.html">Agenda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Galeria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true">Chat</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="d-flex flex-direction-row m-5 flex-wrap justify-content-center gap-4" id="box">
+        <!-- <img class="foto shadow bg-body-tertiary rounded"
+            src="../../../backend/uploads/picture-1707351751683-246327963-Captura de tela 2024-02-07 212151.png"
+            alt="Foto da turma" width="300" height="300">
+
+        <img class="foto shadow bg-body-tertiary rounded"
+            src="../../../backend/uploads/picture-1707351751683-246327963-Captura de tela 2024-02-07 212151.png"
+            alt="Cinque Terre" width="300" height="300"> -->
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div id="caption" class="d-flex justify-content-center"></div>
+    </div>
+    <!-- <img src="../../../backend/uploads/picture-1706910817225-498935461-gomes.jpg" alt=""> -->
+
+    <!-- <h1>Grafico Linhas</h1>
+    <canvas id="grafico-linhas" width="800" height="400" style="display: block; width: 946px; height: 473px;"></canvas> -->
     <!-- <h1>Grafico Colunas</h1>
     <canvas id="grafico-colunas" width="962" height="481" style="display: block; width: 962px; height: 481px;"></canvas>
     <h1>Grafico Pizza</h1>
     <canvas id="grafico-pizza" width="400" height="200"></canvas> -->
 
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         var ctxLinhas = document.getElementById("grafico-linhas").getContext("2d");
         var chartLinhas = new Chart(ctxLinhas, {
             type: 'line',
@@ -124,9 +198,9 @@
         //         }]
         //     }
         // });
-    </script>
+    </script> -->
 
-	<!-- <div class="classes-schedule">
+    <!-- <div class="classes-schedule">
 		<div class="class-one-schedule">
 			<h5>Agenda Turma 1</h5>
 			<span class="material-symbols-outlined" id="add">

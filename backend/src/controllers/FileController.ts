@@ -19,17 +19,16 @@ export interface reqFile extends Request {
 export class FileController {
     async getClassFiles(req: Request, res: Response) {
         try {
-            console.log(2);
-
-            const fileService = new fileServices;
-            const files = fileService.getClassFiles(req.params.classId);
-            console.log(3);
+ 
+            const fileService = new fileServices();
+            const files = await fileService.getClassFiles(Number(req.params.id));
+            console.log(files);
             if (!files) {
-                return res.status(200).json("Não foi encontrado nenhuma imagem desta turma")
+                return res.status(404).json("Não foi encontrado nenhuma imagem desta turma")
             }
             return res.status(200).json(files);
         } catch (error) {
-
+            return res.status(500).json(error.message)
         }
     }
 

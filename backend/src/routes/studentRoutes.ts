@@ -9,13 +9,15 @@ router.get('/student', (req: Request, res: Response) => {
     studentController.getAllStudents(req, res);
 });
 
+router.get('/student/:id(\\d+)', (req: Request, res: Response) => {
+    studentController.getStudent(req, res);
+});
+
 router.post('/student', (req: Request, res: Response) => {
     studentController.postNewStudent(req, res)
 });
 
-router.post('/student/:id(\\d+)', (req: Request, res: Response) => {
-    studentController.getStudent(req, res);
-});
+
 router.post('/student/class', (req: Request, res: Response) => {
     studentController.getSameClassStudents(req, res);
 });
