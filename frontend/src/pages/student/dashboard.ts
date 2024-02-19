@@ -56,7 +56,7 @@ async function getEvaluations(studentId: number) {
                 } else {
                     var input = `<input type="radio" id="star${i}-${evaluation.id}" name="${evaluation.id}" value="${i}" disable>`;
                 }
-                const label = `<label for="star${i}-${evaluation.id}"><i class="fas fa-star"></i></label>`;
+                const label = `<label for="star${i}-${evaluation.id}"><i class="fas fa-star" disable></i></label>`;
                 ratingDiv.innerHTML += (input + label);
                 dateEvaluation.innerHTML = `${evaluation.evaluation_date}`
             }
