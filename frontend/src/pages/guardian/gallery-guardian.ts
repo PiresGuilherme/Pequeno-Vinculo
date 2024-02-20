@@ -17,7 +17,7 @@ async function findChildren(userId : number) {
 
         // console.log(response.data);
 
-        response.data[0].student.forEach((student:any)=>{
+        response.data.forEach((student:any)=>{
             getStudentClass(student.id)
         })
 
