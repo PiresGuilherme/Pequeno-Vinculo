@@ -62,7 +62,7 @@ async function classesPicture(classId:number) {
                 captionText.innerHTML = `${selectedPicture.description}`
             }
         });
-        var closeBtn = document.getElementsByClassName("close")[0]as HTMLInputElement;
+        var closeBtn = document.getElementById("close") as HTMLInputElement;
         closeBtn.onclick = function () {
             modal.style.display = "none";
         };
