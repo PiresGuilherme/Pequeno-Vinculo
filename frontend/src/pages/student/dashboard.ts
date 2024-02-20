@@ -50,9 +50,9 @@ async function getEvaluations(studentId: number) {
             var dateEvaluation = document.createElement('p');
             for (let i = 5; i > 0; i--) {
                 if (i == evaluation.note) {
-                    var input = `<input type="radio" id="star${i}-${evaluation.id}" name="${evaluation.id}" value="${i}" checked disable>`;
+                    var input = `<input type="radio" id="star${i}-${evaluation.id}" name="${evaluation.id}" value="${i}" checked disabled>`;
                 } else {
-                    var input = `<input type="radio" id="star${i}-${evaluation.id}" name="${evaluation.id}" value="${i}" disable>`;
+                    var input = `<input type="radio" id="star${i}-${evaluation.id}" name="${evaluation.id}" value="${i}" disabled>`;
                 }
                 const label = `<label for="star${i}-${evaluation.id}" disable><i class="fas fa-star" ></i></label>`;
                 ratingDiv.innerHTML += (input + label);
