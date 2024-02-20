@@ -159,3 +159,22 @@ async function postShedules(message: String | undefined, title: String | undefin
         return error
     }
 }
+
+document.getElementById("user-pic")?.addEventListener("click", ()=>{
+const subMenu= document.getElementById("sub-menu");
+if(subMenu?.classList.contains("open-menu")){
+    subMenu?.classList.remove("open-menu") 
+}else{
+    subMenu?.classList.add("open-menu")
+}
+})
+// document.addEventListener('DOMContentLoaded', () => {
+//     // var logout = document.getElementsByClassName("sub-menu-link") as HTMLAnchorElement;
+//     logout.addEventListener('click',  ()=> {
+//         localStorage.clear();
+//         window.location.href = "/frontend/src/pages/initial-login.html";
+        
+//      });
+// })
+
+
