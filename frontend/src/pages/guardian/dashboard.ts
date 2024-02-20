@@ -15,9 +15,12 @@ if (userJson) {
 async function findChildren(userId : number) {
     try {
         const response = await axios.get(`http://localhost:3000/api/user/children/${userId}`);
-        if (response.data[0]) {
-            response.data[0].student.forEach(async (student : any, index:number) => {
-
+        console.log(response.data);
+        
+        
+        if (response.data) {
+            response.data.forEach(async (student : any, index:number) => {
+                
                 let divChildren = document.createElement('div');
                 divChildren.classList.add('best-children-one');
                 let link = document.createElement('a');
@@ -26,7 +29,7 @@ async function findChildren(userId : number) {
                 link.href = `http://127.0.0.1:5500/frontend/src/pages/student/dashboard-student.html?id=${student.id}`
                 
                 link.textContent = `Filho ${index + 1}`;
-                var turma = await axios.get(`http://localhost:3000/api/class/${student.classeId}`);
+                var turma = await axios.get(`http://localhost:3000/api/class/${student.classe.id}`);
                 console.log(turma.data);
                 turma = turma.data;
                 studentInfo.innerHTML = `<strong>Nome:</strong>
@@ -54,8 +57,8 @@ async function childrensPerformance(userId : number) {
         const response = await axios.get(`http://localhost:3000/api/user/children/${userId}`);
 
         // console.log(response);
-        if (response.data[0]) {
-            response.data[0].student.forEach(async (student : any, index:number) => {
+        if (response.data) {
+            response.data.forEach(async (student : any, index:number) => {
                 let divBests = document.createElement('div');
                 divBests.classList.add('best-children-one');
                

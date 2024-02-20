@@ -1,6 +1,7 @@
 import { User } from "../entity/User";
 import { AppDataSource } from "../data-source"
 import bcrypt from "bcrypt"
+import { Student } from "../entity/Student";
 
 
 export class UserServices {
@@ -26,14 +27,18 @@ export class UserServices {
         return userRepository.findOneBy({ id: userId })
     }
 
-    //select de filhos funcionando porém aparentemente não está sendo registrado na tabela de relação quando é criado um filho;
-    async findChildren(userId: Number) {
-        const userRepository = AppDataSource.getRepository(User);
-        const children = await userRepository
-            .createQueryBuilder("user")
-            .innerJoinAndSelect("user.student", "student")
-            .where("user.id = :userId ", { userId })
-            .getMany()
+    async findChildren(userId: number) {
+        const studentRepository = AppDataSource.getRepository(Student);
+        const children = await studentRepository.find({
+            where: {
+                user: {
+                    id: userId
+                }
+            },
+            relations: {
+                classe: true
+            }
+        })
         return children;
     }
 
