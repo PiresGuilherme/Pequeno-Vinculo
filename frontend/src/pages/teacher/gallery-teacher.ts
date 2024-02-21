@@ -70,6 +70,7 @@ if (classesJson) {
     divClassesGallery.appendChild(oneClass)
 }
 
+
 buttonAddPhoto.addEventListener('click', async () => {
     const classElement: HTMLInputElement | null = document.querySelector('.input-class');
     const messageElement: HTMLTextAreaElement | null = document.querySelector('.input-message');
@@ -77,50 +78,63 @@ buttonAddPhoto.addEventListener('click', async () => {
 
     if(!Number(classElement?.value)){
         alert('Informe o ID da turma!')
+        return;
     }
 
     if(messageElement?.value === ''){
-        alert('Informe a mensagem do lembrete!')
+        alert('Informe a legenda da foto!')
+        return;
     }
 
-    if(pictureElement?.value){
-        alert('Insira o arquivo!')
+    if(!pictureElement?.files?.length){
+        alert('Insira a foto!')
+        return;
     }
 
-    let classId = Number(classElement?.value);
-    let message = messageElement?.value;
-    let picture = pictureElement?.value
+    const classId = Number(classElement?.value);
+    const description = messageElement?.value;
+    const picture = pictureElement?.files?.[0];
 
-    let response = await postPhotos(message, classId, picture)
-
-    if(response.status === 200){
-        alert('Lembrete adicionado com sucesso!')
-        window.location.href = `http://127.0.0.1:5500/frontend/src/pages/teacher/schedule-teacher.html`
-        return
-    }
-    
-    alert(response.statusText)
-
-})
-
-
-async function postPhotos(message: String | undefined, classId: Number | undefined, picture: any){
     try {
-        if(classId === undefined){
-            alert('Informe o ID da turma!')
+        const response = await postPhotos(description, classId, picture);
+
+        if(response.status === 200){
+            alert('Foto adicionada com sucesso!')
+            window.location.href = `http://127.0.0.1:5500/frontend/src/pages/teacher/gallery-teacher.html`;
+        } else {
+            alert(response.statusText);
         }
-
-        if(message === undefined){
-            alert('Informe a mensagem do lembrete!')
-        }
-
-        const response = await axios.post(`http://localhost:3000/api/class/:id(\\d+)/picture`, {
-            "message": message,
-            "class": classId
-        })
-
-        return response
     } catch (error) {
-        return error
+        console.error(error);
+        alert('Erro ao adicionar foto');
+    }
+});
+
+async function postPhotos(description: string | undefined, classId: number | undefined, picture: any) {
+    try {
+        if (classId === undefined) {
+            alert('Informe o ID da turma!');
+            return;
+        }
+
+        if (description === undefined) {
+            alert('Informe a legenda da foto!');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('description', description);
+        formData.append('class', String(classId));
+        formData.append('picture', picture);
+
+        const response = await axios.post(`http://localhost:3000/api/class/${classId}/picture`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return response;
+    } catch (error) {
+        return error;
     }
 }
