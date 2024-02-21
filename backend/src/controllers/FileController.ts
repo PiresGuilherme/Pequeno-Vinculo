@@ -3,6 +3,8 @@ import { fileServices } from "../services/fileServices";
 import { File } from "../entity/File";
 import { Class } from "../entity/Class";
 import { ClassServices } from "../services/classServices";
+import { StudentServices } from "../services/studentServices";
+import { NotificationController } from "./NotificationController";
 
 export interface reqFile extends Request {
     file: {
@@ -40,9 +42,16 @@ export class FileController {
             if(!classe){
                 return Error("Classe não encontrada!")
             }
-            console.log(req.file);
+            // console.log(req.file);
+            const studentServices = new StudentServices();
+            const students = await studentServices.getSameClassStudents(classe.id)
+            console.log(students);
             
-            console.log(req.body);
+            students[0].forEach(async(student)=>{
+                const notificationController = new NotificationController();
+                await notificationController.postNotification(student, `Postaram uma nova foto na turma do estudante: ${student.name}`)
+            })
+            // console.log(req.body);
             var newPicture : File = {
                 fieldname : req.file.fieldname,
                 originalname : req.file.originalname,
