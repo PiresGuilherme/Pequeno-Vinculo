@@ -52,7 +52,6 @@ main {
 .class-schedule {
     display: flex;
     flex-direction: row;
-    background-color: var(--pink);
     height: 7vh;
     justify-content: space-between;
     padding-right: 2%;
@@ -164,6 +163,10 @@ main {
 
 .add-reminder-button:hover{
     background-color: var(--hover-purple);
+}
+
+.accordion{
+     border-radius: 10px;
 }
 
 footer {
