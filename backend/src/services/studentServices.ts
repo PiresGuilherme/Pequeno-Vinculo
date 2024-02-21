@@ -31,6 +31,10 @@ export class StudentServices {
         const studentRepository = AppDataSource.getRepository(Student);
 
         return studentRepository.findAndCount({
+            relations:{
+                // classe:true,
+                user:true
+            },
             where: {
                 classe: { id: classId }
             }

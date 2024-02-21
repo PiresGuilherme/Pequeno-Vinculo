@@ -23,8 +23,8 @@ export class NotificationController {
             const userService = new UserServices();
             // console.log(student.user);
 
-            var user = await userService.getUserById(student.user[0].id);
-            console.log(user);
+            // var user = await userService.getUserById(student.user[0].id);
+            // console.log(user);
             student.user.forEach(async user => {
                 const notificationReposity = new NotificationServices();
                 const newNotification: Notification = {
@@ -34,12 +34,25 @@ export class NotificationController {
                     verified: false,
                     user: user
                 }
-                console.log(newNotification);
+
+                // console.log(newNotification);
                 await notificationReposity.postNotification(newNotification)
             })
 
         } catch (error) {
         }
-
     }
+    async verify(req:Request,res:Response){
+        try {
+            const notificationService = new NotificationServices();
+            await notificationService.verified(req.body.id);
+            return res.status(200).json();
+        
+        } catch (error) {
+            console.log(error);
+            
+        }
+        
+    }
+
 }

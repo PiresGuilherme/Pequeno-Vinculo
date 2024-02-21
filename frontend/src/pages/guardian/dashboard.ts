@@ -17,7 +17,7 @@ if (userJson) {
 async function findChildren(userId: number) {
     try {
         const response = await axios.get(`${backend}/user/children/${userId}`);
-        // console.log(response.data);
+        console.log(response.data);
 
 
         if (response.data) {
@@ -32,7 +32,7 @@ async function findChildren(userId: number) {
 
                 link.textContent = `Filho ${index + 1}`;
                 var turma = await axios.get(`${backend}/class/${student.classe.id}`);
-                console.log(turma.data);
+                // console.log(turma.data);
                 turma = turma.data;
                 studentInfo.innerHTML = `<strong>Nome:</strong>
                 <p> ${student.name}</p> <strong>Turma:</strong> <p>${turma.name}</p>`;
@@ -95,47 +95,45 @@ async function notifications(userId: number) {
     try {
         const response = await axios.get(`${backend}/notification/user/${userId}`)
         const notifications = response.data
-        console.log(notifications);
-        // notifications.sort(function(a, b) {
-        //     // Convert the date strings to Date objects
-        //     let dateA =  Date.parse(a.date);
-        //     let dateB =  Date.parse(b);
+        // console.log(notifications);
+        const notificacoes = notifications.map((notification: any) => {
+            const data = new Date(notification.notification_date);
+            notification.notification_date = data;
+            return notification;
+        });
+        notificacoes.sort((a: any, b: any) => b.notification_date - a.notification_date);
+        // console.log(notificacoes);
+        const divNotification = document.querySelector('.notification');
+        notificacoes.forEach((notification: any) => {
+            // console.log(notification);
+            if (!notification.verified) {
+                let divBests = document.createElement('div');
+                divBests.classList.add('notifications');
 
-        //     // Subtract the dates to get a value that is either negative, positive, or zero
-        //     return  dateB -dateA ;
-        //   });
-        //   console.log(notifications);
-          
+                let message = document.createElement('p');
+                message.innerHTML = `${notification.message} `
 
-        //é necessário organizar o array por datas!!! 
+                const data = new Date(notification.notification_date)
+                var date = document.createElement('p');
+                date.innerHTML = ` ${data.toLocaleDateString('pt-BR')}`
 
-        // const divNotification = document.querySelector('.notification');
-        // const notificacoes = notifications.map((notification: any) => {
-        //     // let divBests = document.createElement('div');
-        //     // divBests.classList.add('notifications');
+                const check = document.createElement('button');
+                check.className = 'btn btn-outline-success';
+                check.innerHTML = '<i class="bi bi-check"></i>'
 
-        //     // let message = document.createElement('p');
-        //     // message.innerHTML = `${notification.message} `
-        //     const data = new Date(notification.notification_date)
-
-        //     // var date = document.createElement('p');
-        //     // date.innerHTML = ` ${data.toLocaleDateString('pt-BR')}`
-        //     notification.notification_date = data;
-        //     console.log(notification);
-
-        //     // divBests.appendChild(message);
-        //     // divBests.appendChild(date);
-        //     // divNotification?.appendChild(divBests)
-        //     return notification
-        // })
-        //  notificacoes.sort(function(a:Date, b:Date) {
-        //     // Convert the date strings to Date objects
-        //     let dateA =  Date.parse(a);
-        //     let dateB =  Date.parse(b);
-
-        //     // Subtract the dates to get a value that is either negative, positive, or zero
-        //     return dateA - dateB;
-        //   });
+                check.addEventListener('click', async (event: MouseEvent) => {
+                    axios.post(`${backend}/notification/user/verified`, {
+                        id: notification.id
+                    })
+                    divBests.remove();
+                })
+                divBests.appendChild(message);
+                divBests.appendChild(date);
+                divBests.appendChild(check);
+                divNotification?.appendChild(divBests)
+                return notification
+            }
+        })
 
     } catch (error) {
         console.log(error);

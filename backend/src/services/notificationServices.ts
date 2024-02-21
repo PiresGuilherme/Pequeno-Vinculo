@@ -4,19 +4,28 @@ import { AppDataSource } from "../data-source";
 
 
 export class NotificationServices {
-    async getNotificationUser(userId) {
-        const notificationRepository = AppDataSource.getRepository(Notification);
-        return await notificationRepository.find({
-            where:{
-                user:{
-                    id:userId
+    getNotificationUser(userId) {
+        const notificationReposity = AppDataSource.getRepository(Notification);
+        return notificationReposity.find({
+            where: {
+                user: {
+                    id: userId
                 }
             }
         })
     }
 
     postNotification(notification) {
-        const notificationRepository = AppDataSource.getRepository(Notification);
-        return notificationRepository.save(notification);
+        const notificationReposity = AppDataSource.getRepository(Notification);
+        return notificationReposity.save(notification);
+    }
+
+    async verified(notificationId){
+        const notificationReposity = AppDataSource.getRepository(Notification);
+        return await notificationReposity.update({
+            id:notificationId
+        }, {
+            verified:true
+        })
     }
 }

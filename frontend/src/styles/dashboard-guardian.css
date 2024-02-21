@@ -54,6 +54,7 @@ body {
     position: relative;
     padding-top: 1%;
     text-align: center;
+    overflow-x: auto;
 }
 
 .children {
@@ -75,10 +76,8 @@ body {
     border-radius: 20px;
     position: relative;
     padding-top: 1%;
-
+    flex-wrap: nowrap;
     overflow-x: auto;
-
-    flex-wrap: wrap;
 }
 
 .notifications{
@@ -90,6 +89,7 @@ body {
     display: flex;
     align-items: center;
     background-color: var(--green);
+    overflow-y: auto;
 }
 
 .notifications p {

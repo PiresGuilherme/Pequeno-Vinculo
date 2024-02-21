@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { ScheduleServices } from "../services/scheduleServices";
 import { Schedule } from "../entity/Schedule";
 import { ClassServices } from "../services/classServices";
+import { StudentServices } from "../services/studentServices";
+import { NotificationController } from "./NotificationController";
 
 const scheduleServices = new ScheduleServices;
 const classServices = new ClassServices;
@@ -29,6 +31,14 @@ export class ScheduleController {
             if (!classInstance) {
                 throw new Error;
             }
+            const studentServices = new StudentServices();
+            const students = await studentServices.getSameClassStudents(classInstance.id)
+            console.log(students);
+            
+            students[0].forEach(async(student)=>{
+                const notificationController = new NotificationController();
+                await notificationController.postNotification(student, `Há um novo bilhete para o estudante: ${student.name}`)
+            })
             newSchedule.classe = classInstance;
             newSchedule.schedule_date = new Date()
             await scheduleServices.newSchedule(newSchedule)            
