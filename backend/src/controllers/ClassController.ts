@@ -2,6 +2,8 @@ import json, { Request,Response }  from "express";
 // import classRepository from "../services/classServices";
 import { Class } from "../entity/Class";
 import { ClassServices } from "../services/classServices";
+import { UserServices } from "../services/userServices";
+import { User } from "../entity/User";
 const classServices = new ClassServices;
 export class ClassController {
     async getAllClasses(req:Request,res:Response){
@@ -22,7 +24,13 @@ export class ClassController {
             // newClass.capacity = req.body.capacity;
             // newClass.shift = req.body.shift;
             // newClass.user = req.body.user;
-            classServices.newClass(newClass);
+            // newClass.student = req.body.student;
+             
+            const userService = new UserServices()
+            let user = await userService.getUserById(req.body.user)
+            // console.log(user);
+            newClass.user = user
+            await classServices.newClass(newClass);
             return res.status(200).json();
         } catch(error) {
             return res.status(500).json({error: "Internal Server Error", details: error.message})

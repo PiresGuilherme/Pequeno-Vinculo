@@ -4,17 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="/frontend/assets/logo-icon.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="/frontend/src/styles/gallery-guardian.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-    <script type="module" src="../../../build/pages/guardian/gallery-guardian.js" defer></script>
-    <title>Galeria</title>
+    <link rel="stylesheet" href="dashboard-student.css">
+    <script type="module" src="../../../build/pages/student/dashboard.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <title>Dashboard Estudante</title>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="dashboard-guardian.html">Home</a>
                     </li>
@@ -43,19 +44,29 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Chat</a>
                     </li>
+                    <li class="nav-item" id="dropdown-logout"> <!--esther-->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="material-symbols-outlined">person</span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Sair</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <main>
-        <div class="page-title">
-            <h4>Galeria</h4>
-        </div>
-        <div class="classes-gallery"></div>
-    </main>
 
-    <footer>Desenvolvido por Esther Lucena, Gabriel Morez, Guilherme Pires e Larissa Wandervegen.</footer>
+    <main>
+        <div class="student-dash">
+            <div id="student-info"></div>
+            <div id="dashboard">
+            </div>
+        </div>
+    </main>
 </body>
 
 </html>
-

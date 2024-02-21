@@ -1,30 +1,45 @@
 import { AppDataSource } from "../data-source";
 import { Student } from "../entity/Student";
 
-const studentRepository = AppDataSource.getRepository(Student);
+// const studentRepository = AppDataSource.getRepository(Student);
 
 export class StudentServices {
-    getAllStudents() { return studentRepository.find(); }
+    async getAllStudents() {
+        const studentRepository = AppDataSource.getRepository(Student);
+        return studentRepository.find();
+    }
 
-    newStudent(newStudent) {
+    async newStudent(newStudent) {
+        const studentRepository = AppDataSource.getRepository(Student);
+
         studentRepository.save(newStudent)
     }
 
-    getStudent(id) {        
+    async getStudent(id) {
+        const studentRepository = AppDataSource.getRepository(Student);
+
         return studentRepository.findOne({
             relations:{
-                classe:true
+                classe:true,
+                user:true
             },
-            where: { id : id }
+            where: { id: id }
         })
     }
-    
-    getSameClassStudents(classId){      
+
+    async getSameClassStudents(classId) {
+        const studentRepository = AppDataSource.getRepository(Student);
+
         return studentRepository.findAndCount({
-            where:{
-                classe : {id: classId}
+            where: {
+                classe: { id: classId }
             }
         })
+    }
+    async earnCoin(studentId, value) {
+        const studentRepository = AppDataSource.getRepository(Student);
+        const student = await studentRepository.findOne({where:{id:studentId}});
+        student.coin+= value
     }
 }
 

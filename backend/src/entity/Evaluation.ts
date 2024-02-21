@@ -9,7 +9,7 @@ export class Evaluation {
     @Column()
     note: number
 
-    @Column()
+    @Column({type:Date})
     evaluation_date: Date
 
     @ManyToOne(()=> Student, (student) => student.evaluation)

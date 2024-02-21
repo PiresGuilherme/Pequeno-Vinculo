@@ -9,9 +9,7 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 // findChildren(userId);
 // async function findChildren(userId) {
 //     try {
-//         const response = await axios.post('http://localhost:3000/api/user/children', {
-//             userId: userId
-//         })
+//         const response = await axios.get(`http://localhost:3000/api/user/children/${userId}`);
 
 //         divChildren.innerHTML = '';
 
@@ -293,10 +291,10 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 
 ///gallery
 
-// import {express} from 'express';
+import {express} from 'express';
 
-// const server = express();
-// server.use(express.static('uploads'))
+const server = express();
+server.use(express.static('uploads'))
 let classId = 1
 
 classesPicture(classId);

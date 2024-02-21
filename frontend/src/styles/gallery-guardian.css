@@ -22,7 +22,8 @@ body {
     height: 100vh;
     gap: 2%;
     background-color: var(--body);
-    margin-bottom: 10vh
+    margin-bottom: 10vh;
+    
 }
 
 #navbar{
@@ -42,6 +43,34 @@ main {
     height: 100vh;
     width: 100%;
     gap: 2%;
+}
+
+.classes-gallery {
+    width: 90%;
+    height: 70vh;
+    gap: 2%;
+}
+
+.class-gallery {
+    display: flex;
+    flex-direction: row;
+    height: 7vh;
+    justify-content: space-between;
+    padding-right: 2%;
+    padding-left: 2%;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 0.5%;
+}
+
+.btnAcess{
+    display: flex;
+    flex-direction: row;
+    background-color: var(--body);
+    border-radius: 5px;
+    width: 120%;
+    cursor: pointer;
+    justify-content: space-evenly;
 }
 
 .modal {
@@ -65,8 +94,15 @@ main {
     max-width: 700px;
 }
 
-.button{
-    background-color: var(--pink);
+#caption{
+    color: var(--body);
+}
+
+#close{
+    color: var(--body);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }
 
 footer {
@@ -80,6 +116,7 @@ footer {
     background-color: var(--green);
     height: 6vh;
 }
+
 
 @media screen and (max-width: 768px) {
     h5 {
@@ -95,10 +132,13 @@ footer {
     }
 
     footer {
-        position: static;
+        position: fixed;
         text-align: center;
         font-size: 14px;
         padding: 1%;
+        bottom: 0;
+        left: 0;
+        
     }
 }
 

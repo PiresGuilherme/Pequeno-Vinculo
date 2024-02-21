@@ -1,0 +1,90 @@
+:root {
+    --body: #f3f8fe;
+    --orange: #FEC868;
+    --pink: #FF708D;
+    --purple: #DCC1FC;
+    --green: #A3E487;
+    --background: #e7e7e7;
+
+    --hover-pink: #e94e6d;
+    --hover-purple: #ae7deb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#navbar {
+    padding: 0px;
+    margin-bottom: 1%;
+}
+
+.container-fluid {
+    background-color: #DCC1FC;
+    border-color: 10px solid #DCC1FC;
+
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    gap: 5%;
+}
+
+.student-dash{
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    justify-content: space-between;
+    gap: 1%;
+}
+
+#student-info{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    padding: 1.5%;
+    /* border-radius: 10px 0px 0px 10px; */
+    border-radius: 10px;
+}
+
+#dashboard{
+    /* border-radius: 0px 10px 10px 00px; */
+    border-radius: 10px;
+    width: 60%;
+    padding: 1.5%;
+}
+
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse
+}
+
+.rating input {
+    display: none;
+}
+
+.rating label {
+    cursor: pointer;
+    font-size: 24px;
+    color: #ddd;
+
+}
+
+/* .rating label:hover,
+.rating label:hover~label {
+    color: #f39c12;
+
+} */
+
+.rating input:checked~label,
+.rating input:checked~label:hover,
+.rating input:checked~label:hover~label {
+    color: #f39c12;
+}

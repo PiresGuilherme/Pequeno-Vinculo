@@ -44,65 +44,24 @@ main {
     gap: 2%;
 }
 
-.classes-attendance {
+.clhildren-performances {
     width: 90%;
     height: 70vh;
     gap: 2%;
 }
 
-.class-attendance {
+.class-performance {
     display: flex;
     flex-direction: row;
+    background-color: var(--pink);
     height: 7vh;
     justify-content: space-between;
     padding-right: 2%;
     padding-left: 2%;
     align-items: center;
     border-radius: 10px;
-    margin-top: 0.5%;
 }
 
-.accordion{
-    border-radius: 10px;
-}
-
-.form-check-input:checked{
-    background-color: var(--hover-purple);
-}
-
-.accordion.active .students-container {
-    display: block;
-}
-
-.expand-button {
-    transition: transform 0.3s;
-}
-
-.accordion.active .expand-button {
-    transform: rotate(180deg);
-}
-
-.students-container {
-    display: none;
-}
-
-.buttons{
-    display: flex;
-    flex-direction: row;
-    gap: 25%;
-}
-
-#btnExpand{
-    cursor: pointer;
-}
-
-button {
-    background-color: var(--body);
-    border: none;
-    border-radius: 5px;
-    width: 130%;
-    cursor: pointer;
-}
 
 footer {
     position: fixed;
@@ -114,31 +73,4 @@ footer {
     justify-content: center;
     background-color: var(--green);
     height: 6vh;
-}
-
-
-@media screen and (max-width: 768px) {
-    h5 {
-        font-size: 1rem;
-    }
-
-    .classes-schedule {
-        width: 90%;
-    }
-
-    .class-one-schedule {
-        padding: 2%;
-    }
-
-    footer {
-        position: static;
-        text-align: center;
-        font-size: 14px;
-        padding: 1%;
-    }
-}
-
-.gray-background {
-    background-color: #ccc;
-    /* ou a cor de fundo desejada */
 }
