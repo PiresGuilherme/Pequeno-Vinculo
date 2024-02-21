@@ -39,35 +39,26 @@ main {
 .student-dash{
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 60%;
     justify-content: space-between;
+    gap: 1%;
 }
 
 #student-info{
-    background-color: var(--purple);
+    display: flex;
+    flex-direction: column;
     width: 40%;
     padding: 1.5%;
+    /* border-radius: 10px 0px 0px 10px; */
+    border-radius: 10px;
 }
 
 #dashboard{
-    background-color: var(--green);
+    /* border-radius: 0px 10px 10px 00px; */
+    border-radius: 10px;
     width: 60%;
     padding: 1.5%;
-    /* opacity: 50%; */
 }
-
-/* p,
-input{
-    opacity: 100%;
-} */
-
-/* .bg-purple{
-    background-color: var(--purple);
-}
-
-.bg-green{
-    background-color: var(--green);
-} */
 
 
 .rating {

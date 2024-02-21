@@ -1,7 +1,8 @@
 //@ts-ignore
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 const back = "http://localhost:3000/api";
-
+const colorPalette = ['rgb(254, 200, 104, 0.5)', 'rgb(255, 112, 141, 0.5)', 'rgb(220, 193, 252, 0.5)', 'rgb(163, 228, 135, 0.5)'];
+let colorIndex = 0;
 try {
     let urlParams = new URLSearchParams(window.location.search);
     let idParam = urlParams.get('id');
@@ -11,7 +12,7 @@ try {
         student = student.data
         getEvaluations(student.id)
     }
-    const studentInfoDiv = document.querySelector('#student-info');
+    const studentInfoDiv = document.querySelector('#student-info') as HTMLElement;
     const studentInfo = document.createElement('div');
     studentInfo.innerHTML = `
         <h2>${student.name} ${student.last_name}</h2>
@@ -30,6 +31,11 @@ try {
         }
         console.log(average);
         studentInfo.innerHTML += `<strong>Média:  ${media}</strong>`;
+        var studentIcon = document.createElement('div');
+        studentIcon.innerHTML = '<span class="material-symbols-outlined">child_care</span>';
+        studentInfo.appendChild(studentIcon)
+        studentInfoDiv.style.backgroundColor = colorPalette[colorIndex];
+            colorIndex = (colorIndex + 1) % colorPalette.length;
     studentInfoDiv?.appendChild(studentInfo);
 } catch (error) {
     console.log(error);
@@ -65,8 +71,10 @@ async function getEvaluations(studentId: number) {
             evaluationContainer.appendChild(dateEvaluation);
             evaluationContainer.appendChild(ratingDiv);
 
-            const dashboardDiv = document.querySelector('#dashboard');
+            const dashboardDiv = document.querySelector('#dashboard') as HTMLElement;
             dashboardDiv?.appendChild(evaluationContainer);
+            dashboardDiv.style.backgroundColor = colorPalette[colorIndex];
+            colorIndex = (colorIndex + 1) % colorPalette.length;
         })
     } catch (error) {
 
