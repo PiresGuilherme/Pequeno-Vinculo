@@ -16,13 +16,58 @@
     box-sizing: border-box;
 }
 
-.bg-purple{
+#navbar {
+    padding: 0px;
+    margin-bottom: 1%;
+}
+
+.container-fluid {
+    background-color: #DCC1FC;
+    border-color: 10px solid #DCC1FC;
+
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    gap: 5%;
+}
+
+.student-dash{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-between;
+}
+
+#student-info{
+    background-color: var(--purple);
+    width: 40%;
+    padding: 1.5%;
+}
+
+#dashboard{
+    background-color: var(--green);
+    width: 60%;
+    padding: 1.5%;
+    /* opacity: 50%; */
+}
+
+/* p,
+input{
+    opacity: 100%;
+} */
+
+/* .bg-purple{
     background-color: var(--purple);
 }
 
 .bg-green{
     background-color: var(--green);
-}
+} */
 
 
 .rating {

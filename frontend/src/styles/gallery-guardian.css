@@ -23,8 +23,6 @@ body {
     gap: 2%;
     background-color: var(--body);
     margin-bottom: 10vh;
-    overflow-y: hidden; /* Impede a rolagem vertical */
-
     
 }
 
@@ -119,6 +117,7 @@ footer {
     height: 6vh;
 }
 
+
 @media screen and (max-width: 768px) {
     h5 {
         font-size: 1rem;
@@ -133,10 +132,13 @@ footer {
     }
 
     footer {
-        position: static;
+        position: fixed;
         text-align: center;
         font-size: 14px;
         padding: 1%;
+        bottom: 0;
+        left: 0;
+        
     }
 }
 

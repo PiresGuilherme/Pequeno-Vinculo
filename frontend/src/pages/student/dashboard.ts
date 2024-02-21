@@ -54,12 +54,13 @@ async function getEvaluations(studentId: number) {
                 } else {
                     var input = `<input type="radio" id="star${i}-${evaluation.id}" name="${evaluation.id}" value="${i}" disabled>`;
                 }
-                const label = `<label for="star${i}-${evaluation.id}" disable><i class="fas fa-star" ></i></label>`;
+                const label = `<label for="star${i}-${evaluation.id}" disabled><i class="fas fa-star" ></i></label>`;
                 ratingDiv.innerHTML += (input + label);
-                dateEvaluation.innerHTML = `${evaluation.evaluation_date}`
+                var date = new Date(evaluation.evaluation_date);
+                dateEvaluation.innerHTML = `${date.toLocaleDateString('pt-BR')}`
             }
             const evaluationContainer = document.createElement('div');
-            evaluationContainer.className = 'd-flex justify-content-between'
+            evaluationContainer.className = 'd-flex justify-content-evenly'
 
             evaluationContainer.appendChild(dateEvaluation);
             evaluationContainer.appendChild(ratingDiv);
