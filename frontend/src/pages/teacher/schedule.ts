@@ -33,30 +33,30 @@ if (classesJson) {
 
         document.addEventListener('DOMContentLoaded', () => {
             var modal = document.getElementById("myModal") as HTMLElement;
-        
+
             if (!modal) {
                 console.error("Elemento modal não encontrado");
                 return;
             }
-        
+
             var closeButton = document.getElementsByClassName("close")[0] as HTMLElement;
             var addButton = document.getElementById(`add-button${i + 1}`) as HTMLElement;
-        
+
             addButton.onclick = function () {
                 modal.style.display = "block";
             };
-        
+
             closeButton.onclick = function () {
                 modal.style.display = "none";
             };
-        
+
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
             };
         });
-        
+
 
     }
     // getClassSchedules(classes.data.id);
@@ -70,17 +70,17 @@ if (classesJson) {
 buttonAddSchedule.addEventListener('click', async () => {
     const classElement: HTMLInputElement | null = document.querySelector('.input-class');
     const titleElement: HTMLInputElement | null = document.querySelector('.input-title');
-    const messageElement: HTMLTextAreaElement | null = document.querySelector('.input-message');    
+    const messageElement: HTMLTextAreaElement | null = document.querySelector('.input-message');
 
-    if(!Number(classElement?.value)){
+    if (!Number(classElement?.value)) {
         alert('Informe o ID da turma!')
     }
 
-    if(titleElement?.value === ''){
+    if (titleElement?.value === '') {
         alert('Informe o título do lembrete!')
     }
 
-    if(messageElement?.value === ''){
+    if (messageElement?.value === '') {
         alert('Informe a mensagem do lembrete!')
     }
 
@@ -90,12 +90,12 @@ buttonAddSchedule.addEventListener('click', async () => {
 
     let response = await postShedules(message, title, classId)
 
-    if(response.status === 200){
+    if (response.status === 200) {
         alert('Lembrete adicionado com sucesso!')
         window.location.href = `http://127.0.0.1:5500/frontend/src/pages/teacher/schedule-teacher.html`
         return
     }
-    
+
     alert(response.statusText)
 
 })
@@ -134,17 +134,17 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
         }
     }
 }
-async function postShedules(message: String | undefined, title: String | undefined, classId: Number | undefined){
+async function postShedules(message: String | undefined, title: String | undefined, classId: Number | undefined) {
     try {
-        if(classId === undefined){
+        if (classId === undefined) {
             alert('Informe o ID da turma!')
         }
 
-        if(title === undefined){
+        if (title === undefined) {
             alert('Informe o título do lembrete!')
         }
 
-        if(message === undefined){
+        if (message === undefined) {
             alert('Informe a mensagem do lembrete!')
         }
 
@@ -160,21 +160,27 @@ async function postShedules(message: String | undefined, title: String | undefin
     }
 }
 
-document.getElementById("user-pic")?.addEventListener("click", ()=>{
-const subMenu= document.getElementById("sub-menu");
-if(subMenu?.classList.contains("open-menu")){
-    subMenu?.classList.remove("open-menu") 
-}else{
-    subMenu?.classList.add("open-menu")
-}
-})
+document.getElementById("user-pic")?.addEventListener("click", () => {
+    const subMenu = document.getElementById("sub-menu");
+    if (subMenu?.classList.contains("open-menu")) {
+        subMenu?.classList.remove("open-menu")
+    } else {
+        subMenu?.classList.add("open-menu")
+    }
+});
+
+
+// criar função de limpar o local storage e incluir o logout na media do css com 'hidden' 
+
 // document.addEventListener('DOMContentLoaded', () => {
-//     // var logout = document.getElementsByClassName("sub-menu-link") as HTMLAnchorElement;
+//     var logout = document.getElementsByClassName("sub-menu-link") as  any;
 //     logout.addEventListener('click',  ()=> {
 //         localStorage.clear();
 //         window.location.href = "/frontend/src/pages/initial-login.html";
-        
+
 //      });
 // })
 
-
+// document.getElementsByClassName("sub-menu-link")?.addEventListener("click", function Logout() {
+//     localStorage.clear();
+// })
