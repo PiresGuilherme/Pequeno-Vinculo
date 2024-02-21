@@ -13,7 +13,7 @@ if (classesJson) {
     for (let i = 0; i < classes.data.length; i++) {
         let accordionDiv = document.createElement('div');
         accordionDiv.classList.add('accordion');
-        accordionDiv.id = 'accordion' + (i + 1);
+        accordionDiv.id = `class-${i}`;
         let oneClass = document.createElement('div');
         let buttons = document.createElement('div');
         let showMoreButton = document.createElement('span');
@@ -54,10 +54,12 @@ if (classesJson) {
                     expandButton.classList.add('Marked')
                     return;
                 }
-                expandButton.classList.remove('Marked');
-                (document.getElementById(`scheduleContainer/${i}`)!.childNodes).forEach(element => element.remove());
-                expandButton.classList.add('notMarked');
-                return
+                if(expandButton.classList.contains('Marked')){
+                    document.getElementById(`scheduleContainer/${i}`)!.innerHTML = ''
+                    expandButton.classList.remove('Marked');
+                    expandButton.classList.add('notMarked');
+                    return
+                }
             });
         });
 
@@ -88,10 +90,8 @@ if (classesJson) {
                 }
             };
         });
-        
 
     }
-    // getClassSchedules(classes.data.id);
 } else {
     let oneClass = document.createElement('div');
     oneClass.classList.add('d-flex', 'justify-content-center',);
@@ -130,22 +130,63 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
 
             return;
         }
-        let data = schedules.data;
+        let data = schedules.data;      
 
         for (let index = 0; index < data.length; index++) {
             const schedule = data[index];
 
             const newSchedule = document.createElement('div');
-            newSchedule.classList.add('p-1');
+            newSchedule.classList.add('p-1', 'schedule-item');
             newSchedule.id = `accordion${index+1}`
             newSchedule.innerHTML = `
-                <div">
+                <div>
                     <h5>${schedule.schedule_date}</h5>
-                    <p>${schedule.message}</p>
+                    <p>${schedule.title}</p>
                 </div>
+                <span class="material-symbols-outlined" id="viewSchedule-${schedule.id}">
+                visibility
+                </span>
             `;
 
             oneClass.appendChild(newSchedule);
+
+            let viewSchedule = document.getElementById(`viewSchedule-${schedule.id}`)!
+
+            viewSchedule.addEventListener('click', () => {
+
+                var modal = document.getElementById("viewModal") as HTMLElement;
+                var classShedule = document.getElementById("input-vw-class") as HTMLInputElement;
+                var titleSchedule = document.getElementById("input-vw-title") as HTMLInputElement;
+                var messageSchedule = document.getElementById("input-vw-message") as HTMLInputElement;
+                var classes = JSON.parse(localStorage.getItem('classes')!);
+                var position = (oneClass.parentElement?.id!).split('-', 2)[1]
+
+                if (!modal) {
+                    console.error("Elemento modal não encontrado");
+                    return;
+                }
+            
+                let closeButton = document.getElementsByClassName("close-vw")[0] as HTMLElement;
+
+                
+                
+                modal.style.display = "block";
+                classShedule.value = `${classes.data[position].id} - ${classes.data[position].name}`
+                titleSchedule.value = schedule.title
+                messageSchedule.value = schedule.message
+
+            
+                closeButton.onclick = function () {
+                    modal.style.display = "none";
+                };
+            
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                };
+                
+            })
         }
 
 

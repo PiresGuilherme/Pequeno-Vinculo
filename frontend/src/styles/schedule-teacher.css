@@ -77,10 +77,12 @@ main {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+.modal-vw-title,
 .modal-title{
     font-size: 1.3em;
 }
 
+.modal-vw-content,
 .modal-content {
     background-color: var(--pink);
     margin: auto;
@@ -90,12 +92,14 @@ main {
     gap: 3%;
 }
 
+.modal-vw-info,
 .modal-info{
     display: flex;
     text-align: center;
     flex-direction: column;
 }
 
+.close-vw,
 .close {
     color: var(--body);
     float: right;
@@ -106,6 +110,7 @@ main {
     height: 24px;
 }
 
+.close-vw:hover,
 .close:hover,
 .close:focus {
     color: #000;
@@ -163,6 +168,13 @@ main {
 
 .add-reminder-button:hover{
     background-color: var(--hover-purple);
+}
+
+.schedule-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2%;
 }
 
 .accordion{
