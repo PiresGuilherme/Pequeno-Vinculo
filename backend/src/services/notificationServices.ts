@@ -4,12 +4,19 @@ import { AppDataSource } from "../data-source";
 
 
 export class NotificationServices {
-    getNotificationUser(userId) {
-
+    async getNotificationUser(userId) {
+        const notificationRepository = AppDataSource.getRepository(Notification);
+        return await notificationRepository.find({
+            where:{
+                user:{
+                    id:userId
+                }
+            }
+        })
     }
 
     postNotification(notification) {
-        const notificationReposity = AppDataSource.getRepository(Notification);
-        return notificationReposity.save(notification);
+        const notificationRepository = AppDataSource.getRepository(Notification);
+        return notificationRepository.save(notification);
     }
 }

@@ -7,8 +7,15 @@ import { UserServices } from "../services/userServices";
 
 export class NotificationController {
 
-    async getNotificationUser(req:Request,res:Response){
-
+    async getNotificationUser(req: Request, res: Response) {
+        try {
+            const notificationService = new NotificationServices();
+            const notifications = await notificationService.getNotificationUser(req.params.id)
+            console.log(notifications);
+            return res.status(200).json(notifications)
+        } catch (error) {
+            res.status(500).json(error.message)
+        }
     }
 
     async postNotification(student: Student, message: string) {
