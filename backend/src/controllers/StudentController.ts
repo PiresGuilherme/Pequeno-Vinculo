@@ -50,18 +50,38 @@ export class StudentController {
 
     async getSameClassStudents(req: Request, res: Response){
         try {            
-            const students = await studentServices.getSameClassStudents(req.body.classId)
-            //students
-            // console.log(students[0]);
-            //count
-            // console.log(students[1]);
-            // console.log(students);
-            
+            const students = await studentServices.getSameClassStudents(req.body.classId)            
             return res.status(200).json(students);
         } catch (error) {
             console.log(error.message);
             
         }
+    }
+
+
+    async getBirthdayStudent(req: Request, res: Response){
+        try {
+            console.log(req.params.id);
+            const students = await studentServices.getSameClassStudents(req.params.id);
+            // console.log(students);
+            
+            const birthdayStudent = students[0].filter((student)=>{
+                const day = student.birth_date.getDay();
+                const month = student.birth_date.getMonth();
+                const today = new Date().getDay();
+                const todayMonth = new Date().getMonth();
+
+                if (day ==today && month == todayMonth) {
+                    return student;
+                } else{
+                    return
+                }
+            })
+            return res.status(200).json(birthdayStudent);
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+
     }
 
 }

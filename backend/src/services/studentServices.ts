@@ -19,9 +19,9 @@ export class StudentServices {
         const studentRepository = AppDataSource.getRepository(Student);
 
         return studentRepository.findOne({
-            relations:{
-                classe:true,
-                user:true
+            relations: {
+                classe: true,
+                user: true
             },
             where: { id: id }
         })
@@ -31,9 +31,9 @@ export class StudentServices {
         const studentRepository = AppDataSource.getRepository(Student);
 
         return studentRepository.findAndCount({
-            relations:{
-                // classe:true,
-                user:true
+            relations: {
+                classe:true,
+                user: true
             },
             where: {
                 classe: { id: classId }
@@ -42,8 +42,15 @@ export class StudentServices {
     }
     async earnCoin(studentId, value) {
         const studentRepository = AppDataSource.getRepository(Student);
-        const student = await studentRepository.findOne({where:{id:studentId}});
-        student.coin+= value
+        const student = await studentRepository.findOne({ where: { id: studentId } });
+        // student.coin += value
+        studentRepository.update({
+            id:studentId
+        }, {
+            coin:()=>`coin + ${value}` 
+            
+        })
+
     }
 }
 

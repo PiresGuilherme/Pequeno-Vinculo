@@ -5,12 +5,12 @@ import { EvaluationServices } from "../services/evaluationServices";
 import { StudentServices } from "../services/studentServices";
 import { NotificationController } from "./NotificationController";
 
-const evaluationServices = new EvaluationServices;
-const studentServices = new StudentServices;
 
 export class EvaluationController {
     async getAllEvaluations(req: Request, res: Response) {
         try {
+            const evaluationServices = new EvaluationServices;
+
             let allEvaluations = await evaluationServices.getAllEvaluations();
             return res.status(200).json(allEvaluations);
         } catch (error) {
@@ -21,6 +21,9 @@ export class EvaluationController {
 
     async postNewEvaluation(req: Request, res: Response) {
         try {
+            const studentServices = new StudentServices;
+            const evaluationServices = new EvaluationServices;
+
 
             let student = await studentServices.getStudent(req.body.student)
             if (!student) {
@@ -30,6 +33,8 @@ export class EvaluationController {
             newEvaluation.student = student;
 
             newEvaluation.note = req.body.note;
+
+            await studentServices.earnCoin(student.id,req.body.note)
             await evaluationServices.newEvaluation(newEvaluation);
 
             const notificationController = new NotificationController();
@@ -44,6 +49,8 @@ export class EvaluationController {
 
     async stundentEvaluations(req: Request, res: Response) {
         try {
+            const evaluationServices = new EvaluationServices;
+
             const stundentEvaluations = await evaluationServices.findStudentEvaluations(req.params.id);
             return res.status(200).json(stundentEvaluations);
         } catch (error) {
@@ -53,6 +60,8 @@ export class EvaluationController {
 
     async averageEvaluations(req: Request, res: Response) {
         try {
+            const evaluationServices = new EvaluationServices;
+
             const average = await evaluationServices.averageEvaluations(req.params.id)
             return res.status(200).json(average)
         } catch (error) {
