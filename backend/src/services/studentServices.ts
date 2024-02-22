@@ -42,8 +42,6 @@ export class StudentServices {
     }
     async earnCoin(studentId, value) {
         const studentRepository = AppDataSource.getRepository(Student);
-        const student = await studentRepository.findOne({ where: { id: studentId } });
-        // student.coin += value
         studentRepository.update({
             id:studentId
         }, {

@@ -30,6 +30,11 @@ router.post('/class/teacher', (req: Request, res: Response) => {
     classController.findClassroomTeacher(req, res)
 });
 
+router.get('/class/coins/:id(\\d+)', (req:Request,res:Response)=>{
+    const classController = new ClassController();
+    classController.findBestClasses(req,res);
+})
+
 router.get('/class/:id', (req: Request, res: Response) => {
     let classController = new ClassController()
     classController.findOneClass(req, res)

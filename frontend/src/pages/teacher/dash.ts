@@ -19,7 +19,11 @@ async function teacherClasses(userId: number) {
         // console.log(response);
 
         response.data.forEach(async (classe: any) => {
+
             birthdayStudents(classe.id);
+            classTotalCoin(classe.id)
+            // console.log(1);
+
         })
         // console.log(birthdayStudents);
 
@@ -59,25 +63,34 @@ async function birthdayStudents(classId: number) {
     try {
         const response = await axios.get(`${backend}/student/birthday/class/${classId}`)
         const divbirthdays = document.querySelector('.last-info-birthdays');
-        
-        response.data.forEach((student:any)=>{
-            console.log(
-                student
-            );
-            
-                let divBests = document.createElement('div');
-                divBests.classList.add('birthdays');
+        // console.log(2);
+        // console.log(response);
 
-                let message = document.createElement('p');
-                message.innerHTML = `Hoje é aniversário do estudante : ${student.name} da turma ${student.classe.name}`
+        response.data.forEach((student: any) => {
 
-               
-                divBests.appendChild(message);
-                // console.log(divBests);
-                
-                divbirthdays?.appendChild(divBests)
+            let divBests = document.createElement('div');
+            divBests.classList.add('birthdays');
+
+            let message = document.createElement('p');
+            message.innerHTML = `Hoje é aniversário do estudante : ${student.name} da turma ${student.classe.name}`
+
+
+            divBests.appendChild(message);
+
+            divbirthdays?.appendChild(divBests)
         })
     } catch (error) {
+        console.log(error);
+
+    }
+}
+async function classTotalCoin(classId: number) {
+    try {       
+        const response = await axios.get(`${backend}/class/coins/${classId}`)
+        console.log(response);
+        
+    } catch (error) {
+        console.log(error);
 
     }
 }

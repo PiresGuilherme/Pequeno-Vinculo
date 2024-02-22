@@ -24,7 +24,7 @@ export class StudentController {
            // verificar existencia do guardian
             const classeId = req.body.class;
             const classInstance = await classServices.findOneClass(classeId);
-            console.log(classInstance);
+            // console.log(classInstance);
             
             if (classInstance) {
                 newStudent.classe = classInstance;
@@ -66,9 +66,9 @@ export class StudentController {
             // console.log(students);
             
             const birthdayStudent = students[0].filter((student)=>{
-                const day = student.birth_date.getDay();
+                const day = student.birth_date.getDate();
                 const month = student.birth_date.getMonth();
-                const today = new Date().getDay();
+                const today = new Date().getDate();
                 const todayMonth = new Date().getMonth();
 
                 if (day ==today && month == todayMonth) {
