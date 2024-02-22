@@ -1,11 +1,17 @@
 //@ts-ignore
 import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
+const token = localStorage.getItem('login');
+if (!token) {
+  window.location.href = "/frontend/src/pages/initial-login.html";
+}
+
 const buttonAddSchedule = document.querySelector('.add-reminder-button') as HTMLButtonElement;
 const classesJson = localStorage.getItem('classes');
 const divClassesSchedule = document.querySelector('.classes-schedule') as HTMLDivElement;
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
+
 
 if (classesJson) {
     const classes = JSON.parse(classesJson);
@@ -65,13 +71,14 @@ if (classesJson) {
 
         document.addEventListener('DOMContentLoaded', () => {
             var modal = document.getElementById("myModal") as HTMLElement;
-        
+
             if (!modal) {
                 console.error("Elemento modal não encontrado");
                 return;
             }
-        
+
             var closeButton = document.getElementsByClassName("close")[0] as HTMLElement;
+
             var addButton = document.getElementById(`add-button/${i + 1}`) as HTMLElement;
         
             addButton.onclick = function () {
@@ -79,17 +86,18 @@ if (classesJson) {
                 modal.style.display = "block";
                 inputClass.value = `${classes.data[i].id}-${classes.data[i].name}`
             };
-        
+
             closeButton.onclick = function () {
                 modal.style.display = "none";
             };
-        
+
             window.onclick = function (event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
             };
         });
+
 
     }
 } else {
@@ -100,6 +108,7 @@ if (classesJson) {
 }
 
 buttonAddSchedule.addEventListener('click', async () => {
+
     const classElement: HTMLInputElement = document.querySelector('.input-class')!;
     const titleElement: HTMLInputElement = document.querySelector('.input-title')!;
     const messageElement: HTMLTextAreaElement = document.querySelector('.input-message')!;    
@@ -201,8 +210,10 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
         }
     }
 }
-async function postShedules(message: String | undefined, title: String | undefined, classId: Number | undefined){
+async function postShedules(message: String | undefined, title: String | undefined, classId: Number | undefined) {
     try {
+
+
         if(!classId){
             throw new Error('Informe o ID da turma!')
         }
@@ -213,6 +224,7 @@ async function postShedules(message: String | undefined, title: String | undefin
 
         if(!message){
             throw new Error('Informe a mensagem do lembrete!');
+
         }
 
         const response = await axios.post('http://localhost:3000/api/schedule', {
@@ -226,3 +238,23 @@ async function postShedules(message: String | undefined, title: String | undefin
         return error
     }
 }
+
+document.getElementById("user-pic")?.addEventListener("click", () => {
+    const subMenu = document.getElementById("sub-menu");
+    if (subMenu?.classList.contains("open-menu")) {
+        subMenu?.classList.remove("open-menu")
+    } else {
+        subMenu?.classList.add("open-menu")
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+   
+    const logoutLink = document.querySelector(".sub-menu-link") as HTMLAnchorElement;
+    logoutLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.clear();
+      window.location.href = "/frontend/src/pages/initial-login.html";
+    });
+  });
+  
