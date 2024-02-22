@@ -1,134 +1,170 @@
 //@ts-ignore
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
-var classe = 1
-teachersStudents(classe);
-const classesSchedule = document.querySelector('.classes-schedule');
+
+const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
 console.log(classesSchedule);
+const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
+let colorIndex = 0;
 
-async function teachersStudents(classId: number) {
-   try {
-      const response = await axios.post('http://localhost:3000/api/student/class', {
-         classId: classId
-      });
-      const students = response.data[0];
-      console.log(students);
+const userJson = localStorage.getItem('login');
 
-      var classDiv = document.createElement('div');
-      classDiv.classList.add('class-one-schedule')
-      var className = document.createElement('h5');
-      className.textContent += `Turma ${classId}`
-      var btnSubmit = document.createElement('button');
-      btnSubmit.type = 'button';
-      btnSubmit.id = 'btnSubmit';
-      btnSubmit.textContent = 'Avaliar'
+if (userJson) {
+    const user = JSON.parse(userJson);
+    console.log(user.user.id);
 
-      classDiv.appendChild(className);
-      classDiv.appendChild(btnSubmit);
-      classesSchedule?.appendChild(classDiv)
-      // console.log(classDiv);
-      
-      students.forEach((student: any) => {
-         // console.log(student);
-         var studentDiv = document.createElement('div');
-         studentDiv.classList.add('class-one-schedule')
-         var studentName = document.createElement('h5');
-         studentName.textContent += (`${student.name} ${student.last_name}`);
-         var ratingDiv = document.createElement('div');
-         ratingDiv.classList.add('rating');
-         // console.log(student.name, student.last_name);
-
-         for (let i = 10; i > 0; i--) {
-            const input = `<input type="radio" id="star${i}-${student.id}" name="${student.id}" value="${i}">`;
-            const label = `<label for="star${i}-${student.id}"><i class="fas fa-star"></i></label>`;
-            ratingDiv.innerHTML += (input + label);
-         }
-         studentDiv.appendChild(studentName);
-         studentDiv.appendChild(ratingDiv);
-         classesSchedule?.appendChild(studentDiv)
-      })
-
-      document.getElementById('btnSubmit')?.addEventListener('click', async function () {
-         students.forEach(async (student:any) => {
-            
-            var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
-            // console.log(selectedRating.value);
-            // var note = Number(selectedRating.value);
-            // console.log(student.id);
-            
-            var nowDate = new Date();
-            if (selectedRating == null) {
-                     // selectedRating = 0;
-                     await evaluateClass(student.id,0,nowDate);
-                     // await teachersStudents(classe);
-                  } else {
-                     await evaluateClass(student.id,Number(selectedRating.value),nowDate)
-                     // await teachersStudents(classe);
-                     
-                  }
-         })
-
-      });
-
-
-
-      // var studentDiv = document.createElement('div');
-      // var className = document.createElement('h5');
-      // className.textContent = (`Alunos turma ${classId}`);
-      // students.forEach((student: any) => {
-      //    console.log(student);
-
-      //    var studentDiv = document.createElement('div');
-      //    studentDiv.classList.add('class-one-schedule')
-      //    var studentName = document.createElement('h5');
-      //    studentName.textContent += (`${student.name} ${student.last_name}`);
-      //    var ratingDiv = document.createElement('div');
-      //    ratingDiv.classList.add('rating');
-      //    console.log(student.name, student.last_name);
-
-      //    for (let i = 10; i > 0; i--) {
-      //       const input = `<input type="radio" id="star${i}" name="${student.name}" value="${i}">`;
-      //       const label = `<label for="star${i}"><i class="fas fa-star"></i></label>`;
-      //       ratingDiv.innerHTML += (input + label);
-      //    }
-
-      //    studentDiv.appendChild(className);
-      //    studentDiv.appendChild(ratingDiv);
-      //    classesSchedule?.appendChild(studentDiv)
-      // });
-
-
-   } catch (error) {
-
-   }
+    teacherClasses(user.user.id);
 }
 
-// document.getElementById('btnSubmit')?.addEventListener('click', function () {
-//    var selectedRating = document.querySelector('input[name="rating"]:checked') as HTMLInputElement;
-//    console.log(selectedRating.name);
+async function teacherClasses(userId: number) {
+    try {
+        const response = await axios.post('http://localhost:3000/api/class/teacher', {
+            userId: userId
+        });
+        const classes = response.data.length;
+        for (let i = 0; i < classes; i++) {
+            var accordionDiv = document.createElement('div');
+            accordionDiv.classList.add('accordion');
+            accordionDiv.id = 'accordion' + (i + 1);
+            var classDiv = document.createElement('div');
+            classDiv.classList.add('class-performance');
+            var className = document.createElement('h5');
+            className.textContent += `Turma ${response.data[i].name}`;
+            var buttons = document.createElement('div');
+            buttons.classList.add('buttons')
+            var btnSubmit = document.createElement('a');
+            btnSubmit.type = 'button';
+            btnSubmit.id = 'btnSubmit';
+            btnSubmit.innerHTML = `<button>Avaliar</button>`;
+            var btnExpand = document.createElement('div');
+            btnExpand.innerHTML = `
+                <span class="material-symbols-outlined expand-button" id="expand${i + 1}" data-id=${i + 1}>
+                    expand_more
+                </span>`;
 
-//    var countStudents
+            accordionDiv.style.backgroundColor = colorPalette[colorIndex];
+            colorIndex = (colorIndex + 1) % colorPalette.length;
 
-// //    if (selectedRating == null) {
-// //       // selectedRating = 0;
-// //       // await evaluateClass(studentId,0,evaluation_date);
-// //       await teachersStudents(classe);
-// //    } else {
-// //       // await evaluateClass(studentId,selectedRating.value,evaluateClass)
-// //       await teachersStudents(classe);
+            buttons.appendChild(btnSubmit);
+            buttons.appendChild(btnExpand);
+            classDiv.appendChild(className);
+            classDiv.appendChild(buttons);
+            accordionDiv.appendChild(classDiv);
 
-// //    }
-// })
+            const studentsContainer = document.createElement('div');
+            studentsContainer.classList.add('students-container');
+            accordionDiv.appendChild(studentsContainer);
+            classesSchedule?.appendChild(accordionDiv);
 
+            document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function (event: MouseEvent) {
+                //  
+                const id = (event.target as HTMLSpanElement).dataset.id;
+                const accordionDiv = document.getElementById('accordion' + id);
+                if (accordionDiv?.classList.contains('active')) {
+                    accordionDiv.classList.remove('active');
+
+                } else {
+                    accordionDiv?.classList.toggle('active');
+                    await teachersStudents(response.data[i].id, studentsContainer);
+                }
+            });
+
+        }
+    } catch (error: any) {
+        console.log(error.message);
+    }
+}
+
+async function teachersStudents(classId: number, container: HTMLElement) {
+    try {
+        const response = await axios.post('http://localhost:3000/api/student/class', {
+            classId: classId
+        });
+        const students = response.data[0];
+        console.log(students);
+
+        container.innerHTML = '';
+        if (students == 0) {
+            console.log('ss');
+            var studentDiv = document.createElement('div');
+            studentDiv.classList.add('class-performance');
+            studentDiv.classList.add('d-flex');
+            studentDiv.classList.add('justify-content-center');
+            var studentName = document.createElement('h5');
+            studentName.textContent += (`NENHUM ALUNO CADASTRADO NA TURMA!`);
+            studentDiv.appendChild(studentName);
+            container?.appendChild(studentDiv);
+        }
+        students.forEach(async (student: any) => {
+            console.log(student);
+            var studentDiv = document.createElement('div');
+            studentDiv.classList.add('class-performance')
+            var studentName = document.createElement('h5');
+            studentName.textContent += (`${student.name} ${student.last_name}`);
+            var ratingDiv = document.createElement('div');
+            ratingDiv.classList.add('rating');
+            // console.log(student.name, student.last_name);
+
+            for (let i = 5; i > 0; i--) {
+                const input = `<input type="radio" id="star${i}-${student.id}" name="${student.id}" value="${i}">`;
+                const label = `<label for="star${i}-${student.id}"><i class="fas fa-star"></i></label>`;
+                ratingDiv.innerHTML += (input + label);
+            }
+
+            var average = await axios.get(`http://localhost:3000/api/evaluate/average/${student.id}`);
+            average = average.data;
+
+            var media = ``;
+            if (average == null || average == 0) {
+                media = `Nenhuma nota cadastrada!`
+            } else {
+                media = `${average.toFixed(2)} / 5`
+            }
+            console.log(average);
+            var studentAverage = document.createElement('p');
+            studentAverage.innerHTML += `<strong>Média do aluno:  ${media}</strong>`;
+
+            studentDiv.appendChild(studentName);
+            studentDiv.appendChild(studentAverage)
+            studentDiv.appendChild(ratingDiv);
+            container?.appendChild(studentDiv);
+        });
+
+        document.getElementById('btnSubmit')?.addEventListener('click', async function () {
+            const evaluations = students.map(async (student: any) => {
+
+                var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
+                // console.log(selectedRating.value);
+                // var note = Number(selectedRating.value);
+                // console.log(student.id);
+
+                var nowDate = new Date();
+                if (selectedRating == null) {
+                    // selectedRating = 0;
+                    await evaluateClass(student.id, 0, nowDate);
+                    // await teachersStudents(classe);
+                } else {
+                    await evaluateClass(student.id, Number(selectedRating.value), nowDate)
+                    // await teachersStudents(classe);
+                }
+            })
+            await Promise.all(evaluations);
+            alert("Avaliações criadas com sucesso!");
+        });
+    } catch (error: any) {
+        alert(error.message)
+    }
+}
 
 async function evaluateClass(studentId: number, note: number, evaluation_date: Date) {
-   try {
-      const response = await axios.post('http://localhost:3000/api/evaluation', {
-         student: studentId,
-         note: note,
-         evaluation_date: evaluation_date
-      })
-      return 
-   } catch (error) {
-
-   }
+    try {
+        const response = await axios.post('http://localhost:3000/api/evaluation', {
+            student: studentId,
+            note: note,
+            evaluation_date: evaluation_date
+        });
+        console.log(response);
+        return;
+    } catch (error: any) {
+        throw new Error(error.message);
+    }
 }

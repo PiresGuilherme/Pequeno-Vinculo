@@ -1,8 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, ManyToMany, JoinTable, OneToMany } from "typeorm"
 import { Class } from "./Class"
 import { Student } from "./Student"
+import { Notification } from "./Notification"
 
-export type type_user = "RESPONSIBLE"|"TEACHER"|"COORDINATOR"
+export type type_user = "RESPONSIBLE" | "TEACHER" | "COORDINATOR"
 
 
 @Entity()
@@ -27,7 +28,7 @@ export class User {
     phone_number: number
 
     @Column()
-    address_coutry: string
+    address_country: string
 
     @Column()
     address_city: string
@@ -44,7 +45,7 @@ export class User {
     @Column()
     postal_code: number
 
-    @Column()
+    @Column({ type: "numeric" })
     document: number
 
     @Column()
@@ -53,19 +54,25 @@ export class User {
     @Column()
     password: string
 
-    @Column({type:'date'})
+    @Column({ type: 'date' })
     birth_date: Date
 
     @Column({
-        type:"enum",
-        enum:["RESPONSIBLE","TEACHER","COORDINATOR"],
+        type: "enum",
+        enum: ["RESPONSIBLE", "TEACHER", "COORDINATOR"],
     })
-    type_user : type_user
+    type_user: type_user
 
     @OneToMany(() => Class, (classe) => classe.user)
-    class : Class
+    class: Class
+
+    @OneToMany(() => Notification, notification => notification.user)
+    notification : Notification;
 
     @ManyToMany(() => Student, student => student.user)
     @JoinTable()
-    student : Student[];
+    student: Student[];
+
+
 }
+

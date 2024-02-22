@@ -1,15 +1,42 @@
 import { AppDataSource } from "../data-source";
 import { Evaluation } from "../entity/Evaluation";
 
-const evaluationRepository = AppDataSource.getRepository(Evaluation);
+// const evaluationRepository = AppDataSource.getRepository(Evaluation);
 export class EvaluationServices {
-    getAllEvaluations() { return evaluationRepository.find(); }
+    getAllEvaluations() {
+        const evaluationRepository = AppDataSource.getRepository(Evaluation);
+        return evaluationRepository.find();
+    }
 
-    newEvaluation(newEvaluation) {
-        evaluationRepository.save(newEvaluation)
+    async newEvaluation(newEvaluation) {
+        const evaluationRepository = AppDataSource.getRepository(Evaluation);
+        var valid = false
+        const exist = await evaluationRepository.find({
+            relations: {
+                student: true
+            },
+            where: {
+                student: { id: newEvaluation.student.id }
+            }
+        })
+        
+        exist.forEach(evaluate => {
+            if (evaluate.evaluation_date == newEvaluation.student.id) {
+                valid = true;
+            }
+        })
+        
+        if (!valid) {
+            return evaluationRepository.save(newEvaluation)
+        }
+        else {
+            throw new Error("Avaliação já foi feita na data de hoje.")
+        }
     }
 
     findStudentEvaluations(studentId) {
+        const evaluationRepository = AppDataSource.getRepository(Evaluation);
+
         return evaluationRepository.find({
             relations: {
                 student: true
@@ -19,17 +46,22 @@ export class EvaluationServices {
             }
         })
     }
-    averageEvaluations(evaluation_date) {
-        let evaluations = evaluationRepository.findAndCount({
+    async averageEvaluations(studentId) {
+        const evaluationRepository = AppDataSource.getRepository(Evaluation);
+        
+        const evaluations = await evaluationRepository.find({
+            relations: {
+                student: true
+            },
             where: {
-                evaluation_date: evaluation_date
+                student: { id: studentId }
             }
         })
-        // evaluations.then(evaluate => {
-        //     // console.log(evaluate);
-        // }
-        // )
-        return evaluations;
+        var totalNotes: number = evaluations.reduce((acc, evaluation) => acc + evaluation.note, 0)
+        const average = totalNotes / evaluations.length;
+        // console.log(average);
+        
+        return average;
     }
 }
 

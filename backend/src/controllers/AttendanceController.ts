@@ -28,7 +28,7 @@ export class AttendanceController{
         try {
             const attandanceServices = new AttendanceServices();
             const studentServices = new StudentServices();
-            const student = await studentServices.getStudent(req.body.user)
+            const student = await studentServices.getStudent(req.body.student)
             console.log(student);
             
             if(student == null){

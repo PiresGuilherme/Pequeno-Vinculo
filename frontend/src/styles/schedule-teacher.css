@@ -130,13 +130,13 @@ main {
 .class-schedule {
     display: flex;
     flex-direction: row;
-    background-color: var(--pink);
     height: 7vh;
     justify-content: space-between;
     padding-right: 2%;
     padding-left: 2%;
     align-items: center;
     border-radius: 10px;
+    margin-top: 1%;
 }
 
 .material-symbols-outlined {
@@ -156,10 +156,14 @@ main {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.modal-title {
+
+.modal-vw-title,
+.modal-title{
+
     font-size: 1.3em;
 }
 
+.modal-vw-content,
 .modal-content {
     background-color: var(--pink);
     margin: auto;
@@ -169,12 +173,16 @@ main {
     gap: 3%;
 }
 
-.modal-info {
+
+.modal-vw-info,
+.modal-info{
+
     display: flex;
     text-align: center;
     flex-direction: column;
 }
 
+.close-vw,
 .close {
     color: var(--body);
     float: right;
@@ -185,6 +193,7 @@ main {
     height: 24px;
 }
 
+.close-vw:hover,
 .close:hover,
 .close:focus {
     color: #000;
@@ -242,6 +251,17 @@ main {
 
 .add-reminder-button:hover {
     background-color: var(--hover-purple);
+}
+
+.schedule-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2%;
+}
+
+.accordion{
+     border-radius: 10px;
 }
 
 footer {
