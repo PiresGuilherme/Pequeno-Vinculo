@@ -1,9 +1,15 @@
 //@ts-ignore
 import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
+const token = localStorage.getItem('login');
+if (!token) {
+  window.location.href = "/frontend/src/pages/initial-login.html";
+}
+
 const buttonAddSchedule = document.querySelector('.add-reminder-button') as HTMLButtonElement;
 const classesJson = localStorage.getItem('classes');
 const divClassesSchedule = document.querySelector('.classes-schedule') as HTMLDivElement;
+
 
 if (classesJson) {
     const classes = JSON.parse(classesJson);
@@ -169,18 +175,13 @@ document.getElementById("user-pic")?.addEventListener("click", () => {
     }
 });
 
-
-// criar função de limpar o local storage e incluir o logout na media do css com 'hidden' 
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     var logout = document.getElementsByClassName("sub-menu-link") as  any;
-//     logout.addEventListener('click',  ()=> {
-//         localStorage.clear();
-//         window.location.href = "/frontend/src/pages/initial-login.html";
-
-//      });
-// })
-
-// document.getElementsByClassName("sub-menu-link")?.addEventListener("click", function Logout() {
-//     localStorage.clear();
-// })
+document.addEventListener("DOMContentLoaded", () => {
+   
+    const logoutLink = document.querySelector(".sub-menu-link") as HTMLAnchorElement;
+    logoutLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      localStorage.clear();
+      window.location.href = "/frontend/src/pages/initial-login.html";
+    });
+  });
+  
