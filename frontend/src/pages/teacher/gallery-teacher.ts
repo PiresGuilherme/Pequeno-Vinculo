@@ -157,15 +157,4 @@ async function postPhotos(description: string | undefined, classId: number | und
 }
 
 
-
-
-
-// const response = await axios.post('http://localhost:3000/api/class/teacher', {
-//     userId: user
-// });
-
-
-// if (classesJson) {
-//     const classes = JSON.parse(classesJson);
-
   
