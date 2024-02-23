@@ -95,7 +95,6 @@ async function notifications(userId: number) {
     try {
         const response = await axios.get(`${backend}/notification/user/${userId}`)
         const notifications = response.data
-        // console.log(notifications);
         const notificacoes = notifications.map((notification: any) => {
             const data = new Date(notification.notification_date);
             notification.notification_date = data;

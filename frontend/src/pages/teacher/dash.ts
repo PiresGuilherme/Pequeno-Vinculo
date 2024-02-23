@@ -16,7 +16,6 @@ async function teacherClasses(userId: number) {
         const response = await axios.post('http://localhost:3000/api/class/teacher', {
             userId: userId
         })
-        console.log(response);
 
         var classesCoin: Array<any> = [];
         await Promise.all(response.data.map(async (classe: any) => {
@@ -27,7 +26,6 @@ async function teacherClasses(userId: number) {
         }))
 
         classesCoin.sort((a: any, b: any) => b[1] - a[1]);
-
         classesCoin.forEach((classeId: any, index: number) => {
             if (classeId[1] > 0) {
                 index++;
@@ -53,7 +51,6 @@ async function teacherClasses(userId: number) {
                 }  
             }
         });
-        
 
         const countClasses = response.data.length
         var countStudents = 0
@@ -62,9 +59,7 @@ async function teacherClasses(userId: number) {
             countStudents += count.data[1];
 
         }
-
         countClassesLine.textContent = countClasses.toString();
-
         countStudentsLine.textContent = countStudents.toString();
         localStorage.setItem('classes', JSON.stringify(response))
     } catch (error: any) {
@@ -83,21 +78,15 @@ async function teachersStudents(classId: number) {
 }
 async function birthdayStudents(classId: number) {
     try {
-        const response = await axios.get(`${backend}/student/birthday/class/${classId}`)
+        const response = await axios.get(`${backend}/student/birthday/class/${classId}`);
         const divbirthdays = document.querySelector('.last-info-birthdays');
-
         response.data.forEach((student: any) => {
-
             let divBests = document.createElement('div');
             divBests.classList.add('birthdays');
-
             let message = document.createElement('p');
-            message.innerHTML = `Hoje é aniversário do estudante : ${student.name} da turma ${student.classe.name}`
-
-
+            message.innerHTML = `Hoje é aniversário do estudante : ${student.name} da turma ${student.classe.name}`;
             divBests.appendChild(message);
-
-            divbirthdays?.appendChild(divBests)
+            divbirthdays?.appendChild(divBests);
         })
     } catch (error) {
         console.log(error);
@@ -106,12 +95,11 @@ async function birthdayStudents(classId: number) {
 }
 async function classTotalCoin(classId: number) {
     try {
-        const response = await axios.get(`${backend}/class/coins/${classId}`)
-        // console.log(response);
+        const response = await axios.get(`${backend}/class/coins/${classId}`);
         if (response.data == null) {
-            response.data = 0
-        }
-        return [classId, response.data]
+            response.data = 0;
+        };
+        return [classId, response.data];
     } catch (error) {
         console.log(error);
 
