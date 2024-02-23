@@ -12,4 +12,5 @@ router.post('/notification/user/verified',(req:Request, res:Response)=>{
     const notificationController = new NotificationController();
     notificationController.verify(req,res);
 })
+
 export  {router}

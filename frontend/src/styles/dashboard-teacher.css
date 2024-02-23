@@ -107,9 +107,20 @@ body {
     height: 32vh;
     margin-bottom: 1%;
 }
+.summary-best-classes{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    width: 41%;
+    height: 100%;
+    background-color: var(--background);
+    border-radius: 20px;
+    position: relative;
+    padding-top: 1%;
+}
 
 .summary-calendar,
-.summary-best-classes,
 .last-info-birthdays,
 .last-info-best-students {
     display: flex;
@@ -123,6 +134,38 @@ body {
     position: relative;
     padding-top: 1%;
 }
+
+
+.last-info-birthdays{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 41%;
+    height: 100%;
+    background-color: var(--background);
+    border-radius: 20px;
+    position: relative;
+    padding-top: 1%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.birthdays{
+    align-self: center;
+    width: 90%;
+    margin: 2% 5%;
+    border-radius: 25px;
+    padding: 0% 3%;
+    display: flex;
+    align-items: center;
+    background-color: var(--green);
+    /* overflow-y: auto; */
+}
+
+.birthdays p {
+    margin-bottom: 0px;
+}
+
 
 .best-student-one,
 .best-student-two,
@@ -212,3 +255,36 @@ footer {
         padding: 1%;
     }
 }
+
+.podium {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.podium-place {
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.gold {
+    background-color: gold;
+}
+
+.silver {
+    background-color: silver;
+}
+
+.bronze {
+    background-color: #cd7f32; /* bronze color */
+}
+
+.podium-place:nth-child(2) {
+    transform: translateY(-20px);
+}
+
+.podium-place:nth-child(3) {
+    transform: translateY(-40px);
+}
+

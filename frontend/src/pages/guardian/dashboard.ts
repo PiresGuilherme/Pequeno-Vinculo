@@ -95,17 +95,14 @@ async function notifications(userId: number) {
     try {
         const response = await axios.get(`${backend}/notification/user/${userId}`)
         const notifications = response.data
-        // console.log(notifications);
         const notificacoes = notifications.map((notification: any) => {
             const data = new Date(notification.notification_date);
             notification.notification_date = data;
             return notification;
         });
         notificacoes.sort((a: any, b: any) => b.notification_date - a.notification_date);
-        // console.log(notificacoes);
         const divNotification = document.querySelector('.notification');
         notificacoes.forEach((notification: any) => {
-            // console.log(notification);
             if (!notification.verified) {
                 let divBests = document.createElement('div');
                 divBests.classList.add('notifications');
@@ -148,7 +145,7 @@ async function findLastestNotifications(childrenId: number) {
         const response = await axios.get(`http://localhost:3000/api/schedule/${childrenId}`)
         console.log(response);
 
-        return response;
+        return response.data;
     } catch (error) {
 
     }

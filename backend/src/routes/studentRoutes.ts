@@ -3,25 +3,32 @@ import { StudentController } from "../controllers/StudentController";
 
 
 const router = Router();
-let studentController = new StudentController()
 
-router.get('/student', (req: Request, res: Response) => {
-    studentController.getAllStudents(req, res);
+router.get('/student', async (req: Request, res: Response) => {
+    let studentController = new StudentController()
+    await studentController.getAllStudents(req, res);
 });
 
-router.get('/student/:id(\\d+)', (req: Request, res: Response) => {
-    studentController.getStudent(req, res);
+router.get('/student/birthday/class/:id(\\d+)', async (req: Request, res: Response) => {   
+    let studentController = new StudentController()
+    await studentController.getBirthdayStudent(req, res);
 });
 
-router.post('/student', (req: Request, res: Response) => {
-    studentController.postNewStudent(req, res)
+router.get('/student/:id(\\d+)', async (req: Request, res: Response) => {
+    let studentController = new StudentController()
+    await studentController.getStudent(req, res);
+});
+
+router.post('/student', async (req: Request, res: Response) => {
+    let studentController = new StudentController()
+    await studentController.postNewStudent(req, res)
 });
 
 
-router.post('/student/class', (req: Request, res: Response) => {
-    studentController.getSameClassStudents(req, res);
+router.post('/student/class', async (req: Request, res: Response) => {
+    let studentController = new StudentController()
+    await studentController.getSameClassStudents(req, res);
 });
-
 
 
 export { router };
