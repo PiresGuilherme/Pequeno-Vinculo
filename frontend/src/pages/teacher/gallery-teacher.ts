@@ -56,11 +56,10 @@ if (userJson) {
         var addButton = document.getElementById(`add-button/${i + 1}`) as HTMLElement;
 
         addButton.onclick = function () {
-            console.log("clicou");
             let inputClass: HTMLInputElement | null = document.querySelector(".input-class");
             if (inputClass !== null) {
                 modal.style.display = "block";
-                inputClass.value = `${classes.data[i].name}`;
+                inputClass.value = `${classes.data[i].id}-${classes.data[i].name}`;
             } else {
                 console.error("Input element not found");
             }
@@ -89,14 +88,9 @@ if (userJson) {
 
 
 buttonAddPhoto.addEventListener('click', async () => {
-    const classElement: HTMLInputElement | null = document.querySelector('.input-class');
+    const classElement: HTMLInputElement = document.querySelector('.input-class')!;
     const messageElement: HTMLTextAreaElement | null = document.querySelector('.input-message');
     const pictureElement: HTMLInputElement | null = document.querySelector('#fileInput');
-
-    if (!Number(classElement?.value)) {
-        alert('Informe o ID da turma!')
-        return;
-    }
 
     if (messageElement?.value === '') {
         alert('Informe a legenda da foto!')
@@ -108,7 +102,9 @@ buttonAddPhoto.addEventListener('click', async () => {
         return;
     }
 
-    const classId = Number(classElement?.value);
+    let classId = Number((classElement.value).split('-', 1));
+    console.log(classId);
+    
     const description = messageElement?.value;
     const picture = pictureElement?.files?.[0];
 

@@ -52,31 +52,26 @@ async function teacherClasses(userId: number) {
             classDiv.appendChild(buttons);
             accordionDiv.appendChild(classDiv);
 
-            // const totalStudents = document.createElement('p');
-
-
             const studentsContainer = document.createElement('div');
             studentsContainer.classList.add('students-container');
             accordionDiv.appendChild(studentsContainer);
             classesAttendance?.appendChild(accordionDiv);
 
-
-
-
             document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function (event: MouseEvent) {
-                //  
                 const id = (event.target as HTMLSpanElement).dataset.id;
                 const accordionDiv = document.getElementById('accordion' + id);
                 if (accordionDiv?.classList.contains('active')) {
                     accordionDiv.classList.remove('active');
-
+                    const totalStudentsElement = accordionDiv?.querySelector('.total-class-coins');
+                    if (totalStudentsElement) {
+                        totalStudentsElement.remove();
+                    }
                 } else {
                     accordionDiv?.classList.toggle('active');
                     await teachersStudentsAttendance(response.data[i].id, studentsContainer, 'accordion' + (i + 1), 'btnSubmit' + (i + 1));
                 }
             });
-
-
+            
         }
     } catch (error: any) {
         console.log(error.message);
