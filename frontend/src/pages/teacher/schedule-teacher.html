@@ -45,10 +45,31 @@
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Chat</a>
                     </li>
+                    <li class="nav-item">
+                        <div class="sub-menu-link">
+                            <a class="nav-link" id="user-pic-text"
+                                href="/frontend/src/pages/initial-login.html">Sair</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
+            <div id="user-pic" class="user-pic">
+                <img src="/frontend/assets/profile-userLogin-green.svg" width="38px" height="38px">
+                <img src="/frontend/assets/down-icon.svg" width="30px" height="30px">
+            </div>
+            <div class="sub-menu-wrap" id="sub-menu">
+                <div class="sub-menu">
+                    <a href="/frontend/src/pages/initial-login.html" class="sub-menu-link">
+                        <img src="/frontend/assets/logout-green.svg" width="30px" height="30px">
+                        <p>Sair</p>
+                        <span></span>
+                    </a>
+                </div>
+            </div>
+
         </div>
     </nav>
+
     <main>
         <div class="page-title">
             <h4>Agenda</h4>
@@ -62,7 +83,7 @@
                     </div>
                     <p class="modal-title">Adicionar lembrete</p>
                 </div>
-                <input type="text" placeholder="Selecionar turma ou aluno" class="input-class">
+                <input type="text" placeholder="Selecionar turma ou aluno" class="input-class" id="input-class" disabled>
                 <input type="text" placeholder="Título" class="input-title">
                 <div class="reminder-content">
                     <textarea type="text" placeholder="Insira a mensagem" class="input-message"></textarea>
@@ -74,6 +95,21 @@
                     </label>
                 </div>
                 <button class="add-reminder-button">Adicionar</button>
+            </div>
+        </div>
+        <div id="viewModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-info">
+                    <div>
+                        <span class="close-vw">&times;</span>
+                    </div>
+                    <p class="modal-title">Vizualizando lembrete</p>
+                </div>
+                <input type="text" placeholder="Selecionar turma ou aluno" class="input-class" id="input-vw-class" disabled>
+                <input type="text" placeholder="Título" class="input-title" id="input-vw-title" disabled>
+                <div class="reminder-content">
+                    <textarea type="text" placeholder="Insira a mensagem" class="input-message" id="input-vw-message" disabled></textarea>
+                </div>
             </div>
         </div>
     </main>
