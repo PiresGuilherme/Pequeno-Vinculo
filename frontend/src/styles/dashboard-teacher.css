@@ -44,14 +44,13 @@ body {
 }
 
 .basic-info-classes,
-.basic-info-students,
-.basic-info-guardians {
+.basic-info-students {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    width: 25%;
+    width: 40%;
     height: 100%;
     background-color: var(--background);
     border-radius: 10px;
@@ -192,12 +191,15 @@ body {
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--green);
     height: 6vh;
-    width: 100%;
 }
 
 @media screen and (max-width: 768px) {

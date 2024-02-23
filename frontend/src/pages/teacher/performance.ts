@@ -33,7 +33,7 @@ async function teacherClasses(userId: number) {
             buttons.classList.add('buttons')
             var btnSubmit = document.createElement('a');
             btnSubmit.type = 'button';
-            btnSubmit.id = 'btnSubmit';
+            btnSubmit.id = 'btnSubmit' + (i + 1);
             btnSubmit.innerHTML = `<button>Avaliar</button>`;
             var btnExpand = document.createElement('div');
             btnExpand.innerHTML = `
@@ -64,7 +64,7 @@ async function teacherClasses(userId: number) {
 
                 } else {
                     accordionDiv?.classList.toggle('active');
-                    await teachersStudents(response.data[i].id, studentsContainer);
+                    await teachersStudents(response.data[i].id, studentsContainer, 'btnSubmit' + (i + 1));
                 }
             });
 
@@ -74,7 +74,7 @@ async function teacherClasses(userId: number) {
     }
 }
 
-async function teachersStudents(classId: number, container: HTMLElement) {
+async function teachersStudents(classId: number, container: HTMLElement, submitId: any) {
     try {
         const response = await axios.post('http://localhost:3000/api/student/class', {
             classId: classId
@@ -129,7 +129,7 @@ async function teachersStudents(classId: number, container: HTMLElement) {
             container?.appendChild(studentDiv);
         });
 
-        document.getElementById('btnSubmit')?.addEventListener('click', async function () {
+        document.getElementById(submitId)?.addEventListener('click', async function () {
             const evaluations = students.map(async (student: any) => {
 
                 var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;

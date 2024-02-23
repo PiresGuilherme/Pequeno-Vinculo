@@ -36,7 +36,7 @@ async function teacherClasses(userId: number) {
             buttons.classList.add('buttons');
             var btnSubmit = document.createElement('a');
             btnSubmit.type = 'button';
-            btnSubmit.id = 'btnSubmit';
+            btnSubmit.id = 'btnSubmit' + (i + 1);
             btnSubmit.innerHTML = `<button>Enviar</button>`;
             var btnExpand = document.createElement('div');
             btnExpand.id = 'btnExpand';
@@ -72,7 +72,7 @@ async function teacherClasses(userId: number) {
 
                 } else {
                     accordionDiv?.classList.toggle('active');
-                    await teachersStudentsAttendance(response.data[i].id, studentsContainer, 'accordion' + (i + 1));
+                    await teachersStudentsAttendance(response.data[i].id, studentsContainer, 'accordion' + (i + 1), 'btnSubmit' + (i + 1));
                 }
             });
 
@@ -83,7 +83,7 @@ async function teacherClasses(userId: number) {
     }
 }
 
-async function teachersStudentsAttendance(classId: number, container: HTMLElement, accordionId: any) {
+async function teachersStudentsAttendance(classId: number, container: HTMLElement, accordionId: any, submitId: any) {
     try {
         const response = await axios.post('http://localhost:3000/api/student/class', {
             classId: classId
@@ -129,7 +129,7 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
         totalStudents.classList.add('total-class-coins')
         const accordionDiv = document.getElementById(accordionId);
         accordionDiv?.appendChild(totalStudents);
-        document.getElementById('btnSubmit')?.addEventListener('click', async function () {
+        document.getElementById(submitId)?.addEventListener('click', async function () {
             const evaluations = students.map(async (student: any) => {
 
                 const checkboxAttendance = document.getElementById(`switch-${student.id}`) as HTMLInputElement;
