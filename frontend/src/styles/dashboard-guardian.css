@@ -99,8 +99,8 @@ body {
 .last-info-children-evaluation,
 .last-info-calendar {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: center;
     width: 41%;
     height: 100%;
@@ -108,32 +108,34 @@ body {
     border-radius: 20px;
     position: relative;
     padding-top: 1%;
-
     overflow-x: auto;
-
     flex-wrap: wrap;
 }
 
 
-.best-children-one,
-.best-children-two,
-.best-children-three {
+.best-children-one {
     align-self: center;
     width: 25%;
     height: 85%;
     border-radius: 25px;
 }
 
-.best-children-one {
-    background-color: var(--green);
+#bests{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    margin-bottom: 3%;
+    justify-content: space-around;
 }
 
-.best-children-two {
-    background-color: var(--purple);
-}
-
-.best-children-three {
-    background-color: var(--pink);
+.best-children {
+    align-self: center;
+    width: 25%;
+    height: 100%;
+    border-radius: 25px;
+    justify-content: space-evenly;
 }
 
 footer {

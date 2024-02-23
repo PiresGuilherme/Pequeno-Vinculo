@@ -6,7 +6,8 @@ const backend = "http://localhost:3000/api"
 const userJson = localStorage.getItem('login');
 const children = document.getElementById('children') as HTMLDivElement;
 const bestChildrens = document.getElementById('bests') as HTMLDivElement;
-
+const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
+let colorIndex = 0;
 if (userJson) {
     const user = JSON.parse(userJson);
     findChildren(user.user.id);
@@ -39,7 +40,8 @@ async function findChildren(userId: number) {
 
                 divChildren.appendChild(link);
                 divChildren.appendChild(studentInfo);
-
+                divChildren.style.backgroundColor = colorPalette[colorIndex];
+                colorIndex = (colorIndex + 1) % colorPalette.length;
                 children.appendChild(divChildren);
 
                 // findLastestNotifications(student.id);
@@ -62,7 +64,7 @@ async function childrensPerformance(userId: number) {
         if (response.data) {
             response.data.forEach(async (student: any, index: number) => {
                 let divBests = document.createElement('div');
-                divBests.classList.add('best-children-one');
+                divBests.classList.add('best-children');
 
                 let studentInfo = document.createElement('p');
                 var average = await axios.get(`${backend}/evaluate/average/${student.id}`);
@@ -79,7 +81,8 @@ async function childrensPerformance(userId: number) {
                 <p> ${student.name}</p> <strong>Média:</strong> <p>${media}</p>`;
 
                 divBests.appendChild(studentInfo);
-
+                divBests.style.backgroundColor = colorPalette[colorIndex];
+                colorIndex = (colorIndex + 1) % colorPalette.length;
                 bestChildrens.appendChild(divBests);
 
             });
@@ -127,6 +130,8 @@ async function notifications(userId: number) {
                 divBests.appendChild(message);
                 divBests.appendChild(date);
                 divBests.appendChild(check);
+                divBests.style.backgroundColor = colorPalette[colorIndex];
+                colorIndex = (colorIndex + 1) % colorPalette.length;
                 divNotification?.appendChild(divBests)
                 return notification
             }
