@@ -92,11 +92,6 @@ body {
     color: var(--green);
 }
 
-.guardians-icon {
-    font-size: 3rem;
-    color: var(--pink);
-}
-
 .summary,
 .summary-last-info {
     display: flex;
@@ -270,8 +265,8 @@ footer {
     position: relative;
 }
 
-.gold {
-    background-color: gold;
+.gold{
+    background-color:  #e7bf3b;
 }
 
 .silver {
@@ -280,6 +275,12 @@ footer {
 
 .bronze {
     background-color: #cd7f32; /* bronze color */
+}
+
+.gold p,
+.silver p,
+.bronze p{
+    margin: 0px;
 }
 
 .podium-place:nth-child(2) {
