@@ -133,18 +133,10 @@ async function teachersStudents(classId: number, container: HTMLElement, submitI
             const evaluations = students.map(async (student: any) => {
 
                 var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
-                // console.log(selectedRating.value);
-                // var note = Number(selectedRating.value);
-                // console.log(student.id);
-
                 var nowDate = new Date();
                 if (selectedRating == null) {
-                    // selectedRating = 0;
-                    // await evaluateClass(student.id, 0, nowDate);
-                    // await teachersStudents(classe);
                 } else {
-                    await evaluateClass(student.id, Number(selectedRating.value), nowDate)
-                    // await teachersStudents(classe);
+                    await evaluateClass(student.id, Number(selectedRating.value), nowDate);
                 }
             })
             await Promise.all(evaluations);

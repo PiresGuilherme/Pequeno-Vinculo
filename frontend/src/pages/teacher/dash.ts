@@ -72,12 +72,12 @@ async function teacherClasses(userId: number) {
                 }
             }
         });
-
         const countClasses = response.data.length
         var countStudents = 0
         for (let i = 0; i < countClasses; i++) {
             let count = await teachersStudents(response.data[i].id);
             countStudents += count.data[1];
+
 
         }
         countClassesLine.textContent = countClasses.toString();
@@ -87,6 +87,7 @@ async function teacherClasses(userId: number) {
         console.log(error.message);
     }
 }
+
 async function teachersStudents(classId: number) {
     try {
         const response = await axios.post('http://localhost:3000/api/student/class', {
@@ -97,6 +98,7 @@ async function teachersStudents(classId: number) {
         console.log(error.message);
     }
 }
+
 async function birthdayStudents(classId: number) {
     try {
         const response = await axios.get(`${backend}/student/birthday/class/${classId}`);
@@ -114,6 +116,7 @@ async function birthdayStudents(classId: number) {
 
     }
 }
+
 async function classTotalCoin(classId: number) {
     try {
         const response = await axios.get(`${backend}/class/coins/${classId}`);
@@ -124,5 +127,13 @@ async function classTotalCoin(classId: number) {
     } catch (error) {
         console.log(error);
 
+    }
+}
+
+async function bestStudents(){
+    try {
+        
+    } catch (error) {
+        
     }
 }
