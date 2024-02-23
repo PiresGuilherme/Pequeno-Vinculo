@@ -7,6 +7,9 @@ const countStudentsLine = document.getElementById('countStudents') as HTMLParagr
 
 const userJson = localStorage.getItem('login');
 
+const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
+let colorIndex = 0;
+
 if (userJson) {
     const user = JSON.parse(userJson);
     teacherClasses(user.user.id)
@@ -36,19 +39,37 @@ async function teacherClasses(userId: number) {
                             let divBests = document.createElement('div');
                             divBests.classList.add('bestClasses');
                             if (index === 1) {
-                                divBests.classList.add('gold');
+                                var goldMedal = document.createElement('img');
+                                goldMedal.src = 'medal-gold.svg';
+                                goldMedal.classList.add('gold');
+                                goldMedal.style.width = '40px';
+                                goldMedal.style.height = '40px';
+                                divBests.appendChild(goldMedal);
                             } else if (index === 2) {
-                                divBests.classList.add('silver');
+                                var silverMedal = document.createElement('img');
+                                silverMedal.src = 'medal-silver.svg';
+                                silverMedal.classList.add('silver');
+                                silverMedal.style.width = '40px';
+                                silverMedal.style.height = '40px';
+                                divBests.appendChild(silverMedal);
                             } else if (index === 3) {
-                                divBests.classList.add('bronze');
+                                var bronzeMedal = document.createElement('img');
+                                bronzeMedal.src = 'medal-bronze.svg';
+                                bronzeMedal.classList.add('bronze');
+                                bronzeMedal.style.width = '40px';
+                                bronzeMedal.style.height = '40px';
+                                divBests.appendChild(bronzeMedal);
                             }
                             let message = document.createElement('p');
-                            message.innerHTML = `${index}ª turma : ${classe.name} com a média dos alunos : ${classeId[1]}`
+                            let media: number = classeId[1];
+                            message.innerHTML = `${index}ª turma: ${classe.name} com a média dos alunos: ${media.toFixed(1)}`;
+                            divBests.style.backgroundColor = colorPalette[colorIndex];
+                            colorIndex = (colorIndex + 1) % colorPalette.length;
                             divBests.appendChild(message);
                             divBestClasses?.appendChild(divBests);
                         }
                     })
-                }  
+                }
             }
         });
 

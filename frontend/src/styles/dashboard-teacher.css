@@ -1,9 +1,9 @@
 :root {
     --body: #f3f8fe;
     --orange: #FEC868;
-    --pink: #FF708D;
+    --pink: rgb(255, 112, 141);
     --purple: #DCC1FC;
-    --green: #A3E487;
+    --green: hsl(102, 63%, 71%);
     --background: #e7e7e7;
 
     --hover-pink: #e94e6d;
@@ -185,6 +185,39 @@ body {
     background-color: var(--pink);
 }
 
+.bestClasses{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.bestClasses p {
+    margin: 0px;
+}
+
+.podium {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.podium-place {
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.podium-place:nth-child(2) {
+    transform: translateY(-20px);
+}
+
+.podium-place:nth-child(3) {
+    transform: translateY(-40px);
+}
+
+
 footer {
     position: fixed;
     bottom: 0;
@@ -252,42 +285,3 @@ footer {
         padding: 1%;
     }
 }
-
-.podium {
-    display: flex;
-    justify-content: space-around;
-    align-items: flex-end;
-}
-
-.podium-place {
-    text-align: center;
-    flex: 1;
-    position: relative;
-}
-
-.gold{
-    background-color:  #e7bf3b;
-}
-
-.silver {
-    background-color: silver;
-}
-
-.bronze {
-    background-color: #cd7f32; /* bronze color */
-}
-
-.gold p,
-.silver p,
-.bronze p{
-    margin: 0px;
-}
-
-.podium-place:nth-child(2) {
-    transform: translateY(-20px);
-}
-
-.podium-place:nth-child(3) {
-    transform: translateY(-40px);
-}
-
