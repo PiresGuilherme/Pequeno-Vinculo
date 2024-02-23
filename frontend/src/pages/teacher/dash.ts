@@ -7,7 +7,7 @@ const countStudentsLine = document.getElementById('countStudents') as HTMLParagr
 
 const userJson = localStorage.getItem('login');
 
-const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
+const colorPalette = [  '#DCC1FC','#FF708D', '#A3E487','#FEC868'];
 let colorIndex = 0;
 
 if (userJson) {
