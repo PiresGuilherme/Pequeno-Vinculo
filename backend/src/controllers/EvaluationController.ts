@@ -34,7 +34,7 @@ export class EvaluationController {
 
             newEvaluation.note = req.body.note;
 
-            await studentServices.earnCoin(student.id,req.body.note)
+            await studentServices.earnCoin(student.id,req.body.note);
             await evaluationServices.newEvaluation(newEvaluation);
 
             const notificationController = new NotificationController();

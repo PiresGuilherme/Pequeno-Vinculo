@@ -16,28 +16,54 @@ async function teacherClasses(userId: number) {
         const response = await axios.post('http://localhost:3000/api/class/teacher', {
             userId: userId
         })
-        // console.log(response);
+        console.log(response);
 
-        response.data.forEach(async (classe: any) => {
-
+        var classesCoin: Array<any> = [];
+        await Promise.all(response.data.map(async (classe: any) => {
             birthdayStudents(classe.id);
-            classTotalCoin(classe.id)
-            // console.log(1);
+            const classCoin = await classTotalCoin(classe.id);
+            classesCoin.push(classCoin);
 
-        })
-        // console.log(birthdayStudents);
+        }))
+
+        classesCoin.sort((a: any, b: any) => b[1] - a[1]);
+
+        classesCoin.forEach((classeId: any, index: number) => {
+            if (classeId[1] > 0) {
+                index++;
+                if (index <= 5) {
+                    response.data.forEach(async (classe: any) => {
+                        if (classe.id == classeId[0]) {
+                            const divBestClasses = document.querySelector('.summary-best-classes');
+                            let divBests = document.createElement('div');
+                            divBests.classList.add('bestClasses');
+                            if (index === 1) {
+                                divBests.classList.add('gold');
+                            } else if (index === 2) {
+                                divBests.classList.add('silver');
+                            } else if (index === 3) {
+                                divBests.classList.add('bronze');
+                            }
+                            let message = document.createElement('p');
+                            message.innerHTML = `${index}ª turma : ${classe.name} com a média dos alunos : ${classeId[1]}`
+                            divBests.appendChild(message);
+                            divBestClasses?.appendChild(divBests);
+                        }
+                    })
+                }  
+            }
+        });
+        
 
         const countClasses = response.data.length
         var countStudents = 0
         for (let i = 0; i < countClasses; i++) {
             let count = await teachersStudents(response.data[i].id);
             countStudents += count.data[1];
-            // console.log(response.data[i].id);
+
         }
-        // console.log(countStudents);
 
         countClassesLine.textContent = countClasses.toString();
-        // console.log(countClasses);
 
         countStudentsLine.textContent = countStudents.toString();
         localStorage.setItem('classes', JSON.stringify(response))
@@ -47,24 +73,18 @@ async function teacherClasses(userId: number) {
 }
 async function teachersStudents(classId: number) {
     try {
-        // console.log(classId);
         const response = await axios.post('http://localhost:3000/api/student/class', {
             classId: classId
         })
-        // console.log(response.data[1]);
         return response;
     } catch (error: any) {
         console.log(error.message);
     }
-
-
 }
 async function birthdayStudents(classId: number) {
     try {
         const response = await axios.get(`${backend}/student/birthday/class/${classId}`)
         const divbirthdays = document.querySelector('.last-info-birthdays');
-        // console.log(2);
-        // console.log(response);
 
         response.data.forEach((student: any) => {
 
@@ -85,10 +105,13 @@ async function birthdayStudents(classId: number) {
     }
 }
 async function classTotalCoin(classId: number) {
-    try {       
+    try {
         const response = await axios.get(`${backend}/class/coins/${classId}`)
-        console.log(response);
-        
+        // console.log(response);
+        if (response.data == null) {
+            response.data = 0
+        }
+        return [classId, response.data]
     } catch (error) {
         console.log(error);
 

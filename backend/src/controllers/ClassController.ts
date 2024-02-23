@@ -49,7 +49,8 @@ export class ClassController {
     async findBestClasses(req: Request, res: Response) {
         try {
             const studentServices = new StudentServices();
-            const response = await studentServices.getSameClassStudents(req.params.id)
+            const classId= req.params.id
+            const response = await studentServices.getSameClassStudents(classId)
             const students = response[0]
             const classTotalCoin = await students.reduce((accumulator, student) => {
                 return accumulator + student.coin;
