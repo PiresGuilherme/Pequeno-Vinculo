@@ -135,8 +135,6 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
     try {
         const schedules = await axios.get(`http://localhost:3000/api/schedule/${classId}`)
         if (schedules == null) {
-            console.log('l');
-
             return;
         }
         let data = schedules.data;      
@@ -225,7 +223,7 @@ async function postShedules(message: String | undefined, title: String | undefin
         if(!message){
             throw new Error('Informe a mensagem do lembrete!');
         }
-        
+
         const response = await axios.post('http://localhost:3000/api/schedule', {
             "message": message,
             "title": title,

@@ -12,18 +12,15 @@ const userJson = localStorage.getItem('login');
 
 if (userJson) {
     const user = JSON.parse(userJson);
-    console.log(user.user.id);
 
     const response = await axios.post('http://localhost:3000/api/class/teacher', {
         userId: user.user.id
     });
     const classes = response;
-    console.log(classes.data);
 
     for (let i = 0; i < classes.data.length; i++) {
         let oneClass = document.createElement('div');
         oneClass.classList.add('class-gallery');
-        console.log(classes.data[i].id);
         oneClass.innerHTML = `
      <h5>Agenda ${classes.data[i].name}</h5>
      <div>
@@ -40,7 +37,6 @@ if (userJson) {
         divClassesGallery.appendChild(oneClass);
 
         document.getElementById(`${classes.data[i].id}`)?.addEventListener('click', async function (event: MouseEvent) {
-            console.log(classes.data.id);
             window.location.href = `${frontend}/teacher/gallery-dashboard-teacher.html?id=${classes.data[i].id}`
         });
 

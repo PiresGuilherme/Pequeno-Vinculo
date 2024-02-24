@@ -24,14 +24,7 @@ export class SessionController {
           
           findUser.password = undefined;
 
-          let token = jwt.sign({ userId: findUser.id, }, SECRET_KEY )
-
-          console.log({
-            "token": `Bearer ${token}`,
-            "user": findUser
-        });
-          
-
+          let token = jwt.sign({ userId: findUser.id, }, SECRET_KEY )        
           return res.json({
             "token": `Bearer ${token}`,
             "user": findUser

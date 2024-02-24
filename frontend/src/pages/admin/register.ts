@@ -30,21 +30,6 @@ btnRegister?.addEventListener('click', () => {
         areaCode = parseInt(telephone.value.substring(0, 2));
         phoneNumber = parseInt(telephone.value.substring(2));
     }
-// console.log(birthdate.value);
-//     console.log(name.value);
-//     console.log(lastName.value);
-//     console.log(street.value);
-//     console.log(adressNumber.value);
-//     console.log(neighborhood.value);
-//     console.log(city.value);
-//     console.log(adressComplement.value);
-//     console.log(postalcode.value);
-    console.log(country.value);
-//     console.log(birthdate.value);
-//     console.log(cpf.value);
-//     console.log(telephone.value);
-//     console.log(email.value);
-//     console.log(password.value);
     
     var user = {
         name: name.value, 
@@ -63,22 +48,16 @@ btnRegister?.addEventListener('click', () => {
         password: password.value,
         birth_date: birthdate.value,
         type_user: "TEACHER"
-        // address_number: addressNumber.value,
     }
-    console.log(user);
     
     registerUser(user);
-    // registerUser(user);
 })
 
 async function registerUser(user:object){
-    try {
-        console.log(user);
-        
+    try {        
         const response = await axios.post(`http://localhost:3000/api/user`,{
             user:user
         })
-        console.log(response);
         
     } catch (error) {
         console.log(error);

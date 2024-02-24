@@ -24,7 +24,6 @@ export class FileController {
  
             const fileService = new fileServices();
             const files = await fileService.getClassFiles(Number(req.params.id));
-            console.log(files);
             if (!files) {
                 return res.status(404).json("Não foi encontrado nenhuma imagem desta turma")
             }
@@ -42,16 +41,12 @@ export class FileController {
             if(!classe){
                 return Error("Classe não encontrada!")
             }
-            // console.log(req.file);
             const studentServices = new StudentServices();
-            const students = await studentServices.getSameClassStudents(classe.id)
-            console.log(students);
-            
+            const students = await studentServices.getSameClassStudents(classe.id)            
             students[0].forEach(async(student)=>{
                 const notificationController = new NotificationController();
                 await notificationController.postNotification(student, `Postaram uma nova foto na turma do estudante: ${student.name}`)
             })
-            // console.log(req.body);
             var newPicture : File = {
                 fieldname : req.file.fieldname,
                 originalname : req.file.originalname,

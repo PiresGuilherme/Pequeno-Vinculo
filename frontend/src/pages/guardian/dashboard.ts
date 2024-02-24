@@ -18,7 +18,6 @@ if (userJson) {
 async function findChildren(userId: number) {
     try {
         const response = await axios.get(`${backend}/user/children/${userId}`);
-        console.log(response.data);
 
 
         if (response.data) {
@@ -42,11 +41,8 @@ async function findChildren(userId: number) {
                 divChildren.style.backgroundColor = colorPalette[colorIndex];
                 colorIndex = (colorIndex + 1) % colorPalette.length;
                 children.appendChild(divChildren);
-
             });
-        } else {
-            console.log('Nenhum estudante encontrado.');
-        }
+        } 
     } catch (error: any) {
         console.error('sa:', error.message);
     }
@@ -58,7 +54,6 @@ async function childrensPerformance(userId: number) {
     try {
         const response = await axios.get(`${backend}/user/children/${userId}`);
 
-        // console.log(response);
         if (response.data) {
             response.data.forEach(async (student: any, index: number) => {
                 let link = document.createElement('a');
@@ -88,9 +83,7 @@ async function childrensPerformance(userId: number) {
                 bestChildrens.appendChild(divBests);
 
             });
-        } else {
-            // console.log('Nenhum estudante encontrado.');
-        }
+        } 
     } catch (error: any) {
         console.error('sa:', error.message);
     }

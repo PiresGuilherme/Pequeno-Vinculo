@@ -7,7 +7,7 @@ const countStudentsLine = document.getElementById('countStudents') as HTMLParagr
 
 const userJson = localStorage.getItem('login');
 
-const colorPalette = [  '#DCC1FC','#FF708D','#FEC868', '#A3E487'];
+const colorPalette = ['#DCC1FC', '#FF708D', '#FEC868', '#A3E487'];
 let colorIndex = 0;
 
 if (userJson) {
@@ -21,13 +21,35 @@ async function teacherClasses(userId: number) {
         })
 
         var classesCoin: Array<any> = [];
+        var bestsStudents: Array<any> = [];
         await Promise.all(response.data.map(async (classe: any) => {
             birthdayStudents(classe.id);
             const classCoin = await classTotalCoin(classe.id);
             classesCoin.push(classCoin);
-
+            const bestStudent = await bestStudents(classe.id);
+            bestsStudents.push(bestStudent);
         }))
+        bestsStudents.sort((a: any, b: any) => b.coin - a.coin)
+        const divBestStudents = document.querySelector('.last-info-best-students') as HTMLElement
+        bestsStudents.forEach(async (student: any, index: number) => {
+            if (student.coin > 0) {
+                index++;
+                if (index <= 5) {
 
+                    let divBests = document.createElement('div');
+                    divBests.classList.add('best-students');
+    
+                    let studentInfo = document.createElement('p');
+                    studentInfo.innerHTML = `<strong>Nome:</strong>
+                    <p> ${student.name}</p> <strong>Total de moedas:</strong> <p>${student.coin}</p>`;
+
+                    divBests.appendChild(studentInfo);
+                    divBests.style.backgroundColor = colorPalette[colorIndex];
+                    colorIndex = (colorIndex + 1) % colorPalette.length;
+                    divBestStudents.appendChild(divBests);
+                }
+            }
+        })
         classesCoin.sort((a: any, b: any) => b[1] - a[1]);
         classesCoin.forEach((classeId: any, index: number) => {
             if (classeId[1] > 0) {
@@ -113,7 +135,6 @@ async function birthdayStudents(classId: number) {
         })
     } catch (error) {
         console.log(error);
-
     }
 }
 
@@ -126,14 +147,15 @@ async function classTotalCoin(classId: number) {
         return [classId, response.data];
     } catch (error) {
         console.log(error);
-
     }
 }
 
-async function bestStudents(){
+async function bestStudents(classId: number) {
     try {
-        
+        const response = await axios.get(`${backend}/class/${classId}/best/student`);
+        // console.log(response);
+        return response.data
     } catch (error) {
-        
+
     }
 }
