@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/frontend/src/styles/performance-teacher.css">
-    <script type="module" src="../../../build/pages/teacher/performance.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="module" src="../../../build/pages/teacher/performance.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <title>Desempenho</title>
-</head>
+</head> 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary" id="navbar">
         <div class="container-fluid">
@@ -25,7 +25,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="dashboard-teacher.html">Home</a>
                     </li>
@@ -39,15 +39,36 @@
                         <a class="nav-link" href="schedule-teacher.html">Agenda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Galeria</a>
+                        <a class="nav-link" href="gallery-teacher.html">Galeria</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Chat</a>
                     </li>
+                    <li class="nav-item">
+                        <div class="sub-menu-link">
+                            <a class="nav-link" id="user-pic-text"
+                                href="/frontend/src/pages/initial-login.html">Sair</a>
+                        </div>
+                    </li>
                 </ul>
+            </div>
+            <div id="user-pic" class="user-pic">
+                <img src="/frontend/assets/profile-userLogin-green.svg" width="38px" height="38px">
+                <img src="/frontend/assets/down-icon.svg" width="30px" height="30px">
+            </div>
+            <div class="sub-menu-wrap" id="sub-menu">
+                <div class="sub-menu">
+                    <a href="/frontend/src/pages/initial-login.html" class="sub-menu-link">
+                        <img src="/frontend/assets/logout-green.svg" width="30px" height="30px">
+                        <a class="nav-link" id="logout-button" href="/frontend/src/pages/initial-login.html">Sair</a>
+                        <span></span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
+
+    
     <main>
         <div class="page-title">
             <h4>Avaliar</h4>

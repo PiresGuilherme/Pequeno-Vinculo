@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandstander&family=Noto+Sans+Mono&display=swap');
+
 :root {
     --body: #f3f8fe;
     --orange: #FEC868;
@@ -27,7 +29,66 @@ body {
 #navbar{
     padding: 0px;
 }
+.sub-menu-wrap {
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 220px;
+    max-height: 50vh;
+    overflow: hidden;
+    transition: all 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
 
+#user-pic-text {
+    visibility: hidden;
+}
+
+.sub-menu-wrap.open-menu {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    z-index: 100;
+}
+
+.sub-menu {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 2vh;
+    margin: 2vh;
+    border-radius: 10%;
+    z-index: 100;
+    border:0.2vh solid #e4e4e4;
+}
+
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ae7deb;
+    margin: 1vh 0;
+    z-index: 100;
+}
+
+.sub-menu-link p {
+    flex-grow: 1;
+    height: 2vh;
+    z-index: 100;
+}
+
+.sub-menu-link img {
+    width: 5vw;
+    margin-right: 2vw;
+    z-index: 100;
+}
+
+.sub-menu-link span {
+    font-size: 2vh;
+    transition: transform 0.5s;
+    z-index: 100;
+}
 .container-fluid{
     background-color:#DCC1FC;
     border-color: 10px solid #DCC1FC;
@@ -239,7 +300,14 @@ footer {
         font-size: 1rem;
         ;
     }
+    .sub-menu-link div,
+    #user-pic {
+        display: none;
+    }
 
+    #user-pic-text {
+        visibility: visible;
+    }
     .basic-info {
         flex-direction: column;
         height: auto;
@@ -285,3 +353,50 @@ footer {
         padding: 1%;
     }
 }
+
+
+@media screen and (min-width: 769px) and (max-width: 991px) {
+
+    .sub-menu-link div,
+    #user-pic {
+        display: none;
+    }
+
+    #user-pic-text {
+        visibility: visible;
+    }
+
+}
+
+.podium {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.podium-place {
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.gold {
+    background-color: gold;
+}
+
+.silver {
+    background-color: silver;
+}
+
+.bronze {
+    background-color: #cd7f32; /* bronze color */
+}
+
+.podium-place:nth-child(2) {
+    transform: translateY(-20px);
+}
+
+.podium-place:nth-child(3) {
+    transform: translateY(-40px);
+}
+

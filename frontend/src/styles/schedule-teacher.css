@@ -28,29 +28,6 @@ body {
 
 #navbar {
     padding: 0px;
-    /* background: #e0e0e0;
-    box-shadow: 22px 22px 44px #bebebe,
-        -22px -22px 22px #ffffff; */
-    /* font-family: "Noto Sans Mono", monospace; */
-}
-
-.page-title {
-    animation: animation-title 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-}
-
-@keyframes animation-title {
-    0% {
-        letter-spacing: -0.5em;
-        opacity: 0;
-    }
-
-    40% {
-        opacity: 0.6;
-    }
-
-    100% {
-        opacity: 1;
-    }
 }
 
 .sub-menu-wrap {
@@ -76,6 +53,8 @@ body {
 }
 
 .sub-menu {
+    display: flex;
+    align-items: center;
     background: #fff;
     padding: 2vh;
     margin: 2vh;
@@ -168,7 +147,7 @@ main {
 
 
 .modal-vw-title,
-.modal-title{
+.modal-title {
 
     font-size: 1.3em;
 }
@@ -185,7 +164,7 @@ main {
 
 
 .modal-vw-info,
-.modal-info{
+.modal-info {
 
     display: flex;
     text-align: center;
@@ -263,15 +242,15 @@ main {
     background-color: var(--hover-purple);
 }
 
-.schedule-item{
+.schedule-item {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 2%;
 }
 
-.accordion{
-     border-radius: 10px;
+.accordion {
+    border-radius: 10px;
 }
 
 footer {
@@ -313,6 +292,18 @@ footer {
         text-align: center;
         font-size: 14px;
         padding: 1%;
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 991px) {
+
+    .sub-menu-link div,
+    #user-pic {
+        display: none;
+    }
+
+    #user-pic-text {
+        visibility: visible;
     }
 
 }

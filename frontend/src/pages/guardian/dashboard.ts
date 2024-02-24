@@ -1,3 +1,8 @@
+const token = localStorage.getItem('login');
+if (!token) {
+  window.location.href = "/frontend/src/pages/initial-login.html";
+}
+
 //@ts-ignore
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 

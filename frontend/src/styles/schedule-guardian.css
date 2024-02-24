@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Grandstander&family=Noto+Sans+Mono&display=swap');
+
 :root {
     --body: #f3f8fe;
     --orange: #FEC868;
@@ -32,16 +34,66 @@ nav {
     padding: 0px;
 }
 
+.sub-menu-wrap {
+    position: absolute;
+    top: 100%;
+    right: 0%;
+    width: 220px;
+    max-height: 50vh;
+    overflow: hidden;
+    transition: all 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+#user-pic-text {
+    visibility: hidden;
+}
+
+.sub-menu-wrap.open-menu {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.sub-menu {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    padding: 2vh;
+    margin: 2vh;
+    border-radius: 10%;
+}
+
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ae7deb;
+    margin: 1vh 0;
+}
+
+.sub-menu-link p {
+    flex-grow: 1;
+    height: 2vh;
+}
+
+.sub-menu-link img {
+    width: 5vw;
+    margin-right: 2vw;
+}
+
+.sub-menu-link span {
+    font-size: 2vh;
+    transition: transform 0.5s;
+}
+
 .container-fluid{
     background-color:#DCC1FC;
     border-color: 10px solid #DCC1FC;
 
 }
 
-#dropdown-logout {
-
-    border-radius: 50px;
-}
 
 main {
     display: flex;
@@ -91,10 +143,32 @@ footer {
         padding: 2%;
     }
 
+    .sub-menu-link div,
+    #user-pic {
+        display: none;
+    }
+
+    #user-pic-text {
+        visibility: visible;
+    }
+
     footer {
         position: static;
         text-align: center;
         font-size: 14px;
         padding: 1%;
     }
+}
+
+@media screen and (min-width: 769px) and (max-width: 991px) {
+
+    .sub-menu-link div,
+    #user-pic {
+        display: none;
+    }
+
+    #user-pic-text {
+        visibility: visible;
+    }
+
 }
