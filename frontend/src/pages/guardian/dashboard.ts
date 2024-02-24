@@ -25,18 +25,12 @@ async function findChildren(userId: number) {
 
                 let divChildren = document.createElement('div');
                 divChildren.classList.add('best-children-one');
-                let link = document.createElement('a');
                 let studentInfo = document.createElement('p');
-
-                link.href = `http://127.0.0.1:5500/frontend/src/pages/student/dashboard-student.html?id=${student.id}`
-
-                link.textContent = `Filho ${index + 1}`;
                 var turma = await axios.get(`${backend}/class/${student.classe.id}`);
                 turma = turma.data;
                 studentInfo.innerHTML = `<strong>Nome:</strong>
                 <p> ${student.name}</p> <strong>Turma:</strong> <p>${turma.name}</p>`;
 
-                divChildren.appendChild(link);
                 divChildren.appendChild(studentInfo);
                 divChildren.style.backgroundColor = colorPalette[colorIndex];
                 colorIndex = (colorIndex + 1) % colorPalette.length;
