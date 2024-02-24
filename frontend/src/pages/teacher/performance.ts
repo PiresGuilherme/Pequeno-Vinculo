@@ -7,7 +7,6 @@ if (!token) {
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
-console.log(classesSchedule);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
@@ -15,8 +14,6 @@ const userJson = localStorage.getItem('login');
 
 if (userJson) {
     const user = JSON.parse(userJson);
-    console.log(user.user.id);
-
     teacherClasses(user.user.id);
 }
 
@@ -38,7 +35,7 @@ async function teacherClasses(userId: number) {
             buttons.classList.add('buttons')
             var btnSubmit = document.createElement('a');
             btnSubmit.type = 'button';
-            btnSubmit.id = 'btnSubmit';
+            btnSubmit.id = 'btnSubmit' + (i + 1);
             btnSubmit.innerHTML = `<button>Avaliar</button>`;
             var btnExpand = document.createElement('div');
             btnExpand.innerHTML = `
@@ -69,7 +66,7 @@ async function teacherClasses(userId: number) {
 
                 } else {
                     accordionDiv?.classList.toggle('active');
-                    await teachersStudents(response.data[i].id, studentsContainer);
+                    await teachersStudents(response.data[i].id, studentsContainer, 'btnSubmit' + (i + 1));
                 }
             });
 
@@ -79,17 +76,15 @@ async function teacherClasses(userId: number) {
     }
 }
 
-async function teachersStudents(classId: number, container: HTMLElement) {
+async function teachersStudents(classId: number, container: HTMLElement, submitId: any) {
     try {
         const response = await axios.post('http://localhost:3000/api/student/class', {
             classId: classId
         });
         const students = response.data[0];
-        console.log(students);
 
         container.innerHTML = '';
         if (students == 0) {
-            console.log('ss');
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-performance');
             studentDiv.classList.add('d-flex');
@@ -100,14 +95,12 @@ async function teachersStudents(classId: number, container: HTMLElement) {
             container?.appendChild(studentDiv);
         }
         students.forEach(async (student: any) => {
-            console.log(student);
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-performance')
             var studentName = document.createElement('h5');
             studentName.textContent += (`${student.name} ${student.last_name}`);
             var ratingDiv = document.createElement('div');
             ratingDiv.classList.add('rating');
-            // console.log(student.name, student.last_name);
 
             for (let i = 5; i > 0; i--) {
                 const input = `<input type="radio" id="star${i}-${student.id}" name="${student.id}" value="${i}">`;
@@ -124,7 +117,6 @@ async function teachersStudents(classId: number, container: HTMLElement) {
             } else {
                 media = `${average.toFixed(2)} / 5`
             }
-            console.log(average);
             var studentAverage = document.createElement('p');
             studentAverage.innerHTML += `<strong>Média do aluno:  ${media}</strong>`;
 
@@ -134,22 +126,15 @@ async function teachersStudents(classId: number, container: HTMLElement) {
             container?.appendChild(studentDiv);
         });
 
-        document.getElementById('btnSubmit')?.addEventListener('click', async function () {
+        document.getElementById(submitId)?.addEventListener('click', async function () {
             const evaluations = students.map(async (student: any) => {
 
                 var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
-                // console.log(selectedRating.value);
-                // var note = Number(selectedRating.value);
-                // console.log(student.id);
-
                 var nowDate = new Date();
                 if (selectedRating == null) {
-                    // selectedRating = 0;
-                    // await evaluateClass(student.id, 0, nowDate);
-                    // await teachersStudents(classe);
+                    
                 } else {
-                    await evaluateClass(student.id, Number(selectedRating.value), nowDate)
-                    // await teachersStudents(classe);
+                    await evaluateClass(student.id, Number(selectedRating.value), nowDate);
                 }
             })
             await Promise.all(evaluations);
@@ -167,7 +152,6 @@ async function evaluateClass(studentId: number, note: number, evaluation_date: D
             note: note,
             evaluation_date: evaluation_date
         });
-        console.log(response);
         return;
     } catch (error: any) {
         throw new Error(error.message);

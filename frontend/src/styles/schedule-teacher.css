@@ -122,6 +122,16 @@ main {
     cursor: pointer
 }
 
+.notMarked {
+    transition: transform 0.3s;
+    transform: rotate(0deg); 
+}
+
+.accordion.active .notMarked {
+    transform: rotate(180deg);
+}
+
+
 .modal {
     display: none;
     position: fixed;

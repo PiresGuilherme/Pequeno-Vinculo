@@ -18,18 +18,15 @@ const userJson = localStorage.getItem('login');
 
 if (userJson) {
     const user = JSON.parse(userJson);
-    console.log(user.user.id);
 
     const response = await axios.post('http://localhost:3000/api/class/teacher', {
         userId: user.user.id
     });
     const classes = response;
-    console.log(classes.data);
 
     for (let i = 0; i < classes.data.length; i++) {
         let oneClass = document.createElement('div');
         oneClass.classList.add('class-gallery');
-        console.log(classes.data[i].id);
         oneClass.innerHTML = `
      <h5>Agenda ${classes.data[i].name}</h5>
      <div>
@@ -46,7 +43,6 @@ if (userJson) {
         divClassesGallery.appendChild(oneClass);
 
         document.getElementById(`${classes.data[i].id}`)?.addEventListener('click', async function (event: MouseEvent) {
-            console.log(classes.data.id);
             window.location.href = `${frontend}/teacher/gallery-dashboard-teacher.html?id=${classes.data[i].id}`
         });
 
@@ -62,11 +58,10 @@ if (userJson) {
         var addButton = document.getElementById(`add-button/${i + 1}`) as HTMLElement;
 
         addButton.onclick = function () {
-            console.log("clicou");
             let inputClass: HTMLInputElement | null = document.querySelector(".input-class");
             if (inputClass !== null) {
                 modal.style.display = "block";
-                inputClass.value = `${classes.data[i].name}`;
+                inputClass.value = `${classes.data[i].id}-${classes.data[i].name}`;
             } else {
                 console.error("Input element not found");
             }
@@ -95,14 +90,9 @@ if (userJson) {
 
 
 buttonAddPhoto.addEventListener('click', async () => {
-    const classElement: HTMLInputElement | null = document.querySelector('.input-class');
+    const classElement: HTMLInputElement = document.querySelector('.input-class')!;
     const messageElement: HTMLTextAreaElement | null = document.querySelector('.input-message');
     const pictureElement: HTMLInputElement | null = document.querySelector('#fileInput');
-
-    if (!Number(classElement?.value)) {
-        alert('Informe o ID da turma!')
-        return;
-    }
 
     if (messageElement?.value === '') {
         alert('Informe a legenda da foto!')
@@ -114,7 +104,9 @@ buttonAddPhoto.addEventListener('click', async () => {
         return;
     }
 
-    const classId = Number(classElement?.value);
+    let classId = Number((classElement.value).split('-', 1));
+    console.log(classId);
+    
     const description = messageElement?.value;
     const picture = pictureElement?.files?.[0];
 

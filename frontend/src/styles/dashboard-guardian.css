@@ -143,6 +143,8 @@ body {
 }
 
 .notifications{
+    justify-content: space-evenly;
+    align-items: center;
     align-self: center;
     width: 90%;
     margin: 2% 5%;
@@ -150,7 +152,6 @@ body {
     padding: 0% 3%;
     display: flex;
     align-items: center;
-    background-color: var(--green);
     overflow-y: auto;
 }
 
@@ -158,11 +159,22 @@ body {
     margin-bottom: 0px;
 }
 
+.btnLink{
+    border: 0;
+    border-radius: 10px;
+    height: 15%;
+    width: 85%;
+}
+
+.btnLink:hover{
+    background-color: var(--background);
+}
+
 .last-info-children-evaluation,
 .last-info-calendar {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: space-between;
     text-align: center;
     width: 41%;
     height: 100%;
@@ -170,33 +182,53 @@ body {
     border-radius: 20px;
     position: relative;
     padding-top: 1%;
-
     overflow-x: auto;
-
     flex-wrap: wrap;
 }
 
 
-.best-children-one,
-.best-children-two,
-.best-children-three {
+.best-children-one {
     align-self: center;
     width: 25%;
     height: 85%;
     border-radius: 25px;
+    padding-top: 3%;
 }
 
-.best-children-one {
-    background-color: var(--green);
+#bests{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 80%;
+    margin-bottom: 3%;
+    justify-content: space-around;
 }
 
-.best-children-two {
-    background-color: var(--purple);
+.best-children {
+    align-self: center;
+    width: 25%;
+    height: 100%;
+    border-radius: 25px;
+    justify-content: space-evenly;
+    gap: 10%;
+    padding-top: 3%;
 }
 
-.best-children-three {
-    background-color: var(--pink);
+#btnCheck{
+    cursor: pointer;
+    border-radius: 5px;
+    border: 0;
+    background-color: transparent;
+    
 }
+
+#spanCheck{
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+}
+
 
 footer {
     position: fixed;

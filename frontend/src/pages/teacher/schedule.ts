@@ -135,8 +135,6 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
     try {
         const schedules = await axios.get(`http://localhost:3000/api/schedule/${classId}`)
         if (schedules == null) {
-            console.log('l');
-
             return;
         }
         let data = schedules.data;      
@@ -202,7 +200,7 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
     } catch (error: any) {
         if (error.response.status = 404) {
             const newSchedule = document.createElement('div');
-            newSchedule.classList.add('class-one-schedule', 'gray-background', 'p-1'); // 
+            newSchedule.classList.add('class-one-schedule', 'gray-background', 'd-flex', 'justify-content-center', 'p-1'); // 
             newSchedule.innerHTML = `
             <h5>Não há nenhum bilhete aqui</h5>
         `;
@@ -224,7 +222,6 @@ async function postShedules(message: String | undefined, title: String | undefin
 
         if(!message){
             throw new Error('Informe a mensagem do lembrete!');
-
         }
 
         const response = await axios.post('http://localhost:3000/api/schedule', {

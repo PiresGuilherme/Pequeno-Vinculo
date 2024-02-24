@@ -17,8 +17,6 @@ export class UserController {
     async postNewUser(req: Request, res: Response) {
         try {
             const newUser: User = req.body;
-            console.log(req.body);
-            console.log(newUser);
             
             await userServices.newUser(newUser);
             return res.status(200).json(newUser);
@@ -29,9 +27,7 @@ export class UserController {
 
     async findChildren(req: Request, res: Response) {
         try {
-            console.log(req.params.id);
             let childrens = await userServices.findChildren(Number(req.params.id))
-            // console.log(childrens);
 
             return res.status(202).json(childrens);
         } catch (error) {
@@ -53,12 +49,9 @@ export class UserController {
 
     async findTeachers(req: Request, res: Response) {
         try {
-            console.log(2);
             
-            // const searchTerm = req.query.search as string || '';
             const userService = new UserServices();
             const teachers = await userService.findTeachers(
-                // searchTerm
                 );
             res.status(200).json(teachers);
         } catch (error) {

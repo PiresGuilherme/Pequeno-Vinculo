@@ -17,7 +17,6 @@ export class UserServices {
 
         if (savedUser) {
             savedUser.password = undefined;
-            console.log(savedUser);
         }
         return savedUser
     }
@@ -53,7 +52,6 @@ export class UserServices {
 
     async findTeachers() {
         const userRepository = AppDataSource.getRepository(User);
-        console.log(1);
         
         const teachers = await userRepository.find({
             where: {

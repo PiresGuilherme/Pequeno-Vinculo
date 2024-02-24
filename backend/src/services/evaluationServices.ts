@@ -58,9 +58,7 @@ export class EvaluationServices {
             }
         })
         var totalNotes: number = evaluations.reduce((acc, evaluation) => acc + evaluation.note, 0)
-        const average = totalNotes / evaluations.length;
-        // console.log(average);
-        
+        const average = totalNotes / evaluations.length;        
         return average;
     }
 }

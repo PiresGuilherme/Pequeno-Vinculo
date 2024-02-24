@@ -33,7 +33,6 @@ export class ScheduleController {
             }
             const studentServices = new StudentServices();
             const students = await studentServices.getSameClassStudents(classInstance.id)
-            console.log(students);
             
             students[0].forEach(async(student)=>{
                 const notificationController = new NotificationController();

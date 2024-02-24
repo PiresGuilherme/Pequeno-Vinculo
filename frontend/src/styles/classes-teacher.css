@@ -141,6 +141,12 @@ main {
     display: none;
 }
 
+.total-class-coins{
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2%;
+}
+
 .buttons{
     display: flex;
     flex-direction: row;

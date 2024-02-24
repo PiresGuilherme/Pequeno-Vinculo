@@ -40,16 +40,21 @@ router.get('/class/:id', (req: Request, res: Response) => {
     classController.findOneClass(req, res)
 })
 
+router.get('/class/:id(\\d+)/best/student',(req:Request, res:Response)=> {
+    const classController = new ClassController();
+    classController.findBestStudent(req,res)
+})
+
 router.get("/class/:id(\\d+)/picture", (req:Request,res:Response)=>{
     const fileController = new FileController();
     return fileController.getClassFiles(req,res);
 })
 router.post("/class/:id(\\d+)/picture", upload.single('picture'), async (req: reqFile, res: Response) => {
-    console.log(req.file);
     
     const fileController = new FileController();
-    console.log("1");
     fileController.newPicture(req, res);
 })
+
+
 
 export { router };

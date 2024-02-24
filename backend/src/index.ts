@@ -26,8 +26,6 @@ server.use('/api', notificationRouter)
 AppDataSource.initialize().then(async () => {
 
     server.listen(3000, () => {
-        console.log('ouvindo')
-            // console.log(Date());
-            ;
+        console.log('ouvindo');
     })
 }).catch(error => console.log(error))

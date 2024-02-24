@@ -3,9 +3,9 @@
 :root {
     --body: #f3f8fe;
     --orange: #FEC868;
-    --pink: #FF708D;
+    --pink: rgb(255, 112, 141);
     --purple: #DCC1FC;
-    --green: #A3E487;
+    --green: hsl(102, 63%, 71%);
     --background: #e7e7e7;
 
     --hover-pink: #e94e6d;
@@ -105,14 +105,13 @@ body {
 }
 
 .basic-info-classes,
-.basic-info-students,
-.basic-info-guardians {
+.basic-info-students {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     text-align: center;
-    width: 25%;
+    width: 40%;
     height: 100%;
     background-color: var(--background);
     border-radius: 10px;
@@ -152,11 +151,6 @@ body {
 .students-icon {
     font-size: 3rem;
     color: var(--green);
-}
-
-.guardians-icon {
-    font-size: 3rem;
-    color: var(--pink);
 }
 
 .summary,
@@ -252,13 +246,49 @@ body {
     background-color: var(--pink);
 }
 
+.bestClasses{
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.bestClasses p {
+    margin: 0px;
+}
+
+.podium {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.podium-place {
+    text-align: center;
+    flex: 1;
+    position: relative;
+}
+
+.podium-place:nth-child(2) {
+    transform: translateY(-20px);
+}
+
+.podium-place:nth-child(3) {
+    transform: translateY(-40px);
+}
+
+
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--green);
     height: 6vh;
-    width: 100%;
 }
 
 @media screen and (max-width: 768px) {

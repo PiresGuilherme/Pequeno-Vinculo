@@ -10,7 +10,6 @@ const backend = "http://localhost:3000/api"
 
 
 const classesAttendance = document.querySelector('.classes-attendance') as HTMLElement;
-console.log(classesAttendance);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
@@ -18,8 +17,6 @@ const userJson = localStorage.getItem('login');
 
 if (userJson) {
     const user = JSON.parse(userJson);
-    console.log(user.user.id);
-
     teacherClasses(user.user.id);
 }
 
@@ -41,7 +38,7 @@ async function teacherClasses(userId: number) {
             buttons.classList.add('buttons');
             var btnSubmit = document.createElement('a');
             btnSubmit.type = 'button';
-            btnSubmit.id = 'btnSubmit';
+            btnSubmit.id = 'btnSubmit' + (i + 1);
             btnSubmit.innerHTML = `<button>Enviar</button>`;
             var btnExpand = document.createElement('div');
             btnExpand.id = 'btnExpand';
@@ -57,48 +54,40 @@ async function teacherClasses(userId: number) {
             classDiv.appendChild(buttons);
             accordionDiv.appendChild(classDiv);
 
-            const totalStudents = document.createElement('p');
-
-
             const studentsContainer = document.createElement('div');
             studentsContainer.classList.add('students-container');
             accordionDiv.appendChild(studentsContainer);
             classesAttendance?.appendChild(accordionDiv);
 
-
-
-
             document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function (event: MouseEvent) {
-                //  
                 const id = (event.target as HTMLSpanElement).dataset.id;
                 const accordionDiv = document.getElementById('accordion' + id);
                 if (accordionDiv?.classList.contains('active')) {
                     accordionDiv.classList.remove('active');
-
+                    const totalStudentsElement = accordionDiv?.querySelector('.total-class-coins');
+                    if (totalStudentsElement) {
+                        totalStudentsElement.remove();
+                    }
                 } else {
                     accordionDiv?.classList.toggle('active');
-                    await teachersStudentsAttendance(response.data[i].id, studentsContainer);
+                    await teachersStudentsAttendance(response.data[i].id, studentsContainer, 'accordion' + (i + 1), 'btnSubmit' + (i + 1));
                 }
             });
-
-
         }
     } catch (error: any) {
         console.log(error.message);
     }
 }
 
-async function teachersStudentsAttendance(classId: number, container: HTMLElement) {
+async function teachersStudentsAttendance(classId: number, container: HTMLElement, accordionId: any, submitId: any) {
     try {
         const response = await axios.post('http://localhost:3000/api/student/class', {
             classId: classId
         });
         const students = response.data[0];
-        console.log(students);
         var total: number = 0;
         container.innerHTML = '';
         if (students == 0) {
-            // console.log('ss');
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-attendance');
             studentDiv.classList.add('d-flex');
@@ -110,13 +99,13 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
         }
         students.forEach(async (student: any) => {
             total += student.coin;
-            console.log(student);
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-attendance')
             var studentName = document.createElement('h5');
             studentName.textContent += (`${student.name} ${student.last_name}`);
             const coin = document.createElement('div');
             coin.innerHTML = `Total de moedas: ${student.coin}`
+            coin.classList.add('student-coin')
             const attendance = document.createElement('div');
             attendance.className = 'form-check form-switch'
             attendance.innerHTML = `
@@ -129,10 +118,11 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
             container?.appendChild(studentDiv);
         });
         const totalStudents = document.createElement('p');
-        totalStudents.textContent = `Total de Moedas da turma: ${total}`;
-        const classDiv = document.querySelector('.class-attendance');
-        classDiv?.appendChild(totalStudents);
-        document.getElementById('btnSubmit')?.addEventListener('click', async function () {
+        totalStudents.textContent = `Total de moedas da turma: ${total}`;
+        totalStudents.classList.add('total-class-coins')
+        const accordionDiv = document.getElementById(accordionId);
+        accordionDiv?.appendChild(totalStudents);
+        document.getElementById(submitId)?.addEventListener('click', async function () {
             const evaluations = students.map(async (student: any) => {
 
                 const checkboxAttendance = document.getElementById(`switch-${student.id}`) as HTMLInputElement;
@@ -156,11 +146,8 @@ async function studentAttendance(studentId: number, attendance: boolean, nowDate
             presence: attendance,
             date_attendance: nowDate
         })
-        console.log(response);
-
     } catch (error) {
         console.log(error);
-
     }
 }
 

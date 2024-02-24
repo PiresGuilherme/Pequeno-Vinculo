@@ -11,7 +11,8 @@ const backend = "http://localhost:3000/api"
 const userJson = localStorage.getItem('login');
 const children = document.getElementById('children') as HTMLDivElement;
 const bestChildrens = document.getElementById('bests') as HTMLDivElement;
-
+const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
+let colorIndex = 0;
 if (userJson) {
     const user = JSON.parse(userJson);
     findChildren(user.user.id);
@@ -22,7 +23,6 @@ if (userJson) {
 async function findChildren(userId: number) {
     try {
         const response = await axios.get(`${backend}/user/children/${userId}`);
-        console.log(response.data);
 
 
         if (response.data) {
@@ -30,28 +30,18 @@ async function findChildren(userId: number) {
 
                 let divChildren = document.createElement('div');
                 divChildren.classList.add('best-children-one');
-                let link = document.createElement('a');
                 let studentInfo = document.createElement('p');
-
-                link.href = `http://127.0.0.1:5500/frontend/src/pages/student/dashboard-student.html?id=${student.id}`
-
-                link.textContent = `Filho ${index + 1}`;
                 var turma = await axios.get(`${backend}/class/${student.classe.id}`);
-                // console.log(turma.data);
                 turma = turma.data;
                 studentInfo.innerHTML = `<strong>Nome:</strong>
                 <p> ${student.name}</p> <strong>Turma:</strong> <p>${turma.name}</p>`;
 
-                divChildren.appendChild(link);
                 divChildren.appendChild(studentInfo);
-
+                divChildren.style.backgroundColor = colorPalette[colorIndex];
+                colorIndex = (colorIndex + 1) % colorPalette.length;
                 children.appendChild(divChildren);
-
-                // findLastestNotifications(student.id);
             });
-        } else {
-            console.log('Nenhum estudante encontrado.');
-        }
+        } 
     } catch (error: any) {
         console.error('sa:', error.message);
     }
@@ -63,11 +53,14 @@ async function childrensPerformance(userId: number) {
     try {
         const response = await axios.get(`${backend}/user/children/${userId}`);
 
-        // console.log(response);
         if (response.data) {
             response.data.forEach(async (student: any, index: number) => {
+                let link = document.createElement('a');
+                link.href = `http://127.0.0.1:5500/frontend/src/pages/student/dashboard-student.html?id=${student.id}`
+                link.innerHTML = `<button class="btnLink">Ver desempenho</button>`
+
                 let divBests = document.createElement('div');
-                divBests.classList.add('best-children-one');
+                divBests.classList.add('best-children');
 
                 let studentInfo = document.createElement('p');
                 var average = await axios.get(`${backend}/evaluate/average/${student.id}`);
@@ -79,18 +72,17 @@ async function childrensPerformance(userId: number) {
                 } else {
                     media = `${average.toFixed(2)} / 5`
                 }
-                // console.log(average);
                 studentInfo.innerHTML = `<strong>Nome:</strong>
                 <p> ${student.name}</p> <strong>Média:</strong> <p>${media}</p>`;
 
                 divBests.appendChild(studentInfo);
-
+                divBests.appendChild(link);
+                divBests.style.backgroundColor = colorPalette[colorIndex];
+                colorIndex = (colorIndex + 1) % colorPalette.length;
                 bestChildrens.appendChild(divBests);
 
             });
-        } else {
-            // console.log('Nenhum estudante encontrado.');
-        }
+        } 
     } catch (error: any) {
         console.error('sa:', error.message);
     }
@@ -119,9 +111,11 @@ async function notifications(userId: number) {
                 var date = document.createElement('p');
                 date.innerHTML = ` ${data.toLocaleDateString('pt-BR')}`
 
-                const check = document.createElement('button');
-                check.className = 'btn btn-outline-success';
-                check.innerHTML = '<i class="bi bi-check"></i>'
+                const check = document.createElement('a');
+                check.id = "btnCheck";
+                check.innerHTML = `<span class="material-symbols-outlined">
+                check_box
+                </span>`
 
                 check.addEventListener('click', async (event: MouseEvent) => {
                     axios.post(`${backend}/notification/user/verified`, {
@@ -132,6 +126,8 @@ async function notifications(userId: number) {
                 divBests.appendChild(message);
                 divBests.appendChild(date);
                 divBests.appendChild(check);
+                divBests.style.backgroundColor = colorPalette[colorIndex];
+                colorIndex = (colorIndex + 1) % colorPalette.length;
                 divNotification?.appendChild(divBests)
                 return notification
             }
@@ -141,40 +137,3 @@ async function notifications(userId: number) {
         console.log(error);
     }
 }
-
-
-
-
-async function findLastestNotifications(childrenId: number) {
-    try {
-        const response = await axios.get(`http://localhost:3000/api/schedule/${childrenId}`)
-        console.log(response);
-
-        return response.data;
-    } catch (error) {
-
-    }
-}
-
-document.getElementById("user-pic")?.addEventListener("click", () => {
-    const subMenu = document.getElementById("sub-menu");
-    if (subMenu?.classList.contains("open-menu")) {
-        subMenu?.classList.remove("open-menu")
-    } else {
-        subMenu?.classList.add("open-menu")
-    }
-});
-
-function logout(event: Event) {
-    event.preventDefault();
-    localStorage.clear();
-    window.location.href = "/frontend/src/pages/initial-login.html";
-  } 
-document.addEventListener("DOMContentLoaded", () => {
-   
-    const logoutLink = document.getElementById('user-pic-text') as HTMLAnchorElement;
-    logoutLink.addEventListener("click", logout);
-
-    const logoutButton = document.getElementById('logout-button') as HTMLAnchorElement;
-    logoutButton.addEventListener('click', logout)
-  });

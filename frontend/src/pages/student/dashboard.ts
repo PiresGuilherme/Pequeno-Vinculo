@@ -29,7 +29,6 @@ try {
         } else {
             media = `${average.toFixed(2)} / 5`
         }
-        console.log(average);
         studentInfo.innerHTML += `<strong>Média:  ${media}</strong>`;
         var studentIcon = document.createElement('div');
         studentIcon.innerHTML = '<span class="material-symbols-outlined">child_care</span>';
@@ -38,7 +37,6 @@ try {
             colorIndex = (colorIndex + 1) % colorPalette.length;
     studentInfoDiv?.appendChild(studentInfo);
 } catch (error) {
-    console.log(error);
     alert('Estudante não informado!')
     history.back()
 }
@@ -48,7 +46,6 @@ try {
 async function getEvaluations(studentId: number) {
     try {
         const response = await axios.get(`${back}/evaluation/student/${studentId}`);
-        console.log(response.data);
         const evaluations = response.data;
         evaluations.forEach((evaluation: any) => {
             var ratingDiv = document.createElement('div');

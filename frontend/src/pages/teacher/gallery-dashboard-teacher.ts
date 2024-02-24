@@ -10,19 +10,15 @@ import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm"
 
 let urlParams = new URLSearchParams(window.location.search);
 let idParam = urlParams.get('id');
-// console.log(idParam);
 
 let classe = await axios.get(`http://localhost:3000/api/class/${idParam}`);
-// console.log(classe.data);
 
 if (classe.data) {
     classe = classe.data
     classesPicture(classe.id)
-    // console.log(classe.id);
 
 }
 else {
-    console.log("não há nenhuma foto cadastrada para esta turma ainda!");
     const box = document.querySelector('#box');
     const h2 = document.createElement('h1');
     h2.textContent = 'Nenhuma foto cadastrada para esta turma!';
@@ -33,10 +29,8 @@ async function classesPicture(classId: number) {
     const div1 = document.getElementById('box') as HTMLElement
     try {
         const response = await axios.get(`http://localhost:3000/api/class/${classId}/picture`);
-        console.log(response.data);
 
         if (response.data.length == 0) {
-            console.log("não há nenhuma foto cadastrada para esta turma ainda!");
             const box = document.querySelector('#box');
             const h2 = document.createElement('h1');
             h2.textContent = 'Nenhuma foto cadastrada para esta turma!';
@@ -49,7 +43,6 @@ async function classesPicture(classId: number) {
             pictures.forEach((picture: any) => {
                 const image = document.createElement('img');
                 const caminho = `${picture.path.replace(/\\/g, '/')}`
-                console.log(caminho);
 
                 image.setAttribute('src', `../../../../backend/${caminho}`)
                 image.setAttribute('width', '300');
@@ -66,7 +59,6 @@ async function classesPicture(classId: number) {
             var captionText = document.getElementById("caption")!;
 
             div1.addEventListener('click', (selected: any) => {
-                console.log(selected.target.src.replace(/^.*[\\\/]/, ''));
                 const selectedPicture = pictures.find((picture: any) => picture.filename == selected.target.src.replace(/^.*[\\\/]/, ''))
 
                 if (selected.target.tagName === 'IMG') {

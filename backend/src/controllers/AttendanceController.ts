@@ -7,16 +7,11 @@ export class AttendanceController{
         try {
             const attandanceServices = new AttendanceServices();
             const studentServices = new StudentServices();
-            const student = await studentServices.getStudent(req.body.user)
-            console.log(student);
-            
+            const student = await studentServices.getStudent(req.body.user)            
             if(student == null){
                 return res.status(404).json();
             }
-            // console.log(student.id);
-            
             const response  = await attandanceServices.getStudentPresences(student.id);
-            console.log(response);
             
              return res.status(200).json(response)
         } catch (error) {
@@ -29,7 +24,6 @@ export class AttendanceController{
             const attandanceServices = new AttendanceServices();
             const studentServices = new StudentServices();
             const student = await studentServices.getStudent(req.body.student)
-            console.log(student);
             
             if(student == null){
                 return res.status(404).json();

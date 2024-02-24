@@ -32,7 +32,6 @@ async function findChildren(userId: number) {
 
 
 const classesSchedule = document.querySelector('.classes-gallery') as HTMLElement;
-console.log(classesSchedule);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
@@ -46,7 +45,6 @@ async function getStudentClass(studentId: number) {
         if (turma) {
 
             let className = document.querySelector(`#className${classe}`)!;
-            console.log(className);
 
             className.textContent += ` e ${student.name}`
             return
@@ -73,7 +71,6 @@ async function getStudentClass(studentId: number) {
             classesSchedule?.appendChild(classDiv);
 
             document.getElementById(`${classe}`)?.addEventListener('click', async function (event: MouseEvent) {
-                console.log(classe);
                 window.location.href = `${frontend}/guardian/gallery-dashboard-guardian.html?id=${classe}`
             });
         }
