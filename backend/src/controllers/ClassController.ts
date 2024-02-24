@@ -4,6 +4,7 @@ import { Class } from "../entity/Class";
 import { ClassServices } from "../services/classServices";
 import { UserServices } from "../services/userServices";
 import { StudentServices } from "../services/studentServices";
+import { Student } from "../entity/Student";
 const classServices = new ClassServices;
 export class ClassController {
     async getAllClasses(req: Request, res: Response) {
@@ -49,17 +50,36 @@ export class ClassController {
     async findBestClasses(req: Request, res: Response) {
         try {
             const studentServices = new StudentServices();
-            const classId= req.params.id
+            const classId = req.params.id
             const response = await studentServices.getSameClassStudents(classId)
             const students = response[0]
             const classTotalCoin = await students.reduce((accumulator, student) => {
                 return accumulator + student.coin;
-            },0)
-            const classAverageCoin = classTotalCoin/response[1];
-            console.log(classTotalCoin);
+            }, 0)
+            const classAverageCoin = classTotalCoin / response[1];
             return res.status(200).json(classAverageCoin)
         } catch (error) {
 
+        }
+    }
+
+    async findBestStudent(req: Request, res: Response) {
+        try {
+            const studentServices = new StudentServices();
+            const classId = req.params.id
+            const response = await studentServices.getSameClassStudents(classId)
+            var best: Student;
+            for (const student of response[0]) {
+                if (best == undefined) {
+                    best = student
+                }
+                if (student.coin > best.coin) {
+                    best = student
+                }
+            };
+            return res.status(200).json(best);
+        } catch (error) {
+            return res.status(500).json(error.message)
         }
     }
 }

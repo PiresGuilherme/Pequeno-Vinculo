@@ -2,7 +2,6 @@
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const classesSchedule = document.querySelector('.classes-performances') as HTMLElement;
-console.log(classesSchedule);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
@@ -10,8 +9,6 @@ const userJson = localStorage.getItem('login');
 
 if (userJson) {
     const user = JSON.parse(userJson);
-    console.log(user.user.id);
-
     teacherClasses(user.user.id);
 }
 
@@ -80,11 +77,9 @@ async function teachersStudents(classId: number, container: HTMLElement, submitI
             classId: classId
         });
         const students = response.data[0];
-        console.log(students);
 
         container.innerHTML = '';
         if (students == 0) {
-            console.log('ss');
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-performance');
             studentDiv.classList.add('d-flex');
@@ -95,14 +90,12 @@ async function teachersStudents(classId: number, container: HTMLElement, submitI
             container?.appendChild(studentDiv);
         }
         students.forEach(async (student: any) => {
-            console.log(student);
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-performance')
             var studentName = document.createElement('h5');
             studentName.textContent += (`${student.name} ${student.last_name}`);
             var ratingDiv = document.createElement('div');
             ratingDiv.classList.add('rating');
-            // console.log(student.name, student.last_name);
 
             for (let i = 5; i > 0; i--) {
                 const input = `<input type="radio" id="star${i}-${student.id}" name="${student.id}" value="${i}">`;
@@ -119,7 +112,6 @@ async function teachersStudents(classId: number, container: HTMLElement, submitI
             } else {
                 media = `${average.toFixed(2)} / 5`
             }
-            console.log(average);
             var studentAverage = document.createElement('p');
             studentAverage.innerHTML += `<strong>Média do aluno:  ${media}</strong>`;
 
@@ -135,6 +127,7 @@ async function teachersStudents(classId: number, container: HTMLElement, submitI
                 var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
                 var nowDate = new Date();
                 if (selectedRating == null) {
+                    
                 } else {
                     await evaluateClass(student.id, Number(selectedRating.value), nowDate);
                 }
@@ -154,7 +147,6 @@ async function evaluateClass(studentId: number, note: number, evaluation_date: D
             note: note,
             evaluation_date: evaluation_date
         });
-        console.log(response);
         return;
     } catch (error: any) {
         throw new Error(error.message);

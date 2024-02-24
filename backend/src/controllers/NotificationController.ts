@@ -11,7 +11,6 @@ export class NotificationController {
         try {
             const notificationService = new NotificationServices();
             const notifications = await notificationService.getNotificationUser(req.params.id)
-            console.log(notifications);
             return res.status(200).json(notifications)
         } catch (error) {
             res.status(500).json(error.message)
@@ -21,10 +20,8 @@ export class NotificationController {
     async postNotification(student: Student, message: string) {
         try {
             const userService = new UserServices();
-            // console.log(student.user);
 
             // var user = await userService.getUserById(student.user[0].id);
-            // console.log(user);
             student.user.forEach(async user => {
                 const notificationReposity = new NotificationServices();
                 const newNotification: Notification = {
@@ -34,8 +31,6 @@ export class NotificationController {
                     verified: false,
                     user: user
                 }
-
-                // console.log(newNotification);
                 await notificationReposity.postNotification(newNotification)
             })
 
@@ -49,8 +44,7 @@ export class NotificationController {
             return res.status(200).json();
         
         } catch (error) {
-            console.log(error);
-            
+            // console.log(error);
         }
         
     }

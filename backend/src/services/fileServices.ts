@@ -7,9 +7,7 @@ export class fileServices {
         const files = await fileRepository.find({
             relations: {classe:true}, 
             where: { classe: {id: classId }}
-        });
-        console.log(files);
-        
+        });        
         return files;
     }
 

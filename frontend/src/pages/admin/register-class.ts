@@ -6,7 +6,6 @@ let teachersList: any = [];
 (async function fetchTeachers() {
     try {
         const response = await axios.get(`${back}/user/teachers`);
-        // console.log(response.data);
         response.data.forEach((teacher: object) => {
             teachersList.push(teacher)
         })
@@ -40,13 +39,11 @@ professorInput.addEventListener('input', () => {
         professorItem.classList.add('professor-item');
 
         professorItem.addEventListener('click', function () {
-            // console.log(teacher.id);
             
             professorInput.value = `${teacher.name} ${teacher.last_name}`;
             professorList.innerHTML = '';
             var idTeacher = document.querySelector('#id-teacher') as HTMLInputElement;
             idTeacher.value = teacher.id;
-            // console.log(idTeacher);
             
         });
 
@@ -62,8 +59,6 @@ btnRegisterClass?.addEventListener('click', async () => {
         const shift = document.querySelector('.input-shift') as HTMLInputElement;
         const capacity = document.querySelector('.input-capacity') as HTMLInputElement;
         const teacher = document.querySelector('#id-teacher') as HTMLInputElement;
-        console.log(teacher.value);
-        console.log(shift.value);
         
 
         const response =  await axios.post(`${back}/class`, {
@@ -72,10 +67,8 @@ btnRegisterClass?.addEventListener('click', async () => {
             capacity:capacity.value,
             user:teacher.value
         });
-        // console.log(response);
 
     } catch (error) {
-        // console.log(error);
         
     }
 })

@@ -18,7 +18,6 @@ if (userJson) {
 async function findChildren(userId: number) {
     try {
         const response = await axios.get(`${backend}/user/children/${userId}`);
-        console.log(response.data);
 
 
         if (response.data) {
@@ -33,7 +32,6 @@ async function findChildren(userId: number) {
 
                 link.textContent = `Filho ${index + 1}`;
                 var turma = await axios.get(`${backend}/class/${student.classe.id}`);
-                // console.log(turma.data);
                 turma = turma.data;
                 studentInfo.innerHTML = `<strong>Nome:</strong>
                 <p> ${student.name}</p> <strong>Turma:</strong> <p>${turma.name}</p>`;
@@ -43,12 +41,8 @@ async function findChildren(userId: number) {
                 divChildren.style.backgroundColor = colorPalette[colorIndex];
                 colorIndex = (colorIndex + 1) % colorPalette.length;
                 children.appendChild(divChildren);
-
-                // findLastestNotifications(student.id);
             });
-        } else {
-            console.log('Nenhum estudante encontrado.');
-        }
+        } 
     } catch (error: any) {
         console.error('sa:', error.message);
     }
@@ -60,7 +54,6 @@ async function childrensPerformance(userId: number) {
     try {
         const response = await axios.get(`${backend}/user/children/${userId}`);
 
-        // console.log(response);
         if (response.data) {
             response.data.forEach(async (student: any, index: number) => {
                 let divBests = document.createElement('div');
@@ -76,7 +69,6 @@ async function childrensPerformance(userId: number) {
                 } else {
                     media = `${average.toFixed(2)} / 5`
                 }
-                // console.log(average);
                 studentInfo.innerHTML = `<strong>Nome:</strong>
                 <p> ${student.name}</p> <strong>Média:</strong> <p>${media}</p>`;
 
@@ -86,9 +78,7 @@ async function childrensPerformance(userId: number) {
                 bestChildrens.appendChild(divBests);
 
             });
-        } else {
-            // console.log('Nenhum estudante encontrado.');
-        }
+        } 
     } catch (error: any) {
         console.error('sa:', error.message);
     }
@@ -148,10 +138,8 @@ async function notifications(userId: number) {
 async function findLastestNotifications(childrenId: number) {
     try {
         const response = await axios.get(`http://localhost:3000/api/schedule/${childrenId}`)
-        console.log(response);
-
         return response.data;
     } catch (error) {
-
+        console.log(error);        
     }
 }

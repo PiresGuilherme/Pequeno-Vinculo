@@ -5,7 +5,6 @@ const backend = "http://localhost:3000/api"
 
 
 const classesAttendance = document.querySelector('.classes-attendance') as HTMLElement;
-console.log(classesAttendance);
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
@@ -13,8 +12,6 @@ const userJson = localStorage.getItem('login');
 
 if (userJson) {
     const user = JSON.parse(userJson);
-    console.log(user.user.id);
-
     teacherClasses(user.user.id);
 }
 
@@ -60,9 +57,6 @@ async function teacherClasses(userId: number) {
             accordionDiv.appendChild(studentsContainer);
             classesAttendance?.appendChild(accordionDiv);
 
-
-
-
             document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function (event: MouseEvent) {
                 //  
                 const id = (event.target as HTMLSpanElement).dataset.id;
@@ -75,8 +69,6 @@ async function teacherClasses(userId: number) {
                     await teachersStudentsAttendance(response.data[i].id, studentsContainer, 'accordion' + (i + 1), 'btnSubmit' + (i + 1));
                 }
             });
-
-
         }
     } catch (error: any) {
         console.log(error.message);
@@ -89,11 +81,9 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
             classId: classId
         });
         const students = response.data[0];
-        console.log(students);
         var total: number = 0;
         container.innerHTML = '';
         if (students == 0) {
-            // console.log('ss');
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-attendance');
             studentDiv.classList.add('d-flex');
@@ -105,7 +95,6 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
         }
         students.forEach(async (student: any) => {
             total += student.coin;
-            console.log(student);
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-attendance')
             var studentName = document.createElement('h5');
@@ -153,10 +142,7 @@ async function studentAttendance(studentId: number, attendance: boolean, nowDate
             presence: attendance,
             date_attendance: nowDate
         })
-        console.log(response);
-
     } catch (error) {
         console.log(error);
-
     }
 }

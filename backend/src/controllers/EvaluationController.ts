@@ -41,8 +41,6 @@ export class EvaluationController {
             await notificationController.postNotification(student, `Foi criado uma nova avaliação para o aluno ${student.name}`,)
             return res.status(201).json(newEvaluation);
         } catch (error) {
-            console.log(error);
-
             return res.status(400).json({ error: "Bad Request", details: error.message })
         }
     }

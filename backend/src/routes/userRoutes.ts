@@ -10,9 +10,7 @@ router.get("/user", async (req: Request, res: Response) => {
     await userControler.getAllUsers(req, res);
 });
 
-router.get("/user/teachers", async (req: Request, res: Response) => {
-    console.log(1);
-    
+router.get("/user/teachers", async (req: Request, res: Response) => {   
     let userControler = new UserController()
     await userControler.findTeachers(req, res);
 }); 
