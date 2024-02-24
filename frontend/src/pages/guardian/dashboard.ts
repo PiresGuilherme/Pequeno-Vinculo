@@ -33,7 +33,6 @@ async function findChildren(userId: number) {
 
                 link.textContent = `Filho ${index + 1}`;
                 var turma = await axios.get(`${backend}/class/${student.classe.id}`);
-                // console.log(turma.data);
                 turma = turma.data;
                 studentInfo.innerHTML = `<strong>Nome:</strong>
                 <p> ${student.name}</p> <strong>Turma:</strong> <p>${turma.name}</p>`;
@@ -44,7 +43,6 @@ async function findChildren(userId: number) {
                 colorIndex = (colorIndex + 1) % colorPalette.length;
                 children.appendChild(divChildren);
 
-                // findLastestNotifications(student.id);
             });
         } else {
             console.log('Nenhum estudante encontrado.');
@@ -63,6 +61,10 @@ async function childrensPerformance(userId: number) {
         // console.log(response);
         if (response.data) {
             response.data.forEach(async (student: any, index: number) => {
+                let link = document.createElement('a');
+                link.href = `http://127.0.0.1:5500/frontend/src/pages/student/dashboard-student.html?id=${student.id}`
+                link.innerHTML = `<button class="btnLink">Ver desempenho</button>`
+
                 let divBests = document.createElement('div');
                 divBests.classList.add('best-children');
 
@@ -76,11 +78,11 @@ async function childrensPerformance(userId: number) {
                 } else {
                     media = `${average.toFixed(2)} / 5`
                 }
-                // console.log(average);
                 studentInfo.innerHTML = `<strong>Nome:</strong>
                 <p> ${student.name}</p> <strong>Média:</strong> <p>${media}</p>`;
 
                 divBests.appendChild(studentInfo);
+                divBests.appendChild(link);
                 divBests.style.backgroundColor = colorPalette[colorIndex];
                 colorIndex = (colorIndex + 1) % colorPalette.length;
                 bestChildrens.appendChild(divBests);
@@ -117,9 +119,11 @@ async function notifications(userId: number) {
                 var date = document.createElement('p');
                 date.innerHTML = ` ${data.toLocaleDateString('pt-BR')}`
 
-                const check = document.createElement('button');
-                check.className = 'btn btn-outline-success';
-                check.innerHTML = '<i class="bi bi-check"></i>'
+                const check = document.createElement('a');
+                check.id = "btnCheck";
+                check.innerHTML = `<span class="material-symbols-outlined">
+                check_box
+                </span>`
 
                 check.addEventListener('click', async (event: MouseEvent) => {
                     axios.post(`${backend}/notification/user/verified`, {
@@ -139,19 +143,5 @@ async function notifications(userId: number) {
 
     } catch (error) {
         console.log(error);
-    }
-}
-
-
-
-
-async function findLastestNotifications(childrenId: number) {
-    try {
-        const response = await axios.get(`http://localhost:3000/api/schedule/${childrenId}`)
-        console.log(response);
-
-        return response.data;
-    } catch (error) {
-
     }
 }
