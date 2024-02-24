@@ -40,17 +40,8 @@ async function teacherClasses(userId: number) {
                     divBests.classList.add('best-students');
     
                     let studentInfo = document.createElement('p');
-                    var average = await axios.get(`${backend}/evaluate/average/${student.id}`);
-                    average = average.data;
-    
-                    var media = ``;
-                    if (average == null || average == 0) {
-                        media = `Nenhuma nota cadastrada!`
-                    } else {
-                        media = `${average.toFixed(2)} / 5`
-                    }
                     studentInfo.innerHTML = `<strong>Nome:</strong>
-                    <p> ${student.name}</p> <strong>Média:</strong> <p>${media}</p>`;
+                    <p> ${student.name}</p> <strong>Total de moedas:</strong> <p>${student.coin}</p>`;
 
                     divBests.appendChild(studentInfo);
                     divBests.style.backgroundColor = colorPalette[colorIndex];
