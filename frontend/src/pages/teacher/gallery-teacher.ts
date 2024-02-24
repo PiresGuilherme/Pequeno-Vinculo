@@ -14,59 +14,76 @@ const frontend = "http://127.0.0.1:5500/frontend/src/pages"
 const colorPalette = ['#FEC868', '#FF708D', '#DCC1FC', '#A3E487'];
 let colorIndex = 0;
 
-if (classesJson) {
-    const classes = JSON.parse(classesJson);
-    
+const userJson = localStorage.getItem('login');
+
+if (userJson) {
+    const user = JSON.parse(userJson);
+    console.log(user.user.id);
+
+    const response = await axios.post('http://localhost:3000/api/class/teacher', {
+        userId: user.user.id
+    });
+    const classes = response;
+    console.log(classes.data);
+
     for (let i = 0; i < classes.data.length; i++) {
         let oneClass = document.createElement('div');
         oneClass.classList.add('class-gallery');
-        console.log(classes.data.id);
+        console.log(classes.data[i].id);
         oneClass.innerHTML = `
-         <h5>Agenda ${classes.data[i].name}</h5>
-         <div>
-            <span class="material-symbols-outlined" id="${classes.data.id}">
-                photo_library
-            </span>
-            <span class="material-symbols-outlined" id="add-button${i + 1}">
-                add
-            </span>
-        </div>`
+     <h5>Agenda ${classes.data[i].name}</h5>
+     <div>
+        <span class="material-symbols-outlined" id="${classes.data[i].id}">
+            photo_library
+        </span>
+        <span class="material-symbols-outlined" id="add-button/${i + 1}">
+            add
+        </span>
+    </div>`
 
         oneClass.style.backgroundColor = colorPalette[colorIndex];
         colorIndex = (colorIndex + 1) % colorPalette.length;
         divClassesGallery.appendChild(oneClass);
-        
-        document.getElementById(`${classes.data.id}`)?.addEventListener('click', async function (event: MouseEvent) {
+
+        document.getElementById(`${classes.data[i].id}`)?.addEventListener('click', async function (event: MouseEvent) {
             console.log(classes.data.id);
             window.location.href = `${frontend}/teacher/gallery-dashboard-teacher.html?id=${classes.data[i].id}`
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            var modal = document.getElementById("myModal") as HTMLElement;
-        
-            if (!modal) {
-                console.error("Elemento modal não encontrado");
-                return;
-            }
-        
-            var closeButton = document.getElementsByClassName("close")[0] as HTMLElement;
-            var addButton = document.getElementById(`add-button${i + 1}`) as HTMLElement;
-        
-            addButton.onclick = function () {
+
+        var modal = document.getElementById("myModal") as HTMLElement;
+
+        if (!modal) {
+            console.error("Elemento modal não encontrado");
+        }
+
+        var closeButton = document.getElementsByClassName("close")[0] as HTMLElement;
+
+        var addButton = document.getElementById(`add-button/${i + 1}`) as HTMLElement;
+
+        addButton.onclick = function () {
+            console.log("clicou");
+            let inputClass: HTMLInputElement | null = document.querySelector(".input-class");
+            if (inputClass !== null) {
                 modal.style.display = "block";
-            };
-        
-            closeButton.onclick = function () {
+                inputClass.value = `${classes.data[i].name}`;
+            } else {
+                console.error("Input element not found");
+            }
+        };
+
+        closeButton.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
                 modal.style.display = "none";
-            };
-        
-            window.onclick = function (event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            };
-        });
-        
+            }
+        };
+        ;
+
+
     }
     // getClassSchedules(classes.data.id);
 } else {
@@ -80,19 +97,19 @@ if (classesJson) {
 buttonAddPhoto.addEventListener('click', async () => {
     const classElement: HTMLInputElement | null = document.querySelector('.input-class');
     const messageElement: HTMLTextAreaElement | null = document.querySelector('.input-message');
-    const pictureElement: HTMLInputElement | null = document.querySelector('#fileInput');    
+    const pictureElement: HTMLInputElement | null = document.querySelector('#fileInput');
 
-    if(!Number(classElement?.value)){
+    if (!Number(classElement?.value)) {
         alert('Informe o ID da turma!')
         return;
     }
 
-    if(messageElement?.value === ''){
+    if (messageElement?.value === '') {
         alert('Informe a legenda da foto!')
         return;
     }
 
-    if(!pictureElement?.files?.length){
+    if (!pictureElement?.files?.length) {
         alert('Insira a foto!')
         return;
     }
@@ -104,7 +121,7 @@ buttonAddPhoto.addEventListener('click', async () => {
     try {
         const response = await postPhotos(description, classId, picture);
 
-        if(response.status === 200){
+        if (response.status === 200) {
             alert('Foto adicionada com sucesso!')
             window.location.href = `http://127.0.0.1:5500/frontend/src/pages/teacher/gallery-teacher.html`;
         } else {
@@ -145,6 +162,7 @@ async function postPhotos(description: string | undefined, classId: number | und
     }
 }
 
+
 document.getElementById("user-pic")?.addEventListener("click", () => {
     const subMenu = document.getElementById("sub-menu");
     if (subMenu?.classList.contains("open-menu")) {
@@ -167,3 +185,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const logoutButton = document.getElementById('logout-button') as HTMLAnchorElement;
     logoutButton.addEventListener('click', logout)
   });
+
+
+
+
+
+// const response = await axios.post('http://localhost:3000/api/class/teacher', {
+//     userId: user
+// });
+
+
+// if (classesJson) {
+//     const classes = JSON.parse(classesJson);
+
+  
+

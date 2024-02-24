@@ -145,7 +145,7 @@ async function teachersStudents(classId: number, container: HTMLElement) {
                 var nowDate = new Date();
                 if (selectedRating == null) {
                     // selectedRating = 0;
-                    await evaluateClass(student.id, 0, nowDate);
+                    // await evaluateClass(student.id, 0, nowDate);
                     // await teachersStudents(classe);
                 } else {
                     await evaluateClass(student.id, Number(selectedRating.value), nowDate)

@@ -44,25 +44,29 @@ async function teacherClasses(userId: number) {
             btnSubmit.id = 'btnSubmit';
             btnSubmit.innerHTML = `<button>Enviar</button>`;
             var btnExpand = document.createElement('div');
-            btnExpand.id= 'btnExpand';
+            btnExpand.id = 'btnExpand';
             btnExpand.innerHTML = `
                 <span class="material-symbols-outlined expand-button" id="expand${i + 1}" data-id=${i + 1}>
                     expand_more
                 </span>`;
-
             accordionDiv.style.backgroundColor = colorPalette[colorIndex];
             colorIndex = (colorIndex + 1) % colorPalette.length;
-
             buttons.appendChild(btnSubmit);
             buttons.appendChild(btnExpand);
             classDiv.appendChild(className);
             classDiv.appendChild(buttons);
             accordionDiv.appendChild(classDiv);
 
+            const totalStudents = document.createElement('p');
+
+
             const studentsContainer = document.createElement('div');
             studentsContainer.classList.add('students-container');
             accordionDiv.appendChild(studentsContainer);
             classesAttendance?.appendChild(accordionDiv);
+
+
+
 
             document.getElementById(`expand${i + 1}`)?.addEventListener('click', async function (event: MouseEvent) {
                 //  
@@ -77,6 +81,7 @@ async function teacherClasses(userId: number) {
                 }
             });
 
+
         }
     } catch (error: any) {
         console.log(error.message);
@@ -90,7 +95,7 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
         });
         const students = response.data[0];
         console.log(students);
-
+        var total: number = 0;
         container.innerHTML = '';
         if (students == 0) {
             // console.log('ss');
@@ -104,11 +109,14 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
             container?.appendChild(studentDiv);
         }
         students.forEach(async (student: any) => {
+            total += student.coin;
             console.log(student);
             var studentDiv = document.createElement('div');
             studentDiv.classList.add('class-attendance')
             var studentName = document.createElement('h5');
             studentName.textContent += (`${student.name} ${student.last_name}`);
+            const coin = document.createElement('div');
+            coin.innerHTML = `Total de moedas: ${student.coin}`
             const attendance = document.createElement('div');
             attendance.className = 'form-check form-switch'
             attendance.innerHTML = `
@@ -116,10 +124,14 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
             <label class="form-check-label" for="switch-${student.id}"></label>
             `
             studentDiv.appendChild(studentName);
+            studentDiv.appendChild(coin);
             studentDiv.appendChild(attendance);
             container?.appendChild(studentDiv);
         });
-
+        const totalStudents = document.createElement('p');
+        totalStudents.textContent = `Total de Moedas da turma: ${total}`;
+        const classDiv = document.querySelector('.class-attendance');
+        classDiv?.appendChild(totalStudents);
         document.getElementById('btnSubmit')?.addEventListener('click', async function () {
             const evaluations = students.map(async (student: any) => {
 
@@ -130,6 +142,7 @@ async function teachersStudentsAttendance(classId: number, container: HTMLElemen
             })
             await Promise.all(evaluations);
             alert("Chamada registrada com sucesso!");
+
         });
     } catch (error: any) {
         alert(error.message)
@@ -144,10 +157,10 @@ async function studentAttendance(studentId: number, attendance: boolean, nowDate
             date_attendance: nowDate
         })
         console.log(response);
-        
-    } catch (error) {   
+
+    } catch (error) {
         console.log(error);
-        
+
     }
 }
 

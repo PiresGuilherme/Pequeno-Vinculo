@@ -14,7 +14,7 @@ export const AppDataSource = new DataSource({
     host: "localhost",
     port: 5432,
     username: "postgres",
-    password: "admin37",
+    password: "admin",
     database: "Pequeno Vinculo",
     synchronize: true,
     logging: false,
