@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -36,23 +36,31 @@
                         <a class="nav-link" href="schedule-guardian.html">Agenda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Galeria</a>
+                        <a class="nav-link" href="gallery-guardian.html">Galeria</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Chat</a>
                     </li>
-                    <li class="nav-item" id="dropdown-logout"> <!--esther-->
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="material-symbols-outlined">person</span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Sair</a></li>
-                            </ul>
+                    <li class="nav-item">
+                        <div class="sub-menu-link">
+                            <a class="nav-link" id="user-pic-text"
+                                href="/frontend/src/pages/initial-login.html">Sair</a>
                         </div>
                     </li>
                 </ul>
+            </div>
+            <div id="user-pic" class="user-pic">
+                <img src="/frontend/assets/profile-userLogin-green.svg" width="38px" height="38px">
+                <img src="/frontend/assets/down-icon.svg" width="30px" height="30px">
+            </div>
+            <div class="sub-menu-wrap" id="sub-menu">
+                <div class="sub-menu">
+                    <a href="/frontend/src/pages/initial-login.html" class="sub-menu-link">
+                        <img src="/frontend/assets/logout-green.svg" width="30px" height="30px">
+                        <a class="nav-link" id="logout-button" href="/frontend/src/pages/initial-login.html">Sair</a>
+                        <span></span>
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

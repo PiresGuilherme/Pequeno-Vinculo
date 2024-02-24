@@ -1,3 +1,9 @@
+const token = localStorage.getItem('login');
+if (!token) {
+  window.location.href = "/frontend/src/pages/initial-login.html";
+}
+
+
 //@ts-ignore
 import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
@@ -157,6 +163,30 @@ async function postPhotos(description: string | undefined, classId: number | und
 }
 
 
+document.getElementById("user-pic")?.addEventListener("click", () => {
+    const subMenu = document.getElementById("sub-menu");
+    if (subMenu?.classList.contains("open-menu")) {
+        subMenu?.classList.remove("open-menu")
+    } else {
+        subMenu?.classList.add("open-menu")
+    }
+});
+
+function logout(event: Event) {
+    event.preventDefault();
+    localStorage.clear();
+    window.location.href = "/frontend/src/pages/initial-login.html";
+  } 
+document.addEventListener("DOMContentLoaded", () => {
+   
+    const logoutLink = document.getElementById('user-pic-text') as HTMLAnchorElement;
+    logoutLink.addEventListener("click", logout);
+
+    const logoutButton = document.getElementById('logout-button') as HTMLAnchorElement;
+    logoutButton.addEventListener('click', logout)
+  });
+
+
 
 
 
@@ -169,3 +199,4 @@ async function postPhotos(description: string | undefined, classId: number | und
 //     const classes = JSON.parse(classesJson);
 
   
+

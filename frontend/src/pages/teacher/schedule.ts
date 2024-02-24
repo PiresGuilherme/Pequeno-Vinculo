@@ -248,13 +248,17 @@ document.getElementById("user-pic")?.addEventListener("click", () => {
     }
 });
 
+function logout(event: Event) {
+    event.preventDefault();
+    localStorage.clear();
+    window.location.href = "/frontend/src/pages/initial-login.html";
+  } 
 document.addEventListener("DOMContentLoaded", () => {
    
-    const logoutLink = document.querySelector(".sub-menu-link") as HTMLAnchorElement;
-    logoutLink.addEventListener("click", (event) => {
-      event.preventDefault();
-      localStorage.clear();
-      window.location.href = "/frontend/src/pages/initial-login.html";
-    });
+    const logoutLink = document.getElementById('user-pic-text') as HTMLAnchorElement;
+    logoutLink.addEventListener("click", logout);
+
+    const logoutButton = document.getElementById('logout-button') as HTMLAnchorElement;
+    logoutButton.addEventListener('click', logout)
   });
   
