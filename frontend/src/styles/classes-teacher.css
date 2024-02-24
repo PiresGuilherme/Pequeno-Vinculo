@@ -85,10 +85,13 @@ main {
 .students-container {
     display: none;
 }
+
 .total-class-coins{
-    justify-content: right;
-    padding-left: 2%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 2%;
 }
+
 .buttons{
     display: flex;
     flex-direction: row;
