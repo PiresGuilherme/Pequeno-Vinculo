@@ -173,7 +173,19 @@ body {
     padding-top: 1%;
 }
 
-.summary-calendar,
+.summary-calendar {
+    text-align: center;
+    width: 41%;
+    height: 100%;
+    background-color: var(--background);
+    border-radius: 20px;
+    padding: 1%;
+}
+
+.summary-calendar h5 {
+    color: var(--orange);
+}
+
 .last-info-birthdays,
 .last-info-best-students {
     display: flex;
