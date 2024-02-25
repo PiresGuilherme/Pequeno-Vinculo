@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="imagex/png" href="/frontend/assets/logo-icon-pink.svg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet"
@@ -13,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Galeria</title>
 </head>
 
@@ -28,19 +30,21 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="dashboard-teacher.html">Home</a>
+                        <a class="nav-link active" aria-current="page" href="dashboard-teacher.html"
+                            id="active-home">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="classes-teacher.html">Turmas</a>
+                        <a class="nav-link active" href="classes-teacher.html" id="active-class">Turmas</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="performance-teacher.html">Desempenho</a>
+                        <a class="nav-link active" href="performance-teacher.html"
+                            id="active-performance">Desempenho</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="schedule-teacher.html">Agenda</a>
+                        <a class="nav-link active" href="schedule-teacher.html" id="active-schedule">Agenda</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="gallery-teacher.html">Galeria</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="gallery-teacher.html" id="active-gallery">Galeria</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled" aria-disabled="true">Chat</a>

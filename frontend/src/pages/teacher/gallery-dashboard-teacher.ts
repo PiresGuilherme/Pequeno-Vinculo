@@ -1,6 +1,6 @@
 const token = localStorage.getItem('login');
 if (!token) {
-  window.location.href = "/frontend/src/pages/initial-login.html";
+    window.location.href = "/frontend/src/pages/initial-login.html";
 }
 
 //@ts-ignore
@@ -90,12 +90,19 @@ function logout(event: Event) {
     event.preventDefault();
     localStorage.clear();
     window.location.href = "/frontend/src/pages/initial-login.html";
-  } 
+}
 document.addEventListener("DOMContentLoaded", () => {
-   
+
     const logoutLink = document.getElementById('user-pic-text') as HTMLAnchorElement;
     logoutLink.addEventListener("click", logout);
 
     const logoutButton = document.getElementById('logout-button') as HTMLAnchorElement;
     logoutButton.addEventListener('click', logout)
-  });
+});
+$(document).ready(function() {
+    $("#active-home").removeClass("active");
+    $("#active-class").removeClass('active');
+    $("#active-performance").removeClass("active");
+    $("#active-schedule").removeClass("active");
+    $("#active-gallery").addClass("active")
+});
