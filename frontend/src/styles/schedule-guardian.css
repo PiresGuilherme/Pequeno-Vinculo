@@ -69,6 +69,10 @@ main {
     border-radius: 10px;
 }
 
+.expand-button {
+    transition: transform 0.3s;
+}
+
 footer {
     display: flex;
     align-items: center;

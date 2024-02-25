@@ -106,6 +106,9 @@ body {
     transition: transform 0.5s;
 }
 
+.expand-button {
+    transition: transform 0.3s;
+}
 
 .container-fluid {
     background-color: #DCC1FC;

@@ -5,7 +5,6 @@
     --purple: #DCC1FC;
     --green: #A3E487;
     --background: #e7e7e7;
-
     --hover-pink: #e94e6d;
     --hover-purple: #ae7deb;
 }
@@ -120,7 +119,19 @@ body {
     padding-top: 1%;
 }
 
-.summary-calendar,
+.summary-calendar {
+    text-align: center;
+    width: 41%;
+    height: 100%;
+    background-color: var(--background);
+    border-radius: 20px;
+    padding: 1%;
+}
+
+.summary-calendar h5 {
+    color: var(--orange);
+}
+
 .last-info-birthdays,
 .last-info-best-students {
     display: flex;
@@ -287,4 +298,3 @@ footer {
 .podium-place:nth-child(3) {
     transform: translateY(-40px);
 }
-

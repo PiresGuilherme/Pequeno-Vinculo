@@ -96,8 +96,20 @@ body {
     margin-bottom: 0px;
 }
 
-.last-info-children-evaluation,
 .last-info-calendar {
+    text-align: center;
+    width: 41%;
+    height: 100%;
+    background-color: var(--background);
+    border-radius: 20px;
+    padding: 1%;
+}
+
+.last-info-calendar h5 {
+    color: var(--orange);
+}
+
+.last-info-children-evaluation {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
