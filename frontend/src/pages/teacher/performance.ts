@@ -1,6 +1,6 @@
 const token = localStorage.getItem('login');
 if (!token) {
-  window.location.href = "/frontend/src/pages/initial-login.html";
+    window.location.href = "/frontend/src/pages/initial-login.html";
 }
 
 //@ts-ignore
@@ -132,7 +132,7 @@ async function teachersStudents(classId: number, container: HTMLElement, submitI
                 var selectedRating = document.querySelector(`input[name="${student.id}"]:checked`) as HTMLInputElement;
                 var nowDate = new Date();
                 if (selectedRating == null) {
-                    
+
                 } else {
                     await evaluateClass(student.id, Number(selectedRating.value), nowDate);
                 }
@@ -171,12 +171,20 @@ function logout(event: Event) {
     event.preventDefault();
     localStorage.clear();
     window.location.href = "/frontend/src/pages/initial-login.html";
-  } 
+}
 document.addEventListener("DOMContentLoaded", () => {
-   
+
     const logoutLink = document.getElementById('user-pic-text') as HTMLAnchorElement;
     logoutLink.addEventListener("click", logout);
 
     const logoutButton = document.getElementById('logout-button') as HTMLAnchorElement;
     logoutButton.addEventListener('click', logout)
-  });
+});
+
+$(document).ready(function() {
+    $("#active-home").removeClass("active");
+    $("#active-class").removeClass('active');
+    $("#active-performance").addClass("active");
+    $("#active-schedule").removeClass("active");
+    $("#active-gallery").removeClass("active")
+});

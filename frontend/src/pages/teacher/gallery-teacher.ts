@@ -1,6 +1,6 @@
 const token = localStorage.getItem('login');
 if (!token) {
-  window.location.href = "/frontend/src/pages/initial-login.html";
+    window.location.href = "/frontend/src/pages/initial-login.html";
 }
 
 
@@ -106,7 +106,7 @@ buttonAddPhoto.addEventListener('click', async () => {
 
     let classId = Number((classElement.value).split('-', 1));
     console.log(classId);
-    
+
     const description = messageElement?.value;
     const picture = pictureElement?.files?.[0];
 
@@ -168,27 +168,23 @@ function logout(event: Event) {
     event.preventDefault();
     localStorage.clear();
     window.location.href = "/frontend/src/pages/initial-login.html";
-  } 
+}
 document.addEventListener("DOMContentLoaded", () => {
-   
+
     const logoutLink = document.getElementById('user-pic-text') as HTMLAnchorElement;
     logoutLink.addEventListener("click", logout);
 
     const logoutButton = document.getElementById('logout-button') as HTMLAnchorElement;
     logoutButton.addEventListener('click', logout)
-  });
+});
+
+$(document).ready(function () {
+    $("#active-home").removeClass("active");
+    $("#active-class").removeClass('active');
+    $("#active-performance").removeClass("active");
+    $("#active-schedule").removeClass("active");
+    $("#active-gallery").addClass("active")
+});
 
 
-
-
-
-// const response = await axios.post('http://localhost:3000/api/class/teacher', {
-//     userId: user
-// });
-
-
-// if (classesJson) {
-//     const classes = JSON.parse(classesJson);
-
-  
 

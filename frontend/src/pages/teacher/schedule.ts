@@ -3,7 +3,7 @@ import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
 const token = localStorage.getItem('login');
 if (!token) {
-  window.location.href = "/frontend/src/pages/initial-login.html";
+    window.location.href = "/frontend/src/pages/initial-login.html";
 }
 
 const buttonAddSchedule = document.querySelector('.add-reminder-button') as HTMLButtonElement;
@@ -27,7 +27,7 @@ if (classesJson) {
         let className = document.createElement('h5')
         oneClass.classList.add('class-schedule');
         className.innerHTML = `Agenda ${classes.data[i].name}`
-        
+
         accordionDiv.style.backgroundColor = colorPalette[colorIndex];
         colorIndex = (colorIndex + 1) % colorPalette.length;
 
@@ -54,13 +54,13 @@ if (classesJson) {
         document.addEventListener('DOMContentLoaded', () => {
             const expandButton = document.getElementById(`expand/${i + 1}`)!;
             expandButton.addEventListener('click', () => {
-                if(expandButton.classList.contains('notMarked')){
+                if (expandButton.classList.contains('notMarked')) {
                     getClassSchedules(classes.data[i].id, scheduleContainer);
                     expandButton.classList.remove('notMarked')
                     expandButton.classList.add('Marked')
                     return;
                 }
-                if(expandButton.classList.contains('Marked')){
+                if (expandButton.classList.contains('Marked')) {
                     document.getElementById(`scheduleContainer/${i}`)!.innerHTML = ''
                     expandButton.classList.remove('Marked');
                     expandButton.classList.add('notMarked');
@@ -80,7 +80,7 @@ if (classesJson) {
             var closeButton = document.getElementsByClassName("close")[0] as HTMLElement;
 
             var addButton = document.getElementById(`add-button/${i + 1}`) as HTMLElement;
-        
+
             addButton.onclick = function () {
                 let inputClass = document.getElementById("input-class")! as HTMLInputElement
                 modal.style.display = "block";
@@ -111,7 +111,7 @@ buttonAddSchedule.addEventListener('click', async () => {
 
     const classElement: HTMLInputElement = document.querySelector('.input-class')!;
     const titleElement: HTMLInputElement = document.querySelector('.input-title')!;
-    const messageElement: HTMLTextAreaElement = document.querySelector('.input-message')!;    
+    const messageElement: HTMLTextAreaElement = document.querySelector('.input-message')!;
 
     let classId = Number((classElement.value).split('-', 1))
     let title = titleElement.value
@@ -119,12 +119,12 @@ buttonAddSchedule.addEventListener('click', async () => {
 
     let response = await postShedules(message, title, classId)
 
-    if(response.status != 200){
+    if (response.status != 200) {
         alert(response.message)
         return
     }
 
-    if(response.status === 200){
+    if (response.status === 200) {
         alert('Lembrete adicionado com sucesso!')
         window.location.href = `http://127.0.0.1:5500/frontend/src/pages/teacher/schedule-teacher.html`
         return
@@ -137,14 +137,14 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
         if (schedules == null) {
             return;
         }
-        let data = schedules.data;      
+        let data = schedules.data;
 
         for (let index = 0; index < data.length; index++) {
             const schedule = data[index];
 
             const newSchedule = document.createElement('div');
             newSchedule.classList.add('p-1', 'schedule-item');
-            newSchedule.id = `accordion${index+1}`
+            newSchedule.id = `accordion${index + 1}`
             newSchedule.innerHTML = `
                 <div>
                     <h5>${schedule.schedule_date}</h5>
@@ -172,27 +172,27 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
                     console.error("Elemento modal não encontrado");
                     return;
                 }
-            
+
                 let closeButton = document.getElementsByClassName("close-vw")[0] as HTMLElement;
 
-                
-                
+
+
                 modal.style.display = "block";
                 classShedule.value = `${classes.data[position].id} - ${classes.data[position].name}`
                 titleSchedule.value = schedule.title
                 messageSchedule.value = schedule.message
 
-            
+
                 closeButton.onclick = function () {
                     modal.style.display = "none";
                 };
-            
+
                 window.onclick = function (event) {
                     if (event.target == modal) {
                         modal.style.display = "none";
                     }
                 };
-                
+
             })
         }
 
@@ -212,15 +212,15 @@ async function postShedules(message: String | undefined, title: String | undefin
     try {
 
 
-        if(!classId){
+        if (!classId) {
             throw new Error('Informe o ID da turma!')
         }
 
-        if(!title){
+        if (!title) {
             throw new Error('Informe o título do lembrete!')
         }
 
-        if(!message){
+        if (!message) {
             throw new Error('Informe a mensagem do lembrete!');
         }
 
@@ -249,13 +249,20 @@ function logout(event: Event) {
     event.preventDefault();
     localStorage.clear();
     window.location.href = "/frontend/src/pages/initial-login.html";
-  } 
+}
 document.addEventListener("DOMContentLoaded", () => {
-   
+
     const logoutLink = document.getElementById('user-pic-text') as HTMLAnchorElement;
     logoutLink.addEventListener("click", logout);
 
     const logoutButton = document.getElementById('logout-button') as HTMLAnchorElement;
     logoutButton.addEventListener('click', logout)
-  });
-  
+});
+
+$(document).ready(function() {
+    $("#active-home").removeClass("active");
+    $("#active-class").removeClass('active');
+    $("#active-performance").removeClass("active");
+    $("#active-schedule").addClass("active");
+    $("#active-gallery").removeClass("active")
+});
