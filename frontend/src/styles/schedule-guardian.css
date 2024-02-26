@@ -94,6 +94,9 @@ nav {
 
 }
 
+.expand-button {
+    transition: transform 0.3s;
+}
 
 main {
     display: flex;

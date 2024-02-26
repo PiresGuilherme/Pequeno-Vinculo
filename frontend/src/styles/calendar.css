@@ -1,0 +1,41 @@
+:root {
+	--body: #f3f8fe;
+	--orange: #FEC868;
+	--pink: #FF708D;
+	--purple: #DCC1FC;
+	--green: #A3E487;
+	--background: #e7e7e7;
+	--hover-pink: #e94e6d;
+	--hover-purple: #ae7deb;
+}
+
+a {
+	text-decoration: none;
+	font-size: 15px;
+}
+h1, h2, p, a, span{
+	color: #fff;
+}
+.scnd-font-color {
+	color: #9099b7;
+}
+.calendar{
+	margin: auto;
+}
+.calendar a {
+	font-size: 17px;
+}
+.calendar td, .calendar th {
+	width: 40px;
+	height: 38px;						
+}
+.calendar .days-week {
+	color: #DCC1FC;
+}
+.calendar .today {
+	display: block;
+	width: 34px;
+	line-height: 34px;
+	background: var(--orange);
+	border-radius: 100%;
+}

@@ -249,6 +249,10 @@ main {
     margin: 2%;
 }
 
+.expand-button {
+    transition: transform 0.3s;
+}
+
 .accordion {
     border-radius: 10px;
 }

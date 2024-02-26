@@ -30,9 +30,6 @@ try {
             media = `${average.toFixed(2)} / 5`
         }
         studentInfo.innerHTML += `<strong>Média:  ${media}</strong>`;
-        var studentIcon = document.createElement('div');
-        studentIcon.innerHTML = '<span class="material-symbols-outlined">child_care</span>';
-        studentInfo.appendChild(studentIcon)
         studentInfoDiv.style.backgroundColor = colorPalette[colorIndex];
             colorIndex = (colorIndex + 1) % colorPalette.length;
     studentInfoDiv?.appendChild(studentInfo);
@@ -77,3 +74,22 @@ async function getEvaluations(studentId: number) {
 
     }
 }
+
+document.getElementById("user-pic")?.addEventListener("click", () => {
+    const subMenu = document.getElementById("sub-menu");
+    if (subMenu?.classList.contains("open-menu")) {
+        subMenu?.classList.remove("open-menu")
+    } else {
+        subMenu?.classList.add("open-menu")
+    }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const logoutLink = document.querySelector(".sub-menu-link") as HTMLAnchorElement;
+    logoutLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        localStorage.clear();
+        window.location.href = "/frontend/src/pages/initial-login.html";
+    });
+});

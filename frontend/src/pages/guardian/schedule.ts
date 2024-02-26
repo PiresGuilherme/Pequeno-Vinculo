@@ -3,7 +3,7 @@ import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 
 const token = JSON.parse(localStorage.getItem('login')!);
 if (!token) {
-  window.location.href = "/frontend/src/pages/initial-login.html";
+    window.location.href = "/frontend/src/pages/initial-login.html";
 }
 
 const user = token.user
@@ -28,7 +28,7 @@ if (childrens) {
         let className = document.createElement('h5')
         oneClass.classList.add('class-schedule');
         className.innerHTML = `Agenda ${childrens.data[i].name} ${childrens.data[i].last_name}`
-        
+
         accordionDiv.style.backgroundColor = colorPalette[colorIndex];
         colorIndex = (colorIndex + 1) % colorPalette.length;
 
@@ -49,20 +49,20 @@ if (childrens) {
         accordionDiv.classList.add('mt-2')
         const expandButton = document.getElementById(`expand/${i + 1}`)!;
         expandButton.addEventListener('click', () => {
-            
-        if(expandButton.classList.contains('notMarked')){                    
-            getClassSchedules(childrens.data[i].classe.id, scheduleContainer);
-            expandButton.classList.remove('notMarked')
-            expandButton.classList.add('Marked')
-            return;
-        }
-        if(expandButton.classList.contains('Marked')){
-            document.getElementById(`scheduleContainer/${i}`)!.innerHTML = ''
-            expandButton.classList.remove('Marked');
-            expandButton.classList.add('notMarked');
-            return
-        }
-        });     
+
+            if (expandButton.classList.contains('notMarked')) {
+                getClassSchedules(childrens.data[i].classe.id, scheduleContainer);
+                expandButton.classList.remove('notMarked')
+                expandButton.classList.add('Marked')
+                return;
+            }
+            if (expandButton.classList.contains('Marked')) {
+                document.getElementById(`scheduleContainer/${i}`)!.innerHTML = ''
+                expandButton.classList.remove('Marked');
+                expandButton.classList.add('notMarked');
+                return
+            }
+        });
     }
 } else {
     let oneClass = document.createElement('div');
@@ -72,23 +72,23 @@ if (childrens) {
 }
 
 async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
-    try {        
+    try {
         const schedules = await axios.get(`http://localhost:3000/api/schedule/${classId}`)
         if (schedules == null) {
             console.log('l');
 
             return;
         }
-        let data = schedules.data;      
+        let data = schedules.data;
 
         for (let index = 0; index < data.length; index++) {
             const schedule = data[index];
-            
+
             let scheduleContainerId = (oneClass.id).split('/', 2)[1]
 
             const newSchedule = document.createElement('div');
             newSchedule.classList.add('p-1', 'schedule-item');
-            newSchedule.id = `accordion${index+1}`
+            newSchedule.id = `accordion${index + 1}`
             newSchedule.innerHTML = `
                 <div>
                     <h5>${schedule.schedule_date}</h5>
@@ -115,7 +115,7 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
                     console.error("Elemento modal não encontrado");
                     return;
                 }
-            
+
                 let closeButton = document.getElementsByClassName("close-vw")[0] as HTMLElement;
 
                 modal.style.display = "block";
@@ -126,13 +126,13 @@ async function getClassSchedules(classId: number, oneClass: HTMLDivElement) {
                 closeButton.onclick = function () {
                     modal.style.display = "none";
                 };
-            
+
                 window.onclick = function (event) {
                     if (event.target == modal) {
                         modal.style.display = "none";
                     }
                 };
-                
+
             })
         }
     } catch (error: any) {
@@ -157,12 +157,17 @@ document.getElementById("user-pic")?.addEventListener("click", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-   
+
     const logoutLink = document.querySelector(".sub-menu-link") as HTMLAnchorElement;
     logoutLink.addEventListener("click", (event) => {
-      event.preventDefault();
-      localStorage.clear();
-      window.location.href = "/frontend/src/pages/initial-login.html";
+        event.preventDefault();
+        localStorage.clear();
+        window.location.href = "/frontend/src/pages/initial-login.html";
     });
-  });
-  
+});
+
+$(document).ready(function() {
+    $("#active-home").removeClass("active");
+    $("#active-schedule").addClass('active');
+    $("#active-gallery").removeClass("active")
+});
