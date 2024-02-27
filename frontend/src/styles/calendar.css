@@ -13,25 +13,34 @@ a {
 	text-decoration: none;
 	font-size: 15px;
 }
-h1, h2, p, a, span{
-	color: #fff;
-}
+
 .scnd-font-color {
 	color: #9099b7;
 }
+
 .calendar{
 	margin: auto;
 }
+
 .calendar a {
 	font-size: 17px;
+	color: var(--pink);
 }
+
+#month{
+	font-size: 17px;
+	color: var(--pink);
+}
+
 .calendar td, .calendar th {
-	width: 40px;
-	height: 38px;						
+	width: 35px;
+	height: 30px;						
 }
+
 .calendar .days-week {
-	color: #DCC1FC;
+	color: var(--orange);
 }
+
 .calendar .today {
 	display: block;
 	width: 34px;
