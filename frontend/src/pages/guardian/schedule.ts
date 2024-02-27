@@ -52,14 +52,16 @@ if (childrens) {
 
             if (expandButton.classList.contains('notMarked')) {
                 getClassSchedules(childrens.data[i].classe.id, scheduleContainer);
-                expandButton.classList.remove('notMarked')
-                expandButton.classList.add('Marked')
+                expandButton.classList.remove('notMarked');
+                expandButton.classList.add('Marked');
+                expandButton.style.transform = 'rotate(180deg)';
                 return;
             }
             if (expandButton.classList.contains('Marked')) {
                 document.getElementById(`scheduleContainer/${i}`)!.innerHTML = ''
                 expandButton.classList.remove('Marked');
                 expandButton.classList.add('notMarked');
+                expandButton.style.transform = 'rotate(360deg)';
                 return
             }
         });
