@@ -19,7 +19,7 @@ export async function login() {
 
     try {
         if (!emailValue || !passwordValue) {
-            message.textContent = 'É necessário preencher ambos os campos, E-mail e Senha';
+            window.alert('É necessário preencher ambos os campos, E-mail e Senha');
             return;
         }
 
@@ -29,7 +29,7 @@ export async function login() {
         });
       
         if (response == null) {
-            message.textContent = 'Usuário ou senha incorreto';
+            window.alert('Usuário ou senha incorreto');
             return;
         }
         // console.log(response.data);
